@@ -15,6 +15,19 @@ CREATE TABLE users (
     update_date TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
+CREATE OR REPLACE FUNCTION refresh_update_date()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.update_date = now();
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER refresh_update_date_trg
+BEFORE UPDATE ON users
+FOR EACH ROW
+EXECUTE FUNCTION refresh_update_date();
+
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO users_service_db_user;
 GRANT USAGE, SELECT, UPDATE ON ALL SEQUENCES IN SCHEMA public TO users_service_db_user;
 
