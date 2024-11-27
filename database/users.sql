@@ -8,8 +8,8 @@ CREATE TABLE users (
     username varchar(100),
     first_name varchar(50),
     last_name varchar(50),
-    account_status user_status NOT NULL DEFAULT 'active',
-    account_role user_role NOT NULL DEFAULT 'user',
+    user_status user_status NOT NULL DEFAULT 'active',
+    user_role user_role NOT NULL DEFAULT 'user',
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     deactivation_date TIMESTAMPTZ,
     update_date TIMESTAMPTZ NOT NULL DEFAULT now()
