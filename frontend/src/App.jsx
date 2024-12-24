@@ -1,16 +1,10 @@
-import { Routes, Route } from "react-router";
-import HomePage from "@/components/HomePage/HomePage";
-import NavigationBar from "@/components/NavigationBar/NavigationBar.module.css"
+import styles from "@/App.module.css"
 
 function App() {
   return (
     <>
-      <NavigationBar
-      />
-      <Routes>
-        <Route path='/' element={<HomePage/>}></Route>
-        
-      </Routes>
+      <div className={styles.floating_keys_overlay}>
+      </div>
     </>
   )
 }

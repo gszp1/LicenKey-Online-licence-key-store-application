@@ -1,0 +1,17 @@
+.floating_keys_overlay {
+    width: 500px;
+    height: 300px;
+
+    background-image: url("/src/assets/images/floating-keys.png");
+    animation: overlay_slide 5s linear infinite;
+}
+
+@keyframes overlay_slide {
+    0%{
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 300px;
+    }
+}
+
