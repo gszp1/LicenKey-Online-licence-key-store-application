@@ -13,7 +13,9 @@ const NavigationBarTop = () => {
                 />
                 <div className={styles.search_bar}>
                     <input/>
-                    <button> <SearchIcon/> </button>
+                    <button>
+                        <SearchIcon fontSize="large"/>
+                    </button>
                 </div>
                 <div className={styles.account_button}>
                     <PersonIcon sx={{fontSize: '3rem'}}/>
