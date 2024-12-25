@@ -6,7 +6,9 @@ import App from '@/App.jsx'
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <div className="floating_keys_overlay">
-      <App/>
+      <div className="temp">
+        <App/>
+      </div>
     </div>
   </BrowserRouter>
 )

@@ -44,3 +44,9 @@ body {
     }
 }
 
+.temp {
+    width:350px;
+    height:150px;
+    background-color: white
+    ;
+}
