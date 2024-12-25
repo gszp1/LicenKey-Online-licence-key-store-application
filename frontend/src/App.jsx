@@ -1,10 +1,9 @@
-import styles from "@/App.module.css"
+import NavigationBarTop from "@/components/NavigationBar/NavigationBarTop.jsx"
 
 function App() {
   return (
     <>
-      <div className={styles.floating_keys_overlay}>
-      </div>
+      <NavigationBarTop/>
     </>
   )
 }
