@@ -4,6 +4,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const NavigationBarTop = () => {
+    
     return (
         <div className={styles.navigation_bar_top}>
             <div className={styles.top_section}>
