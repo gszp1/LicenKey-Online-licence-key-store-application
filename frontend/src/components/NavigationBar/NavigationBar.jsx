@@ -18,7 +18,8 @@ const NavigationBar = () => {
                 const viewportHeight = window.innerHeight;
                 const screenBottomY = y + viewportHeight;
                 const rootHeigth = root.getBoundingClientRect().height;
-                const barWidth = (screenBottomY / rootHeigth) * 100
+                let barWidth = (screenBottomY / rootHeigth) * 100
+                barWidth = barWidth > 100 ? 100 : barWidth;
                 bar.style.width = `${barWidth}%`
             }
         }
