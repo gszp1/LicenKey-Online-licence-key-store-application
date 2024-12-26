@@ -44,7 +44,9 @@ const NavigationBar = () => {
                     src="/src/assets/images/website-logo.png"
                 />
                 <div className={styles.search_bar}>
-                    <input/>
+                    <input
+                        placeholder="Search in store"
+                    />
                     <button>
                         <SearchIcon fontSize="large"/>
                     </button>
