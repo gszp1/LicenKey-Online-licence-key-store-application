@@ -2,9 +2,39 @@ import styles from "@/components/NavigationBar/NavigationBar.module.css"
 import SearchIcon from '@mui/icons-material/Search';
 import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useState, useEffect } from "react";
 
 const NavigationBar = () => {
+    const [scrollY, setScrollY] = useState(0)
+    const [showBottomSection, setShowBottomSection] = useState(true);
     
+    useEffect(() => {
+        const fillBar = () => {
+            const y = window.scrollY;
+            const bar = document.getElementById('progressBar');
+            const root = document.getElementById("root");
+
+            if (bar && root) {
+                const viewportHeight = window.innerHeight;
+                const screenBottomY = y + viewportHeight;
+                const rootHeigth = root.getBoundingClientRect().height;
+                const barWidth = (screenBottomY / rootHeigth) * 100
+                bar.style.width = `${barWidth}%`
+            }
+        }
+        
+        const onScroll = () => {
+            const y = window.scrollY;
+            setScrollY(y);
+            setShowBottomSection(y > 74);
+            fillBar();
+        }
+
+        fillBar();
+        window.addEventListener('scroll', onScroll)
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
+
     return (
         <div className={styles.navigation_bar}>
             <div className={styles.top_section}>
@@ -32,7 +62,9 @@ const NavigationBar = () => {
                 <div id="progressBar" className={styles.progression_bar_fill}></div>
             </div>
             <div className={styles.progression_bar_border}/>
-            <div className={styles.bottom_section}></div>
+            { showBottomSection && (
+                <div className={styles.bottom_section}></div>
+            )}
         </div>
     )
 }
