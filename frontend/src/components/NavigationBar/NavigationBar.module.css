@@ -1,10 +1,41 @@
 .navigation_bar {
     display: flex;
     flex-direction: column;
-    height: 130px;
+    height: 148px;
     width: 100%;
     max-width: 1920px;
     background-color: white;
+}
+
+.progression_bar {
+    width: 100%;
+    height: 10px;
+    background-image: url('/src/assets/images/progression_bar.png');
+    background-repeat: repeat-x;
+}
+
+.progression_bar_fill {
+    width: 0;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgb(0, 174, 255) 20%,
+        rgb(46, 189, 255) 40%,
+        rgb(247, 190, 86) 50%,
+        rgb(253, 184, 55) 80%,
+        orange 100%);
+}
+
+.progression_bar_border {
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(
+        to right,
+        rgb(0, 174, 255) 20%,
+        rgb(46, 189, 255) 40%,
+        rgb(247, 190, 86) 50%,
+        rgb(253, 184, 55) 80%,
+        orange 100%);
 }
 
 .top_section {

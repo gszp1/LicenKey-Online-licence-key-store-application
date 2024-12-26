@@ -27,6 +27,11 @@ const NavigationBar = () => {
                     <p>Shopping Cart</p>
                 </div>
             </div>
+            <div className={styles.progression_bar_border}/>
+            <div className={styles.progression_bar}>
+                <div id="progressBar" className={styles.progression_bar_fill}></div>
+            </div>
+            <div className={styles.progression_bar_border}/>
             <div className={styles.bottom_section}></div>
         </div>
     )
