@@ -1,12 +1,12 @@
-import styles from "@/components/NavigationBar/NavigationBarTop.module.css"
+import styles from "@/components/NavigationBar/NavigationBar.module.css"
 import SearchIcon from '@mui/icons-material/Search';
 import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
-const NavigationBarTop = () => {
+const NavigationBar = () => {
     
     return (
-        <div className={styles.navigation_bar_top}>
+        <div className={styles.navigation_bar}>
             <div className={styles.top_section}>
                 <img
                     className={styles.website_logo}
@@ -32,4 +32,4 @@ const NavigationBarTop = () => {
     )
 }
 
-export default NavigationBarTop;
+export default NavigationBar;

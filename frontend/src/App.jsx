@@ -1,9 +1,9 @@
-import NavigationBarTop from "@/components/NavigationBar/NavigationBarTop.jsx"
+import NavigationBar from "@/components/NavigationBar/NavigationBar.jsx"
 
 function App() {
   return (
     <>
-      <NavigationBarTop/>
+      <NavigationBar/>
     </>
   )
 }
