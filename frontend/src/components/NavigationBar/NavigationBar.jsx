@@ -26,7 +26,7 @@ const NavigationBar = () => {
         const onScroll = () => {
             const y = window.scrollY;
             setScrollY(y);
-            setShowBottomSection(y > 74);
+            setShowBottomSection(y < 74);
             fillBar();
         }
 
