@@ -38,6 +38,7 @@
         rgb(247, 190, 86) 50%,
         rgb(253, 184, 55) 80%,
         orange 100%);
+    box-shadow: 1px 5px 10px 2px rgba(223, 231, 235, 0.5);
 }
 
 .top_section {
