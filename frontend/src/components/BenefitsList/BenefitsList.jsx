@@ -7,25 +7,25 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const BenefitsList = () => {
     return (
-        <>
-            <p className={styles.benefits_prompt}>
-                What are the benefits of having an account?
-            </p>
-            <ul className={styles.benefits_list}>
-                <BenefitsListEntry
-                    icon={<ListAltIcon sx={{fontSize: '3rem', color: 'orange'}}/>}
-                    text="Check previous orders"
-                />
-                <BenefitsListEntry
-                    icon={<KeyIcon sx={{fontSize: '3rem', color: 'DeepSkyBlue'}}/>}
-                    text="See keys you have bought"
-                />
-                <BenefitsListEntry
-                    icon={<AccountCircleIcon sx={{fontSize: '3rem', color: 'orange'}}/>}
-                    text="Easily validate your credentials"
-                />
-            </ul>
-        </>
+            <div>
+                <p className={styles.benefits_prompt}>
+                    What are the benefits of having an account?
+                </p>
+                <ul className={styles.benefits_list}>
+                    <BenefitsListEntry
+                        icon={<ListAltIcon sx={{fontSize: '3rem', color: 'orange'}}/>}
+                        text="Check previous orders"
+                    />
+                    <BenefitsListEntry
+                        icon={<KeyIcon sx={{fontSize: '3rem', color: 'DeepSkyBlue'}}/>}
+                        text="See keys you have bought"
+                    />
+                    <BenefitsListEntry
+                        icon={<AccountCircleIcon sx={{fontSize: '3rem', color: 'orange'}}/>}
+                        text="Easily validate your credentials"
+                    />
+                </ul>
+            </div>
     );
 }
 

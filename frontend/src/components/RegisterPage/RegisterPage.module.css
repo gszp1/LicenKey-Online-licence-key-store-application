@@ -72,18 +72,6 @@
     transition: ease-in-out 0.05s;
 }
 
-.requirements {
-    box-sizing: border-box;
-    background-color: rgb(241, 255, 228);
-    width: 480px;
-    height: 150px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 40px;
-    border-radius: 30px;
-    padding:10px 30px 10px 30px;
-}
-
 .error_prompt {
     font-size: 1rem;
     color: red;
@@ -105,4 +93,30 @@
 .register_button:active {
     background-color: orange;
     color: white;
+}
+
+.benefits {
+    height: 270px;
+    width: auto;
+}
+
+.requirements {
+    box-sizing: border-box;
+    background-color: rgb(241, 255, 228);
+    width: 480px;
+    height: 270px;
+    margin-right: auto;
+    border-radius: 30px;
+    padding:10px 30px 10px 30px;
+}
+
+.additional_information {
+    margin-top: 20px;
+    padding-bottom: 20px;
+    width: 1000px;
+    height: 270px;
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
 }

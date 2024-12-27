@@ -1,11 +1,12 @@
 import styles from "@/components/RegisterPage/RegisterPage.module.css"
 import { Link } from "react-router";
+import BenefitsList from "@/components/BenefitsList/BenefitsList.jsx";
 
 const RegisterPage = () => {
     return (
         <div className={styles.page}>
             <Credentials/>
-            <Requirements/>
+            <AdditionalInformation/>
         </div>
     );
 }
@@ -58,6 +59,17 @@ const RightSection = () => {
             <Link to="/login" style={{marginTop: '5px'}}>
                 <p>Already have an account?</p>
             </Link>
+        </div>
+    );
+}
+
+const AdditionalInformation = () => {
+    return (
+        <div className={styles.additional_information}>
+            <Requirements/>
+            <div className={styles.benefits}>
+                <BenefitsList/>
+            </div>
         </div>
     );
 }
