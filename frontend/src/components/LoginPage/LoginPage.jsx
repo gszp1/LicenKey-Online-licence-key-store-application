@@ -1,11 +1,7 @@
 import styles from "@/components/LoginPage/LoginPage.module.css"
-import ListAltIcon from '@mui/icons-material/ListAlt';
-import KeyIcon from '@mui/icons-material/Key';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Stack } from "@mui/material";
-import PropTypes from "prop-types";
 import { useState } from 'react';
 import { Link } from "react-router";
+import BenefitsList from "@/components/BenefitsList/BenefitsList.jsx";
 
 const LoginPage = () => {
     const [errorPrompt, setErrorPrompt] = useState("");
@@ -90,49 +86,6 @@ const LoginPage = () => {
             </div>
         </div>
     );
-}
-
-
-const BenefitsList = () => {
-    return (
-        <>
-            <p className={styles.benefits_prompt}>
-                What are the benefits of having an account?
-            </p>
-            <ul className={styles.benefits_list}>
-                <BenefitsListEntry
-                    icon={<ListAltIcon sx={{fontSize: '3rem', color: 'orange'}}/>}
-                    text="Check previous orders"
-                />
-                <BenefitsListEntry
-                    icon={<KeyIcon sx={{fontSize: '3rem', color: 'DeepSkyBlue'}}/>}
-                    text="See keys you have bought"
-                />
-                <BenefitsListEntry
-                    icon={<AccountCircleIcon sx={{fontSize: '3rem', color: 'orange'}}/>}
-                    text="Easily validate your credentials"
-                />
-            </ul>
-        </>
-    );
-}
-
-const BenefitsListEntry = ({icon, text}) => {
-    return (
-        <li> 
-        <Stack direction="row" alignItems="center" gap={1}>
-            {icon}
-            <p className={styles.li_text}>
-                {text}    
-            </p>
-        </Stack>
-    </li>
-    );
-}
-
-BenefitsListEntry.propTypes = {
-    icon: PropTypes.element,
-    text: PropTypes.string
 }
 
 export default LoginPage;

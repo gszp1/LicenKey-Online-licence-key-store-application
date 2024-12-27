@@ -1,0 +1,22 @@
+.benefits_list {
+    list-style: none;
+}
+
+.benefits_list li {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.li_text {
+    font-size: 1.5rem;
+    font-family: "Saira Semi Condensed", serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.benefits_prompt {
+    margin-top: 150px;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
