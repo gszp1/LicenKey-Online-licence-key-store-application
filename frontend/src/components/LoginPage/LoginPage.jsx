@@ -17,6 +17,13 @@ const LoginPage = () => {
         password: ""
     });
 
+    const updateCredential = (e, credentialName) => {
+        let newCredentials = {...credentials,
+            [credentialName]: e.target.value
+        }
+        setCredentials(newCredentials);
+    }
+
     return (
         <div className={styles.page}>
             <div className={styles.login_box}>
@@ -30,6 +37,7 @@ const LoginPage = () => {
                     className={styles.login_input}
                     autoComplete="true"
                     value={credentials["email"]}
+                    onChange={(e) => updateCredential(e, "email")}
                     placeholder="example@mail.com"
                 />
                 <p className={styles.error_label}>
@@ -42,6 +50,7 @@ const LoginPage = () => {
                     className={styles.login_input}
                     type="password"
                     value={credentials["password"]}
+                    onChange={(e) => updateCredential(e, "password")}
                     placeholder="your password"
                 />
                 <p className={styles.error_label}>
