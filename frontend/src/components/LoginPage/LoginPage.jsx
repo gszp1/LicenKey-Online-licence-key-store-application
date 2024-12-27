@@ -119,19 +119,17 @@ const BenefitsListEntry = ({icon, text}) => {
         <li> 
         <Stack direction="row" alignItems="center" gap={1}>
             {icon}
-            <Typography>
-                <p className={styles.li_text}>
-                    {text}    
-                </p>
-            </Typography>
+            <p className={styles.li_text}>
+                {text}    
+            </p>
         </Stack>
     </li>
     );
 }
 
 BenefitsListEntry.propTypes = {
-    icon: PropTypes.any,
-    text: PropTypes.text
+    icon: PropTypes.element,
+    text: PropTypes.string
 }
 
 export default LoginPage;
