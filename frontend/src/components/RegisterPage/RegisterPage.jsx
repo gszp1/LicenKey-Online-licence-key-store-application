@@ -2,7 +2,7 @@ import styles from "@/components/RegisterPage/RegisterPage.module.css"
 import { Link } from "react-router";
 import BenefitsList from "@/components/BenefitsList/BenefitsList.jsx";
 import { useState } from "react";
-import PropTypes, { func, object } from "prop-types";
+import PropTypes, { func } from "prop-types";
 
 const RegisterPage = () => {
     const [credentials, setCredentials] = useState({
@@ -15,70 +15,89 @@ const RegisterPage = () => {
         lastName: ""
     });
 
+    const updateValue = (e, credentialName) => {
+        let newCredentials = {...credentials,
+            [credentialName]: e.target.value
+        };
+        setCredentials(newCredentials);
+    };
+
     return (
         <div className={styles.page}>
             <Credentials
                 credentials={credentials}
-                setCredentials={setCredentials}
+                updateValue={updateValue}
             />
             <AdditionalInformation/>
         </div>
     );
 }
 
-const Credentials = ({credentials, setCredentials}) => {
+const Credentials = ({credentials, updateValue}) => {
     return (
         <div className={styles.credentials}>
             <LeftSection
                 credentials={credentials}
-                setCredentials={setCredentials}
+                updateValue={updateValue}
             />
             <RightSection
                 credentials={credentials}
-                setCredentials={setCredentials}
+                updateValue={updateValue}
             />
         </div>
     );
 }
 
-const LeftSection = ({credentials, setCredentials}) => {
+const LeftSection = ({credentials, updateValue}) => {
     return (
         <div className={styles.left_section}>
             <label className={styles.input_label}> Email </label>
             <input
                 className={styles.input_field}
-                placeholder="example@mail.com"    
+                placeholder="example@mail.com"   
+                value={credentials["email"]} 
+                onChange={(e) => updateValue(e, "email")}
             />
             <p className={styles.error_prompt}></p>
             <label className={styles.input_label}> Confirm Email </label>
             <input
                 className={styles.input_field}
                 placeholder="example@mail.com"
+                value={credentials["emailConfirmation"]} 
+                onChange={(e) => updateValue(e, "emailConfirmation")}
             />
             <p className={styles.error_prompt}></p>
             <label className={styles.input_label}> Username </label>
             <input 
                 className={styles.input_field}
                 placeholder="your username"
+                value={credentials["username"]} 
+                onChange={(e) => updateValue(e, "username")}
             />
             <p className={styles.error_prompt}></p>
             <label className={styles.input_label}> Password </label>
             <input
                 className={styles.input_field}
                 placeholder="your password"
+                value={credentials["password"]} 
+                type="password"
+                onChange={(e) => updateValue(e, "password")}
             />
             <p className={styles.error_prompt}></p>
             <label className={styles.input_label}> Confirm Password</label>
             <input 
                 className={styles.input_field}
                 placeholder="your password confirmation"
+                value={credentials["passwordConfirmation"]} 
+                type="password"
+                onChange={(e) => updateValue(e, "passwordConfirmation")}
             />
             <p className={styles.error_prompt}></p>
         </div>
     );
 }
 
-const RightSection = ({credentials, setCredentials}) => {
+const RightSection = ({credentials, updateValue}) => {
     return (
         <div className={styles.right_section}>
             <div className={styles.secondary_box}>
@@ -86,12 +105,16 @@ const RightSection = ({credentials, setCredentials}) => {
                 <input
                     className={styles.input_field}
                     placeholder="name (optional)"
+                    value={credentials["firstName"]} 
+                    onChange={(e) => updateValue(e, "firstName")}
                 />
                 <p className={styles.error_prompt}></p>
                 <label className={styles.input_label}> Second Name* </label>
                 <input
                     className={styles.input_field}
                     placeholder="second name (optional)"
+                    value={credentials["lastName"]} 
+                    onChange={(e) => updateValue(e, "lastName")}
                 />
                 <p className={styles.error_prompt}></p>
             </div>
@@ -148,17 +171,17 @@ const Requirements = () => {
 
 Credentials.propTypes = {
     credentials: PropTypes.object,
-    setCredentials: func
+    updateValue: func
 }
 
 LeftSection.propTypes = {
     credentials: PropTypes.object,
-    setCredentials: func
+    updateValue: func
 }
 
 RightSection.propTypes = {
     credentials: PropTypes.object,
-    setCredentials: func
+    updateValue: func
 }
 
 export default RegisterPage;
