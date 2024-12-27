@@ -27,7 +27,7 @@ const LoginPage = () => {
         if (emailRegex.test(credentials["email"]) == false) {
             setErrorPrompt("Provided credentials are invalid.");
             return false;
-        } else if (passwordRegex.test(credentials["password"]) == false) {
+        } else if (passwordRegex.test(credentials["password"]) == false || credentials["password"].length < 8) {
             setErrorPrompt("Provided credentials are invalid.");
             return false;
         } else {
