@@ -2,9 +2,10 @@ import styles from "@/components/LoginPage/LoginPage.module.css"
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import KeyIcon from '@mui/icons-material/Key';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 import PropTypes from "prop-types";
 import { useState } from 'react';
+import { Link } from "react-router";
 
 const LoginPage = () => {
     const [errorPrompt, setErrorPrompt] = useState("");
@@ -80,9 +81,11 @@ const LoginPage = () => {
                 <p className={styles.login_p}>
                     Don&apos;t Have an Account yet?
                 </p>
-                <button className={styles.login_button}>
-                    Sign Up
-                </button>
+                <Link to="/register">
+                    <button className={styles.login_button}>
+                        Sign Up
+                    </button>
+                </Link>
                 <BenefitsList/>
             </div>
         </div>
