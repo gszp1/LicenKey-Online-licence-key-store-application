@@ -24,20 +24,35 @@ const LeftSection = () => {
     return (
         <div className={styles.left_section}>
             <label className={styles.input_label}> Email </label>
-            <input className={styles.input_field}></input>
-            <p className={styles.error_prompt}>error placeholder</p>
+            <input
+                className={styles.input_field}
+                placeholder="example@mail.com"    
+            />
+            <p className={styles.error_prompt}></p>
             <label className={styles.input_label}> Confirm Email </label>
-            <input className={styles.input_field}></input>
-            <p className={styles.error_prompt}>error placeholder</p>
+            <input
+                className={styles.input_field}
+                placeholder="example@mail.com"
+            />
+            <p className={styles.error_prompt}></p>
             <label className={styles.input_label}> Username </label>
-            <input className={styles.input_field}></input>
-            <p className={styles.error_prompt}>error placeholder</p>
+            <input 
+                className={styles.input_field}
+                placeholder="your username"
+            />
+            <p className={styles.error_prompt}></p>
             <label className={styles.input_label}> Password </label>
-            <input className={styles.input_field}></input>
-            <p className={styles.error_prompt}>error placeholder</p>
+            <input
+                className={styles.input_field}
+                placeholder="your password"
+            />
+            <p className={styles.error_prompt}></p>
             <label className={styles.input_label}> Confirm Password</label>
-            <input className={styles.input_field}></input>
-            <p className={styles.error_prompt}>error placeholder</p>
+            <input 
+                className={styles.input_field}
+                placeholder="your password confirmation"
+            />
+            <p className={styles.error_prompt}></p>
         </div>
     );
 }
@@ -47,11 +62,17 @@ const RightSection = () => {
         <div className={styles.right_section}>
             <div className={styles.secondary_box}>
                 <label className={styles.input_label}> Name* </label>
-                <input className={styles.input_field}></input>
-                <p className={styles.error_prompt}>error placeholder</p>
+                <input
+                    className={styles.input_field}
+                    placeholder="name (optional)"
+                />
+                <p className={styles.error_prompt}></p>
                 <label className={styles.input_label}> Second Name* </label>
-                <input className={styles.input_field}></input>
-                <p className={styles.error_prompt}>error placeholder</p>
+                <input
+                    className={styles.input_field}
+                    placeholder="second name (optional)"
+                />
+                <p className={styles.error_prompt}></p>
             </div>
             <button className={styles.register_button}>
                 Sign Up
