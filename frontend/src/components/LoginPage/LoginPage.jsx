@@ -7,10 +7,7 @@ import PropTypes from "prop-types";
 import { useState } from 'react';
 
 const LoginPage = () => {
-    const [errorProps, setErrorProps] = useState({
-        email: "",
-        password: ""
-    });
+    const [errorPrompt, setErrorPrompt] = useState("");
 
     const [credentials, setCredentials] = useState({
         email: "",
@@ -22,6 +19,25 @@ const LoginPage = () => {
             [credentialName]: e.target.value
         }
         setCredentials(newCredentials);
+    }
+
+    const validateCredentials = () => {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/;
+        if (emailRegex.test(credentials["email"]) == false) {
+            setErrorPrompt("Provided credentials are invalid.");
+            return false;
+        } else if (passwordRegex.test(credentials["password"]) == false) {
+            setErrorPrompt("Provided credentials are invalid.");
+            return false;
+        } else {
+            setErrorPrompt("");
+        }
+        return true;
+    }
+
+    const login = () => {
+        validateCredentials();
     }
 
     return (
@@ -40,9 +56,6 @@ const LoginPage = () => {
                     onChange={(e) => updateCredential(e, "email")}
                     placeholder="example@mail.com"
                 />
-                <p className={styles.error_label}>
-                    {errorProps["email"]}
-                </p>
                 <label className={styles.login_label}>
                     Password
                 </label>
@@ -53,12 +66,15 @@ const LoginPage = () => {
                     onChange={(e) => updateCredential(e, "password")}
                     placeholder="your password"
                 />
-                <p className={styles.error_label}>
-                    {errorProps["password"]}
-                </p>
-                <button className={styles.login_button}>
+                <button
+                    className={styles.login_button}
+                    onClick={login}
+                >
                     Login
                 </button>
+                <p className={styles.error_label}>
+                    {errorPrompt}
+                </p>
             </div>
             <div className={styles.register_box}>
                 <p className={styles.login_p}>
