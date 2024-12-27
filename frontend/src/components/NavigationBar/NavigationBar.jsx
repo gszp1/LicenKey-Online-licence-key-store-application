@@ -2,6 +2,7 @@ import styles from "@/components/NavigationBar/NavigationBar.module.css"
 import SearchIcon from '@mui/icons-material/Search';
 import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Link } from "react-router";
 import { useState, useEffect } from "react";
 
 const NavigationBar = () => {
@@ -51,10 +52,14 @@ const NavigationBar = () => {
                         <SearchIcon fontSize="large"/>
                     </button>
                 </div>
-                <div className={styles.account_button}>
-                    <PersonIcon sx={{fontSize: '3rem'}}/>
-                    <p>Login / Register</p>
-                </div>
+                <Link style={{color: 'inherit', textDecoration: 'inherit' }}
+                    to="/login"
+                >
+                    <div className={styles.account_button}>
+                        <PersonIcon sx={{fontSize: '3rem'}}/>
+                        <p>Login / Register</p>
+                    </div>
+                </Link>
                 <div className={styles.shopping_cart_button}>
                     <ShoppingCartIcon sx={{fontSize: '3rem'}}/>
                     <p>Shopping Cart</p>
