@@ -238,8 +238,8 @@ const Requirements = () => {
             <ol>
                 <li>Password must include:
                     <ul>
-                        <li>1 Capital character</li>
-                        <li>1 Small character</li>
+                        <li>1 Capital letter</li>
+                        <li>1 Lowercase letter</li>
                         <li>1 Special character</li>
                         <li>1 Numeric character</li>
                     </ul>
