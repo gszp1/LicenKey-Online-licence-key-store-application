@@ -40,10 +40,12 @@ const NavigationBar = () => {
     return (
         <div className={styles.navigation_bar}>
             <div className={styles.top_section}>
-                <img
-                    className={styles.website_logo}
-                    src="/src/assets/images/website-logo.png"
-                />
+                <Link to="/">
+                    <img
+                        className={styles.website_logo}
+                        src="/src/assets/images/website-logo.png"
+                    />
+                </Link>
                 <div className={styles.search_bar}>
                     <input
                         placeholder="Search in store"
