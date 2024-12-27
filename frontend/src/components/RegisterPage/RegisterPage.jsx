@@ -2,10 +2,20 @@ import styles from "@/components/RegisterPage/RegisterPage.module.css"
 import { Link } from "react-router";
 import BenefitsList from "@/components/BenefitsList/BenefitsList.jsx";
 import { useState } from "react";
-import PropTypes, { func } from "prop-types";
+import PropTypes from "prop-types";
 
 const RegisterPage = () => {
     const [credentials, setCredentials] = useState({
+        email: "",
+        emailConfirmation: "",
+        password: "",
+        passwordConfirmation: "",
+        username: "",
+        firstName: "",
+        lastName: ""
+    });
+
+    const [errorPrompts, setErrorPrompts] = useState({
         email: "",
         emailConfirmation: "",
         password: "",
@@ -26,6 +36,7 @@ const RegisterPage = () => {
         <div className={styles.page}>
             <Credentials
                 credentials={credentials}
+                errorPrompts={errorPrompts}
                 updateValue={updateValue}
             />
             <AdditionalInformation/>
@@ -33,22 +44,24 @@ const RegisterPage = () => {
     );
 }
 
-const Credentials = ({credentials, updateValue}) => {
+const Credentials = ({credentials, errorPrompts, updateValue}) => {
     return (
         <div className={styles.credentials}>
             <LeftSection
                 credentials={credentials}
+                errorPrompts={errorPrompts}
                 updateValue={updateValue}
             />
             <RightSection
                 credentials={credentials}
+                errorPrompts={errorPrompts}
                 updateValue={updateValue}
             />
         </div>
     );
 }
 
-const LeftSection = ({credentials, updateValue}) => {
+const LeftSection = ({credentials, errorPrompts, updateValue}) => {
     return (
         <div className={styles.left_section}>
             <label className={styles.input_label}> Email </label>
@@ -58,7 +71,9 @@ const LeftSection = ({credentials, updateValue}) => {
                 value={credentials["email"]} 
                 onChange={(e) => updateValue(e, "email")}
             />
-            <p className={styles.error_prompt}></p>
+            <p className={styles.error_prompt}>
+                {errorPrompts["email"]}
+            </p>
             <label className={styles.input_label}> Confirm Email </label>
             <input
                 className={styles.input_field}
@@ -66,7 +81,9 @@ const LeftSection = ({credentials, updateValue}) => {
                 value={credentials["emailConfirmation"]} 
                 onChange={(e) => updateValue(e, "emailConfirmation")}
             />
-            <p className={styles.error_prompt}></p>
+            <p className={styles.error_prompt}>
+                {errorPrompts["emailConfirmation"]}
+            </p>
             <label className={styles.input_label}> Username </label>
             <input 
                 className={styles.input_field}
@@ -74,7 +91,9 @@ const LeftSection = ({credentials, updateValue}) => {
                 value={credentials["username"]} 
                 onChange={(e) => updateValue(e, "username")}
             />
-            <p className={styles.error_prompt}></p>
+            <p className={styles.error_prompt}>
+                {errorPrompts["username"]}
+            </p>
             <label className={styles.input_label}> Password </label>
             <input
                 className={styles.input_field}
@@ -83,7 +102,9 @@ const LeftSection = ({credentials, updateValue}) => {
                 type="password"
                 onChange={(e) => updateValue(e, "password")}
             />
-            <p className={styles.error_prompt}></p>
+            <p className={styles.error_prompt}>
+                {errorPrompts["password"]}
+            </p>
             <label className={styles.input_label}> Confirm Password</label>
             <input 
                 className={styles.input_field}
@@ -92,12 +113,14 @@ const LeftSection = ({credentials, updateValue}) => {
                 type="password"
                 onChange={(e) => updateValue(e, "passwordConfirmation")}
             />
-            <p className={styles.error_prompt}></p>
+            <p className={styles.error_prompt}>
+                {errorPrompts["passwordConfirmation"]}
+            </p>
         </div>
     );
 }
 
-const RightSection = ({credentials, updateValue}) => {
+const RightSection = ({credentials, errorPrompts, updateValue}) => {
     return (
         <div className={styles.right_section}>
             <div className={styles.secondary_box}>
@@ -108,7 +131,9 @@ const RightSection = ({credentials, updateValue}) => {
                     value={credentials["firstName"]} 
                     onChange={(e) => updateValue(e, "firstName")}
                 />
-                <p className={styles.error_prompt}></p>
+                <p className={styles.error_prompt}>
+                    {errorPrompts["firstName"]}
+                </p>
                 <label className={styles.input_label}> Second Name* </label>
                 <input
                     className={styles.input_field}
@@ -116,7 +141,9 @@ const RightSection = ({credentials, updateValue}) => {
                     value={credentials["lastName"]} 
                     onChange={(e) => updateValue(e, "lastName")}
                 />
-                <p className={styles.error_prompt}></p>
+                <p className={styles.error_prompt}>
+                    {errorPrompts["lastName"]}
+                </p>
             </div>
             <button className={styles.register_button}>
                 Sign Up
@@ -171,17 +198,20 @@ const Requirements = () => {
 
 Credentials.propTypes = {
     credentials: PropTypes.object,
-    updateValue: func
+    errorPrompts: PropTypes.object,
+    updateValue: PropTypes.func
 }
 
 LeftSection.propTypes = {
     credentials: PropTypes.object,
-    updateValue: func
+    errorPrompts: PropTypes.object,
+    updateValue: PropTypes.func
 }
 
 RightSection.propTypes = {
     credentials: PropTypes.object,
-    updateValue: func
+    errorPrompts: PropTypes.object,
+    updateValue: PropTypes.func
 }
 
 export default RegisterPage;
