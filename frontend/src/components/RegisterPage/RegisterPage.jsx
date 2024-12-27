@@ -44,56 +44,48 @@ const RegisterPage = () => {
             firstName: "",
             lastName: ""
         };
-        let isValid = true;
         
         // Validate email
         const email = credentials["email"];
         if (!email) {
-            isValid = false;
             prompts["email"] = "Email is required.";
         } else if (emailRegex.test(email) == false) {
-            isValid = false;
             prompts["email"] = "Email is invalid.";
         }
         // Validate emailConfirmation
         const emailConfirmation = credentials["emailConfirmation"];
         if (!emailConfirmation) {
-            isValid = false;
             prompts["emailConfirmation"] = "Email confirmation is required.";
         } else if (!(emailConfirmation === email)) {
-            isValid = false;
             prompts["emailConfirmation"] = "Email confirmation is not equal to Email."
         }
 
         // Validate username
         const username = credentials["username"];
         if (!username) {
-            isValid = false;
             prompts["username"] = "Username is required.";
         }
 
         // Validate password
         const password = credentials["password"];
         if (!password) {
-            isValid = false;
             prompts["password"] = "Password is required.";
         } else if (passwordRegex.test(password) == false || password.length < 8) {
-            isValid = false;
             prompts["password"] = "Password is invalid.";
         }
 
         // Validate passwordConfirmation
         const passwordConfirmation = credentials["passwordConfirmation"];
         if (!passwordConfirmation) {
-            isValid = false;
             prompts["passwordConfirmation"] = "Password is required.";
         } else if (!(passwordConfirmation === password)) {
-            isValid = false;
             prompts["passwordConfirmation"] = "Password confirmation is not equal to password.";
         }
 
         setErrorPrompts(prompts);
-        return isValid;
+        return !(prompts["email"] || prompts["emailConfirmation"] || prompts["username"] || 
+            prompts["password"] || prompts["passwordConfirmation"]
+        );
     }
 
     const sendData = () => {
