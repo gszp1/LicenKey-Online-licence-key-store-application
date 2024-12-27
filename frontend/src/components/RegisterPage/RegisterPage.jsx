@@ -1,26 +1,47 @@
 import styles from "@/components/RegisterPage/RegisterPage.module.css"
 import { Link } from "react-router";
 import BenefitsList from "@/components/BenefitsList/BenefitsList.jsx";
+import { useState } from "react";
+import PropTypes, { func, object } from "prop-types";
 
 const RegisterPage = () => {
+    const [credentials, setCredentials] = useState({
+        email: "",
+        emailConfirmation: "",
+        password: "",
+        passwordConfirmation: "",
+        username: "",
+        firstName: "",
+        lastName: ""
+    });
+
     return (
         <div className={styles.page}>
-            <Credentials/>
+            <Credentials
+                credentials={credentials}
+                setCredentials={setCredentials}
+            />
             <AdditionalInformation/>
         </div>
     );
 }
 
-const Credentials = () => {
+const Credentials = ({credentials, setCredentials}) => {
     return (
         <div className={styles.credentials}>
-            <LeftSection/>
-            <RightSection/>
+            <LeftSection
+                credentials={credentials}
+                setCredentials={setCredentials}
+            />
+            <RightSection
+                credentials={credentials}
+                setCredentials={setCredentials}
+            />
         </div>
     );
 }
 
-const LeftSection = () => {
+const LeftSection = ({credentials, setCredentials}) => {
     return (
         <div className={styles.left_section}>
             <label className={styles.input_label}> Email </label>
@@ -57,7 +78,7 @@ const LeftSection = () => {
     );
 }
 
-const RightSection = () => {
+const RightSection = ({credentials, setCredentials}) => {
     return (
         <div className={styles.right_section}>
             <div className={styles.secondary_box}>
@@ -122,6 +143,22 @@ const Requirements = () => {
             </ol>
         </div>
     );
+}
+
+
+Credentials.propTypes = {
+    credentials: PropTypes.object,
+    setCredentials: func
+}
+
+LeftSection.propTypes = {
+    credentials: PropTypes.object,
+    setCredentials: func
+}
+
+RightSection.propTypes = {
+    credentials: PropTypes.object,
+    setCredentials: func
 }
 
 export default RegisterPage;
