@@ -12,24 +12,48 @@ const RegisterPage = () => {
 const Credentials = () => {
     return (
         <div className={styles.credentials}>
-            <MainBox/>
-            <SecondaryBox/>
+            <LeftSection/>
+            <RightSection/>
         </div>
     );
 }
 
-const MainBox = () => {
+const LeftSection = () => {
     return (
-        <div className={styles.main_box}>
-
+        <div className={styles.left_section}>
+            <label className={styles.input_label}> Email </label>
+            <input className={styles.input_field}></input>
+            <p className={styles.error_prompt}>error placeholder</p>
+            <label className={styles.input_label}> Confirm Email </label>
+            <input className={styles.input_field}></input>
+            <p className={styles.error_prompt}>error placeholder</p>
+            <label className={styles.input_label}> Username </label>
+            <input className={styles.input_field}></input>
+            <p className={styles.error_prompt}>error placeholder</p>
+            <label className={styles.input_label}> Password </label>
+            <input className={styles.input_field}></input>
+            <p className={styles.error_prompt}>error placeholder</p>
+            <label className={styles.input_label}> Confirm Password</label>
+            <input className={styles.input_field}></input>
+            <p className={styles.error_prompt}>error placeholder</p>
         </div>
     );
 }
 
-const SecondaryBox = () => {
+const RightSection = () => {
     return (
-        <div className={styles.secondary_box}>
-
+        <div className={styles.right_section}>
+            <div className={styles.secondary_box}>
+                <label className={styles.input_label}> Name </label>
+                <input className={styles.input_field}></input>
+                <p className={styles.error_prompt}>error placeholder</p>
+                <label className={styles.input_label}> Second Name </label>
+                <input className={styles.input_field}></input>
+                <p className={styles.error_prompt}>error placeholder</p>
+            </div>
+            <button className={styles.register_button}>
+                Sign Up
+            </button>
         </div>
     );
 }
@@ -37,7 +61,7 @@ const SecondaryBox = () => {
 const Requirements = () => {
     return (
         <div className={styles.requirements}>
-            
+            requirements
         </div>
     );
 }
