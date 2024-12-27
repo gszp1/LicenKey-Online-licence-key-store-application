@@ -54,7 +54,8 @@ const NavigationBar = () => {
                         <SearchIcon fontSize="large"/>
                     </button>
                 </div>
-                <Link style={{color: 'inherit', textDecoration: 'inherit' }}
+                <Link 
+                    style={{color: 'inherit', textDecoration: 'inherit' }}
                     to="/login"
                 >
                     <div className={styles.account_button}>
@@ -62,10 +63,15 @@ const NavigationBar = () => {
                         <p>Login / Register</p>
                     </div>
                 </Link>
-                <div className={styles.shopping_cart_button}>
-                    <ShoppingCartIcon sx={{fontSize: '3rem'}}/>
-                    <p>Shopping Cart</p>
-                </div>
+                <Link 
+                    style={{color: 'inherit', textDecoration: 'inherit' }}
+                    to="/store/cart"    
+                >
+                    <div className={styles.shopping_cart_button}>
+                        <ShoppingCartIcon sx={{fontSize: '3rem'}}/>
+                        <p>Shopping Cart</p>
+                    </div>
+                </Link>
             </div>
             <div className={styles.progression_bar_border}/>
             <div className={styles.progression_bar}>
