@@ -1,0 +1,7 @@
+.page {
+    width: 1280px;
+    height: calc(100% - 158px);
+    min-height: calc(1080px - 158px);
+    background-color: white;
+    padding-top: 158px;
+}
