@@ -12,6 +12,11 @@ const LoginPage = () => {
         password: ""
     });
 
+    const [credentials, setCredentials] = useState({
+        email: "",
+        password: ""
+    });
+
     return (
         <div className={styles.page}>
             <div className={styles.login_box}>
@@ -24,6 +29,7 @@ const LoginPage = () => {
                 <input
                     className={styles.login_input}
                     autoComplete="true"
+                    value={credentials["email"]}
                     placeholder="example@mail.com"
                 />
                 <p className={styles.error_label}>
@@ -35,6 +41,7 @@ const LoginPage = () => {
                 <input
                     className={styles.login_input}
                     type="password"
+                    value={credentials["password"]}
                     placeholder="your password"
                 />
                 <p className={styles.error_label}>
