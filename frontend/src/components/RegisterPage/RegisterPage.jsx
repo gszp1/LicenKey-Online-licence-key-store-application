@@ -27,10 +27,78 @@ const RegisterPage = () => {
 
     const updateValue = (e, credentialName) => {
         let newCredentials = {...credentials,
-            [credentialName]: e.target.value
+            [credentialName]: e.target.value.trim()
         };
         setCredentials(newCredentials);
     };
+
+    const validateCredentials = () => {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/;
+        let prompts = {
+            email: "",
+            emailConfirmation: "",
+            password: "",
+            passwordConfirmation: "",
+            username: "",
+            firstName: "",
+            lastName: ""
+        };
+        let isValid = true;
+        
+        // Validate email
+        const email = credentials["email"];
+        if (!email) {
+            isValid = false;
+            prompts["email"] = "Email is required.";
+        } else if (emailRegex.test(email) == false) {
+            isValid = false;
+            prompts["email"] = "Email is invalid.";
+        }
+        // Validate emailConfirmation
+        const emailConfirmation = credentials["emailConfirmation"];
+        if (!emailConfirmation) {
+            isValid = false;
+            prompts["emailConfirmation"] = "Email confirmation is required.";
+        } else if (!(emailConfirmation === email)) {
+            isValid = false;
+            prompts["emailConfirmation"] = "Email confirmation is not equal to Email."
+        }
+
+        // Validate username
+        const username = credentials["username"];
+        if (!username) {
+            isValid = false;
+            prompts["username"] = "Username is required.";
+        }
+
+        // Validate password
+        const password = credentials["password"];
+        if (!password) {
+            isValid = false;
+            prompts["password"] = "Password is required.";
+        } else if (passwordRegex.test(password) == false || password.length < 8) {
+            isValid = false;
+            prompts["password"] = "Password is invalid.";
+        }
+
+        // Validate passwordConfirmation
+        const passwordConfirmation = credentials["passwordConfirmation"];
+        if (!passwordConfirmation) {
+            isValid = false;
+            prompts["passwordConfirmation"] = "Password is required.";
+        } else if (!(passwordConfirmation === password)) {
+            isValid = false;
+            prompts["passwordConfirmation"] = "Password confirmation is not equal to password.";
+        }
+
+        setErrorPrompts(prompts);
+        return isValid;
+    }
+
+    const sendData = () => {
+        validateCredentials();
+    }
 
     return (
         <div className={styles.page}>
@@ -38,13 +106,14 @@ const RegisterPage = () => {
                 credentials={credentials}
                 errorPrompts={errorPrompts}
                 updateValue={updateValue}
+                sendData={sendData}
             />
             <AdditionalInformation/>
         </div>
     );
 }
 
-const Credentials = ({credentials, errorPrompts, updateValue}) => {
+const Credentials = ({credentials, errorPrompts, updateValue, sendData}) => {
     return (
         <div className={styles.credentials}>
             <LeftSection
@@ -56,6 +125,7 @@ const Credentials = ({credentials, errorPrompts, updateValue}) => {
                 credentials={credentials}
                 errorPrompts={errorPrompts}
                 updateValue={updateValue}
+                sendData={sendData}
             />
         </div>
     );
@@ -120,7 +190,8 @@ const LeftSection = ({credentials, errorPrompts, updateValue}) => {
     );
 }
 
-const RightSection = ({credentials, errorPrompts, updateValue}) => {
+const RightSection = ({credentials, errorPrompts, updateValue, sendData}) => {
+
     return (
         <div className={styles.right_section}>
             <div className={styles.secondary_box}>
@@ -145,7 +216,10 @@ const RightSection = ({credentials, errorPrompts, updateValue}) => {
                     {errorPrompts["lastName"]}
                 </p>
             </div>
-            <button className={styles.register_button}>
+            <button
+                className={styles.register_button}
+                onClick={sendData}
+            >
                 Sign Up
             </button>
             <Link to="/login" style={{marginTop: '5px'}}>
@@ -197,21 +271,23 @@ const Requirements = () => {
 
 
 Credentials.propTypes = {
-    credentials: PropTypes.object,
-    errorPrompts: PropTypes.object,
-    updateValue: PropTypes.func
+    credentials: PropTypes.object.isRequired,
+    errorPrompts: PropTypes.object.isRequired,
+    updateValue: PropTypes.func.isRequired,
+    sendData: PropTypes.func.isRequired
 }
 
 LeftSection.propTypes = {
-    credentials: PropTypes.object,
-    errorPrompts: PropTypes.object,
-    updateValue: PropTypes.func
+    credentials: PropTypes.object.isRequired,
+    errorPrompts: PropTypes.object.isRequired,
+    updateValue: PropTypes.func.isRequired
 }
 
 RightSection.propTypes = {
-    credentials: PropTypes.object,
-    errorPrompts: PropTypes.object,
-    updateValue: PropTypes.func
+    credentials: PropTypes.object.isRequired,
+    errorPrompts: PropTypes.object.isRequired,
+    updateValue: PropTypes.func.isRequired,
+    sendData: PropTypes.func.isRequired
 }
 
 export default RegisterPage;
