@@ -3,13 +3,15 @@ CREATE TYPE user_role AS ENUM ('user', 'admin');
 
 CREATE TABLE users (
     user_id BIGSERIAL PRIMARY KEY,
+    identifier uuid DEFAULT gen_random_uuid(),
     email varchar(320) NOT NULL UNIQUE, /*RFC5321, RFC5322 local-part->64, domain->255 */
     password_hash varchar(256) NOT NULL, /* 256 bytes Argon2*/
-    username varchar(100),
+    username varchar(100) NOT NULL UNIQUE,
     first_name varchar(50),
     last_name varchar(50),
     user_status user_status NOT NULL DEFAULT 'active',
     user_role user_role NOT NULL DEFAULT 'user',
+    active BOOLEAN DEFAULT false,
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     deactivation_date TIMESTAMPTZ,
     update_date TIMESTAMPTZ NOT NULL DEFAULT now()
