@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "org.github.gszp1"
-version = "0.0.1-SNAPSHOT"
+version = "1.0.0"
 
 java {
     toolchain {
@@ -38,4 +38,10 @@ dependencies {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+    archiveBaseName.set("users-service")
+    archiveVersion.set("1.0.0")
+    mainClass.set("org.github.gszp1.usersservice.UsersServiceApplication")
 }
