@@ -1,0 +1,45 @@
+# Local Config
+spring:
+  application:
+    name: UsersService
+  datasource:
+    url: jdbc:postgresql://localhost:5432/users_service_db
+    username: users_service_db_user
+    password: "2lJ1c_yC#1MJ0e().k{p(9A"
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    database: postgresql
+    open-in-view: false
+    show-sql: false
+server:
+  port: 9090
+
+---
+# Container Config
+spring:
+  config:
+    activate:
+      on-profile: container
+  application:
+    name: UsersService
+  datasource:
+    url: "${DATASOURCE_URL}"
+    username: "${DATASOURCE_USERNAME}"
+    password: "${DATASOURCE_PASSWORD}"
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    database: postgresql
+    open-in-view: false
+    show-sql: false
+server:
+  port: "${APPLICATION_PORT}"
