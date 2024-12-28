@@ -12,6 +12,7 @@ import org.github.gszp1.usersservice.converter.RoleConverter;
 import org.github.gszp1.usersservice.converter.UserStatusConverter;
 
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -24,6 +25,9 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_id;
+
+    @Column(nullable = false, unique = true)
+    private UUID identifier;
 
     @Column(nullable = false, unique = true, length = 320)
     private String email;
@@ -45,6 +49,9 @@ public class User {
 
     @Convert(converter = UserStatusConverter.class)
     private UserStatus userStatus;
+
+    @Column(nullable = false)
+    private Boolean active;
 
     @Column(columnDefinition = "TIMESTAMPTZ", nullable = false)
     private ZonedDateTime creationDate;
