@@ -1,6 +1,3 @@
-CREATE TYPE user_status AS ENUM ('active', 'deactivated', 'banned');
-CREATE TYPE user_role AS ENUM ('user', 'admin');
-
 CREATE TABLE users (
     user_id BIGSERIAL PRIMARY KEY,
     email varchar(320) NOT NULL UNIQUE, /*RFC5321, RFC5322 local-part->64, domain->255 */
@@ -15,14 +12,6 @@ CREATE TABLE users (
     deactivation_date TIMESTAMPTZ,
     update_date TIMESTAMPTZ NOT NULL DEFAULT now()
 );
-
-CREATE OR REPLACE FUNCTION refresh_update_date()
-RETURNS TRIGGER AS $$
-BEGIN
-    NEW.update_date = now();
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
 
 CREATE TRIGGER refresh_update_date_trg
 BEFORE UPDATE ON users
