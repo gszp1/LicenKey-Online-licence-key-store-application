@@ -17,8 +17,8 @@ add_script ./sql/data_types.sql
 add_script ./sql/functions.sql
 
 # tables
-add_script ./sql/users.sql
-add_script ./sql/licences.sql
+add_script ./sql/tables/users.sql
+add_script ./sql/tables/licences.sql
 
 # privileges
 add_script ./sql/privileges.sql
