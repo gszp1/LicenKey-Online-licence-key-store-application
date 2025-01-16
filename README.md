@@ -21,13 +21,20 @@
     z wykorzystaniem brokera wiadomości Apache Kafka jako magazyn na wiadomości i źródło zdarzeń chmurowych.
     
 ## 2. Baza Danych
+
 ### 2.1. Opis
     Wykorzystana została pojedyncza baza danych PostgreSQL:
     - nazwa: licen_key_db
     - użytkownik: licen_key_user
 
 ### 2.2. Tabele
-
+    1. users - przechowuje dane o użytkownikach, informacje autoryzacyjne i uwierzytelniające
+    2. licences - przechowuje informacje o dostępnych w sklepie licencjach
+    3. keys - przechowuje klucze zakupione przez użytkowników - tabela złączeniowa pomiędzy licencjami i użytkownikami
+    4. publishers - przechowuje informacje o wydawcy licencji
+    5. services - przechowuje informacje o serwisie generującym klucze 
+    6. categories - kategorie licencji
+    7. licence_types - typy licencji np. roczna, dożywotnia itp.
 ## 3. Technologie
     1. Java
     2. Spring Boot
