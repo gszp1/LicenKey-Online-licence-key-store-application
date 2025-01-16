@@ -35,6 +35,7 @@
     5. services - przechowuje informacje o serwisie generującym klucze 
     6. categories - kategorie licencji
     7. licence_types - typy licencji np. roczna, dożywotnia itp.
+
 ## 3. Technologie
     1. Java
     2. Spring Boot
