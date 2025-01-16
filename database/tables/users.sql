@@ -3,7 +3,6 @@ CREATE TYPE user_role AS ENUM ('user', 'admin');
 
 CREATE TABLE users (
     user_id BIGSERIAL PRIMARY KEY,
-    identifier uuid DEFAULT gen_random_uuid(),
     email varchar(320) NOT NULL UNIQUE, /*RFC5321, RFC5322 local-part->64, domain->255 */
     password_hash varchar(256) NOT NULL, /* 256 bytes Argon2*/
     username varchar(100) NOT NULL UNIQUE,
@@ -34,4 +33,3 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO licen_key
 GRANT USAGE, SELECT, UPDATE ON ALL SEQUENCES IN SCHEMA public TO licen_key_user;
 
 GRANT USAGE ON SCHEMA public TO licen_key_user;
-
