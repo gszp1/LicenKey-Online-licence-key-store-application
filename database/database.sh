@@ -17,8 +17,13 @@ add_script ./sql/data_types.sql
 add_script ./sql/functions.sql
 
 # tables
+add_script ./sql/tables/licence_types.sql
+add_script ./sql/tables/categories.sql
 add_script ./sql/tables/users.sql
+add_script ./sql/tables/publishers.sql
+add_script ./sql/tables/services.sql
 add_script ./sql/tables/licences.sql
+add_script ./sql/tables/keys.sql
 
 # privileges
 add_script ./sql/privileges.sql

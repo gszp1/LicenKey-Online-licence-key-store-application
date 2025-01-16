@@ -1,5 +1,6 @@
 CREATE TYPE user_status AS ENUM ('active', 'deactivated', 'banned');
 CREATE TYPE user_role AS ENUM ('user', 'admin');
+-- CREATE TYPE licence_type AS ENUM ('monthly', 'trial', 'yearly', 'lifetime', 'weekly', 'daily')
 CREATE OR REPLACE FUNCTION refresh_update_date()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -7,6 +8,30 @@ BEGIN
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE TABLE licence_types (
+    type_id BIGSERIAL PRIMARY KEY,
+    duration_days INTEGER,
+    'name' VARCHAR(50) NOT NULL DEFAULT 'lifetime',
+    creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
+    update_date TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE TRIGGER refresh_update_date_trg
+BEFORE UPDATE ON licences
+FOR EACH ROW
+EXECUTE FUNCTION refresh_update_date();
+CREATE TABLE categories (
+    category_id BIGSERIAL PRIMARY KEY,
+    'name' VARCHAR(100) NOT NULL UNIQUE,
+    creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
+    update_date TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE TRIGGER refresh_update_date_trg
+BEFORE UPDATE ON licences
+FOR EACH ROW
+EXECUTE FUNCTION refresh_update_date();
 
 CREATE TABLE users (
     user_id BIGSERIAL PRIMARY KEY,
@@ -27,6 +52,29 @@ CREATE TRIGGER refresh_update_date_trg
 BEFORE UPDATE ON users
 FOR EACH ROW
 EXECUTE FUNCTION refresh_update_date();
+CREATE TABLE publishers (
+    publisher_id BIGSERIAL PRIMARY KEY,
+    'name' VARCHAR(100) UNIQUE NOT NULL,
+    home_page VARCHAR(2083),
+    creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
+    update_date TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE TRIGGER refresh_update_date_trg
+BEFORE UPDATE ON users
+FOR EACH ROW
+EXECUTE FUNCTION refresh_update_date();
+CREATE TABLE services (
+    service_id BIGSERIAL PRIMARY KEY,
+    api_url VARCHAR(2083) NOT NULL,  /* Currently max length of url*/
+    creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
+    update_date TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE TRIGGER refresh_update_date_trg
+BEFORE UPDATE ON users
+FOR EACH ROW
+EXECUTE FUNCTION refresh_update_date();
 CREATE TABLE licences (
     licence_id BIGSERIAL PRIMARY KEY,
     "name" VARCHAR(128) UNIQUE NOT NULL,
@@ -34,6 +82,18 @@ CREATE TABLE licences (
     "description" TEXT,
     price DECIMAL(10, 2) NOT NULL,
     available_for_sale BOOLEAN NOT NULL DEFAULT FALSE,
+    creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
+    update_date TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE TRIGGER refresh_update_date_trg
+BEFORE UPDATE ON licences
+FOR EACH ROW
+EXECUTE FUNCTION refresh_update_date();
+
+CREATE TABLE keys (
+    key_id BIGSERIAL PRIMARY KEY, 
+    expired BOOLEAN NOT NULL DEFAULT VALUE FALSE,
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     update_date TIMESTAMPTZ NOT NULL DEFAULT now()
 );
