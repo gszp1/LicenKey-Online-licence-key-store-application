@@ -5,6 +5,10 @@ CREATE TABLE licences (
     "description" TEXT,
     price DECIMAL(10, 2) NOT NULL,
     available_for_sale BOOLEAN NOT NULL DEFAULT FALSE,
+    FOREIGN KEY (type_id) BIGINT REFERENCES licence_type(type_id) ON DELETE RESTRICT,
+    FOREIGN KEY (category_id) BIGINT REFERENCES categories(category_id) ON DELETE RESTRICT,
+    FOREIGN KEY (publisher_id) BIGINT REFERENCES publishers(publisher_id) ON DELETE RESTRICT,
+    FOREIGN KEY (service_id) BIGINT REFERENCES services(service_id) ON DELETE SET NULL,
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     update_date TIMESTAMPTZ NOT NULL DEFAULT now()
 );
