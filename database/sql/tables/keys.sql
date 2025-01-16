@@ -1,4 +1,5 @@
 CREATE TABLE keys (
+    expired BOOLEAN NOT NULL DEFAULT VALUE FALSE,
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     update_date TIMESTAMPTZ NOT NULL DEFAULT now()
 );
