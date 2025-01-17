@@ -1,5 +1,9 @@
 package com.gszp.backend.model;
 
+import com.gszp.backend.util.UserRole;
+import com.gszp.backend.util.UserRoleConverter;
+import com.gszp.backend.util.UserStatus;
+import com.gszp.backend.util.UserStatusConverter;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,6 +38,14 @@ public class User {
 
     @Column(name = "last_name", length = 50)
     private String lastName;
+
+    @Convert(converter = UserStatusConverter.class)
+    @Column(name = "user_status")
+    private UserStatus userStatus;
+
+    @Convert(converter = UserRoleConverter.class)
+    @Column(name = "user_role")
+    private UserRole userRole;
 
     @Column(nullable = false)
     private Boolean active = Boolean.FALSE;
