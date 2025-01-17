@@ -36,4 +36,8 @@ public class Licence {
     @ManyToOne
     @JoinColumn(name = "FK_platform_id")
     private Platform platform;
+
+    @ManyToOne
+    @JoinColumn(name = "FK_licence_type_id")
+    private LicenceType licenceType;
 }

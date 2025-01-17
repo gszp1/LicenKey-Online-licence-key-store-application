@@ -1,16 +1,17 @@
 package com.gszp.backend.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Table(name = "licence_types")
 public class LicenceType {
 
@@ -23,4 +24,8 @@ public class LicenceType {
 
     @Column(length = 50, nullable = false, unique = true)
     private String name;
+
+    @OneToMany(mappedBy = "licenceType")
+    @Builder.Default
+    private List<Licence> licences = new ArrayList<>();
 }
