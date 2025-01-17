@@ -39,7 +39,7 @@
 
 ### 2.3. Diagram
     
-![database diagram][database/db_diagram.png]
+![database diagram](database/db_diagram.png)
 
 ## 3. Technologie
     1. Java
