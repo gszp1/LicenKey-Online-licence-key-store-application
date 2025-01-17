@@ -26,4 +26,8 @@ public class Service {
     @OneToMany(mappedBy = "service")
     @Builder.Default
     private List<Licence> licences = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "FK_publisher_id")
+    private Publisher publisher;
 }

@@ -29,4 +29,8 @@ public class Publisher {
     @OneToMany(mappedBy = "publisher")
     @Builder.Default
     private List<Publisher> publishers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "service")
+    @Builder.Default
+    private List<Service> services = new ArrayList<>();
 }
