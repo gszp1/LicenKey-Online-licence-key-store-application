@@ -6,6 +6,6 @@ CREATE TABLE categories (
 );
 
 CREATE TRIGGER refresh_update_date_trg
-BEFORE UPDATE ON licences
+BEFORE UPDATE ON categories
 FOR EACH ROW
 EXECUTE FUNCTION refresh_update_date();

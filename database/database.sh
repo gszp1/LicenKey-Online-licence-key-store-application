@@ -4,7 +4,7 @@ database_file_name="database.sql"
 
 add_script() {
     cat $1 >> $database_file_name
-    echo "" >> $database_file_name
+    echo "\n" >> $database_file_name
 }
 
 # clear file if exists

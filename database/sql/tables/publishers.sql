@@ -7,6 +7,6 @@ CREATE TABLE publishers (
 );
 
 CREATE TRIGGER refresh_update_date_trg
-BEFORE UPDATE ON users
+BEFORE UPDATE ON publishers
 FOR EACH ROW
 EXECUTE FUNCTION refresh_update_date();

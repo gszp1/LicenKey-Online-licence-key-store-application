@@ -7,6 +7,6 @@ CREATE TABLE platforms (
 );
 
 CREATE TRIGGER refresh_update_date_trg
-BEFORE UPDATE ON licences
+BEFORE UPDATE ON platforms
 FOR EACH ROW
 EXECUTE FUNCTION refresh_update_date();
