@@ -32,4 +32,8 @@ public class Licence {
 
     @Column(name = "available_for_sale", nullable = false)
     private Boolean AvailableForSale = true;
+
+    @ManyToOne
+    @JoinColumn(name = "FK_platform_id")
+    private Platform platform;
 }

@@ -48,6 +48,7 @@ public class User {
     private UserRole userRole;
 
     @Column(nullable = false)
+    @Builder.Default
     private Boolean active = Boolean.FALSE;
 
     @Column(name = "deactivation_date", columnDefinition = "TIMESTAMPTZ")

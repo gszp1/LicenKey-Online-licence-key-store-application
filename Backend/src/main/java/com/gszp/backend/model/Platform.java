@@ -3,6 +3,9 @@ package com.gszp.backend.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -22,4 +25,8 @@ public class Platform {
 
     @Column(length = 2083)
     private String homePage;
+
+    @OneToMany(mappedBy = "platform")
+    @Builder.Default
+    private List<Licence> licences = new ArrayList<>();
 }
