@@ -3,6 +3,9 @@ package com.gszp.backend.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -22,4 +25,8 @@ public class Publisher {
 
     @Column(name = "home_page", length = 2083)
     private String homePage;
+
+    @OneToMany(mappedBy = "publisher")
+    @Builder.Default
+    private List<Publisher> publishers = new ArrayList<>();
 }

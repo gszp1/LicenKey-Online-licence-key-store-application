@@ -44,4 +44,8 @@ public class Licence {
     @ManyToOne
     @JoinColumn(name = "FK_category_id")
     private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "FK_publisher_id")
+    private Publisher publisher;
 }
