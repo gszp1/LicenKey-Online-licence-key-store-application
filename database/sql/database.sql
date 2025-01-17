@@ -28,7 +28,7 @@ EXECUTE FUNCTION refresh_update_date();
 CREATE TABLE licence_types (
     type_id BIGSERIAL PRIMARY KEY,
     duration_days INTEGER,
-    "name" VARCHAR(50) NOT NULL DEFAULT 'lifetime',
+    "name" VARCHAR(50) UNIQUE NOT NULL,
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     update_date TIMESTAMPTZ NOT NULL DEFAULT now()
 );
@@ -60,7 +60,7 @@ CREATE TABLE users (
     last_name varchar(50),
     user_status user_status NOT NULL DEFAULT 'active',
     user_role user_role NOT NULL DEFAULT 'user',
-    active BOOLEAN DEFAULT false,
+    active BOOLEAN NOT NULL DEFAULT FALSE,
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     deactivation_date TIMESTAMPTZ,
     update_date TIMESTAMPTZ NOT NULL DEFAULT now()
@@ -87,10 +87,10 @@ EXECUTE FUNCTION refresh_update_date();
 CREATE TABLE services (
     service_id BIGSERIAL PRIMARY KEY,
     api_url VARCHAR(2083) NOT NULL,  /* Currently max length of url*/
-    publisher_id BIGINT,
+    FK_publisher_id BIGINT,
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     update_date TIMESTAMPTZ NOT NULL DEFAULT now(),
-    FOREIGN KEY (publisher_id) REFERENCES publishers(publisher_id) ON DELETE CASCADE
+    FOREIGN KEY (FK_publisher_id) REFERENCES publishers(publisher_id) ON DELETE CASCADE
 );
 
 CREATE TRIGGER refresh_update_date_trg
@@ -104,17 +104,17 @@ CREATE TABLE licences (
     developer VARCHAR(128) NOT NULL,
     "description" TEXT,
     price DECIMAL(10, 2) NOT NULL,
-    available_for_sale BOOLEAN NOT NULL DEFAULT FALSE,
-    type_id BIGINT,
-    category_id BIGINT,
-    publisher_id BIGINT,
-    platform_id BIGINT,
-    service_id BIGINT,
-    FOREIGN KEY (type_id) REFERENCES licence_types(type_id) ON DELETE RESTRICT,
-    FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE RESTRICT,
-    FOREIGN KEY (publisher_id) REFERENCES publishers(publisher_id) ON DELETE RESTRICT,
-    FOREIGN KEY (platform_id) REFERENCES platforms(platform_id) ON DELETE RESTRICT,
-    FOREIGN KEY (service_id) REFERENCES services(service_id) ON DELETE SET NULL,
+    available_for_sale BOOLEAN NOT NULL DEFAULT TRUE,
+    FK_licence_type_id BIGINT,
+    FK_category_id BIGINT,
+    FK_publisher_id BIGINT,
+    FK_platform_id BIGINT,
+    FK_service_id BIGINT,
+    FOREIGN KEY (FK_licence_type_id) REFERENCES licence_types(type_id) ON DELETE RESTRICT,
+    FOREIGN KEY (FK_category_id) REFERENCES categories(category_id) ON DELETE RESTRICT,
+    FOREIGN KEY (FK_publisher_id) REFERENCES publishers(publisher_id) ON DELETE RESTRICT,
+    FOREIGN KEY (FK_platform_id) REFERENCES platforms(platform_id) ON DELETE RESTRICT,
+    FOREIGN KEY (FK_service_id) REFERENCES services(service_id) ON DELETE SET NULL,
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     update_date TIMESTAMPTZ NOT NULL DEFAULT now()
 );
@@ -128,13 +128,12 @@ EXECUTE FUNCTION refresh_update_date();
 CREATE TABLE keys (
     key_id BIGSERIAL PRIMARY KEY, 
     expired BOOLEAN NOT NULL DEFAULT FALSE,
-    licence_id BIGINT,
-    user_id BIGINT,
+    FK_licence_id BIGINT,
+    FK_user_id BIGINT,
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     update_date TIMESTAMPTZ NOT NULL DEFAULT now(),
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE RESTRICT,
-    FOREIGN KEY (licence_id) REFERENCES licences(licence_id) ON DELETE RESTRICT
-
+    FOREIGN KEY (FK_licence_id) REFERENCES licences(licence_id) ON DELETE RESTRICT,
+    FOREIGN KEY (FK_user_id) REFERENCES users(user_id) ON DELETE RESTRICT
 );
 
 CREATE TRIGGER refresh_update_date_trg

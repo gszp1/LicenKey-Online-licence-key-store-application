@@ -1,0 +1,46 @@
+# Local config
+spring:
+  application:
+    name: Backend
+  datasource:
+    url: jdbc:postgresql://localhost:5432/licen_key_db
+    username: licen_key_user
+    password: "2lJ1c_yC#1MJ0e().k{p(9A"
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    database: postgresql
+    open-in-view: false
+    show-sql: false
+server:
+  port: 9090
+
+#Container config
+---
+
+spring:
+  config:
+    activate:
+      on-profile: container
+  application:
+    name: Backend
+  datasource:
+    url: "${DATASOURCE_URL}"
+    username: "${DATASOURCE_USER}"
+    password: "${DATASOURCE_PASSWORD}"
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    database: postgresql
+    open-in-view: false
+    show-sql: false
+server:
+  port: "${APPLICATION_PORT}"

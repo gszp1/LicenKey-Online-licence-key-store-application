@@ -5,8 +5,8 @@ CREATE TABLE keys (
     FK_user_id BIGINT,
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     update_date TIMESTAMPTZ NOT NULL DEFAULT now(),
-    FOREIGN KEY (FK_licence_id) REFERENCES licences(licence_id) ON DELETE RESTRICT
-    FOREIGN KEY (FK_user_id) REFERENCES users(user_id) ON DELETE RESTRICT,
+    FOREIGN KEY (FK_licence_id) REFERENCES licences(licence_id) ON DELETE RESTRICT,
+    FOREIGN KEY (FK_user_id) REFERENCES users(user_id) ON DELETE RESTRICT
 );
 
 CREATE TRIGGER refresh_update_date_trg
