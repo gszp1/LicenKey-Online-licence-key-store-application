@@ -1,6 +1,6 @@
 #!/bin/bash
 
-database_file_name="database.sql"
+database_file_name="./sql/database.sql"
 
 add_script() {
     cat $1 >> $database_file_name
@@ -11,10 +11,10 @@ add_script() {
 > $database_file_name
 
 # data types
-add_script ./sql/data_types.sql
+add_script ./sql/functionality/data_types.sql
 
 # functions
-add_script ./sql/functions.sql
+add_script ./sql/functionality/functions.sql
 
 # tables
 add_script ./sql/tables/platforms.sql
@@ -27,4 +27,4 @@ add_script ./sql/tables/licences.sql
 add_script ./sql/tables/keys.sql
 
 # privileges
-add_script ./sql/privileges.sql
+add_script ./sql/functionality/privileges.sql
