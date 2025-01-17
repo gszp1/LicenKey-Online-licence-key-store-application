@@ -11,7 +11,7 @@ $$ LANGUAGE plpgsql;
 
 CREATE TABLE platforms (
     platform_id BIGSERIAL PRIMARY KEY,
-    'name' VARCHAR(128) UNIQUE NOT NULL,
+    "name" VARCHAR(128) UNIQUE NOT NULL,
     home_page VARCHAR(2083),
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     update_date TIMESTAMPTZ NOT NULL DEFAULT now()
@@ -25,7 +25,7 @@ EXECUTE FUNCTION refresh_update_date();
 CREATE TABLE licence_types (
     type_id BIGSERIAL PRIMARY KEY,
     duration_days INTEGER,
-    'name' VARCHAR(50) NOT NULL DEFAULT 'lifetime',
+    "name" VARCHAR(50) NOT NULL DEFAULT 'lifetime',
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     update_date TIMESTAMPTZ NOT NULL DEFAULT now()
 );
@@ -36,7 +36,7 @@ FOR EACH ROW
 EXECUTE FUNCTION refresh_update_date();
 CREATE TABLE categories (
     category_id BIGSERIAL PRIMARY KEY,
-    'name' VARCHAR(100) NOT NULL UNIQUE,
+    "name" VARCHAR(100) NOT NULL UNIQUE,
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     update_date TIMESTAMPTZ NOT NULL DEFAULT now()
 );
@@ -67,7 +67,7 @@ FOR EACH ROW
 EXECUTE FUNCTION refresh_update_date();
 CREATE TABLE publishers (
     publisher_id BIGSERIAL PRIMARY KEY,
-    'name' VARCHAR(100) UNIQUE NOT NULL,
+    "name" VARCHAR(100) UNIQUE NOT NULL,
     home_page VARCHAR(2083),
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     update_date TIMESTAMPTZ NOT NULL DEFAULT now()
