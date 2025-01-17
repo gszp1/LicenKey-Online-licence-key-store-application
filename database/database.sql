@@ -1,6 +1,7 @@
 CREATE TYPE user_status AS ENUM ('active', 'deactivated', 'banned');
 CREATE TYPE user_role AS ENUM ('user', 'admin');
 -- CREATE TYPE licence_type AS ENUM ('monthly', 'trial', 'yearly', 'lifetime', 'weekly', 'daily')
+
 CREATE OR REPLACE FUNCTION refresh_update_date()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -8,6 +9,7 @@ BEGIN
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+
 
 CREATE TABLE platforms (
     platform_id BIGSERIAL PRIMARY KEY,
@@ -22,6 +24,7 @@ BEFORE UPDATE ON platforms
 FOR EACH ROW
 EXECUTE FUNCTION refresh_update_date();
 
+
 CREATE TABLE licence_types (
     type_id BIGSERIAL PRIMARY KEY,
     duration_days INTEGER,
@@ -34,6 +37,7 @@ CREATE TRIGGER refresh_update_date_trg
 BEFORE UPDATE ON licence_types
 FOR EACH ROW
 EXECUTE FUNCTION refresh_update_date();
+
 CREATE TABLE categories (
     category_id BIGSERIAL PRIMARY KEY,
     "name" VARCHAR(100) NOT NULL UNIQUE,
@@ -45,6 +49,7 @@ CREATE TRIGGER refresh_update_date_trg
 BEFORE UPDATE ON categories
 FOR EACH ROW
 EXECUTE FUNCTION refresh_update_date();
+
 
 CREATE TABLE users (
     user_id BIGSERIAL PRIMARY KEY,
@@ -65,6 +70,7 @@ CREATE TRIGGER refresh_update_date_trg
 BEFORE UPDATE ON users
 FOR EACH ROW
 EXECUTE FUNCTION refresh_update_date();
+
 CREATE TABLE publishers (
     publisher_id BIGSERIAL PRIMARY KEY,
     "name" VARCHAR(100) UNIQUE NOT NULL,
@@ -74,9 +80,10 @@ CREATE TABLE publishers (
 );
 
 CREATE TRIGGER refresh_update_date_trg
-BEFORE UPDATE ON users
+BEFORE UPDATE ON publishers
 FOR EACH ROW
 EXECUTE FUNCTION refresh_update_date();
+
 CREATE TABLE services (
     service_id BIGSERIAL PRIMARY KEY,
     api_url VARCHAR(2083) NOT NULL,  /* Currently max length of url*/
@@ -86,9 +93,10 @@ CREATE TABLE services (
 );
 
 CREATE TRIGGER refresh_update_date_trg
-BEFORE UPDATE ON users
+BEFORE UPDATE ON services
 FOR EACH ROW
 EXECUTE FUNCTION refresh_update_date();
+
 CREATE TABLE licences (
     licence_id BIGSERIAL PRIMARY KEY,
     "name" VARCHAR(128) UNIQUE NOT NULL,
@@ -110,6 +118,7 @@ BEFORE UPDATE ON licences
 FOR EACH ROW
 EXECUTE FUNCTION refresh_update_date();
 
+
 CREATE TABLE keys (
     key_id BIGSERIAL PRIMARY KEY, 
     expired BOOLEAN NOT NULL DEFAULT VALUE FALSE,
@@ -124,7 +133,9 @@ BEFORE UPDATE ON keys
 FOR EACH ROW
 EXECUTE FUNCTION refresh_update_date();
 
+
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO licen_key_user;
 GRANT USAGE, SELECT, UPDATE ON ALL SEQUENCES IN SCHEMA public TO licen_key_user;
 
 GRANT USAGE ON SCHEMA public TO licen_key_user;
+
