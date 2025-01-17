@@ -37,6 +37,10 @@
     7. licence_types - typy licencji np. roczna, dożywotnia itp.
     8. platforms - platforma na której można zrealizować/aktywować klucz.
 
+### 2.3. Diagram
+    
+![database diagram][database/db_diagram.png]
+
 ## 3. Technologie
     1. Java
     2. Spring Boot
