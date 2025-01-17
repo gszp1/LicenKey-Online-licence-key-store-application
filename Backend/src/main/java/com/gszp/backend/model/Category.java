@@ -3,6 +3,9 @@ package com.gszp.backend.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Builder
 @Getter
@@ -19,4 +22,8 @@ public class Category {
 
     @Column(length = 100, nullable = false, unique = true)
     private String name;
+
+    @OneToMany(mappedBy = "category")
+    @Builder.Default
+    private List<Licence> licences = new ArrayList<>();
 }
