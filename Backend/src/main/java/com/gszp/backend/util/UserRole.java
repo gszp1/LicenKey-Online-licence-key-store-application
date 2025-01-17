@@ -18,7 +18,7 @@ public enum UserRole {
     public static final Map<String, UserRole> DB_VALUES =
             Stream.of(values()).collect(Collectors.toMap(UserRole::getDatabaseValue, UserRole -> UserRole));
 
-    public UserRole getFromDatabaseValue(String databaseValue) {
+    public static UserRole getFromDatabaseValue(String databaseValue) {
         return DB_VALUES.get(databaseValue);
     }
 }
