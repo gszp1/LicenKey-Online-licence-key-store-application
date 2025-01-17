@@ -4,7 +4,7 @@ CREATE TABLE licences (
     developer VARCHAR(128) NOT NULL,
     "description" TEXT,
     price DECIMAL(10, 2) NOT NULL,
-    available_for_sale BOOLEAN NOT NULL DEFAULT FALSE,
+    available_for_sale BOOLEAN NOT NULL DEFAULT TRUE,
     type_id BIGINT,
     category_id BIGINT,
     publisher_id BIGINT,
