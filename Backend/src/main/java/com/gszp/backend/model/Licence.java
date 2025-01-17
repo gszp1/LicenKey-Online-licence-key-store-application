@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -52,4 +54,8 @@ public class Licence {
     @ManyToOne
     @JoinColumn(name = "FK_service_id")
     private Service service;
+
+    @OneToMany(mappedBy = "licence")
+    @Builder.Default
+    private List<Key> keys = new ArrayList<>();
 }

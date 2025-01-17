@@ -8,7 +8,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.OffsetDateTime;
-import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -53,4 +54,8 @@ public class User {
 
     @Column(name = "deactivation_date", columnDefinition = "TIMESTAMPTZ")
     private OffsetDateTime deactivationDate;
+
+    @OneToMany(mappedBy = "user")
+    @Builder.Default
+    private List<Key> keys = new ArrayList<>();
 }

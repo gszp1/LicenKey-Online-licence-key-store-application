@@ -24,4 +24,12 @@ public class Key {
 
     @Column(name = "creation_date", nullable = false)
     private OffsetDateTime creationDate = OffsetDateTime.now();
+
+    @ManyToOne
+    @JoinColumn(name = "FK_licence_id")
+    private Licence licence;
+
+    @ManyToOne
+    @JoinColumn(name = "FK_user_id")
+    private User user;
 }
