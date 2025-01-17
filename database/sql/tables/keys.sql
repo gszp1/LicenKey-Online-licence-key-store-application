@@ -1,6 +1,8 @@
 CREATE TABLE keys (
     key_id BIGSERIAL PRIMARY KEY, 
     expired BOOLEAN NOT NULL DEFAULT VALUE FALSE,
+    FOREIGN KEY (user_id) BIGINT REFERENCES users(user_id) ON DELETE RESTRICT,
+    FOREIGN KEY (licence_id) BIGINT REFERENCES licences(licence_id) ON DELETE RESTRICT,
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     update_date TIMESTAMPTZ NOT NULL DEFAULT now()
 );
