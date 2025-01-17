@@ -1,7 +1,7 @@
 CREATE TABLE licence_types (
     type_id BIGSERIAL PRIMARY KEY,
     duration_days INTEGER,
-    'name' VARCHAR(50) NOT NULL DEFAULT 'lifetime',
+    "name" VARCHAR(50) NOT NULL DEFAULT 'lifetime',
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     update_date TIMESTAMPTZ NOT NULL DEFAULT now()
 );

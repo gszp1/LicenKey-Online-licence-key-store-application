@@ -1,6 +1,6 @@
 CREATE TABLE categories (
     category_id BIGSERIAL PRIMARY KEY,
-    'name' VARCHAR(100) NOT NULL UNIQUE,
+    "name" VARCHAR(100) NOT NULL UNIQUE,
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     update_date TIMESTAMPTZ NOT NULL DEFAULT now()
 );
