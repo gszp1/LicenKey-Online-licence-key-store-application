@@ -7,7 +7,7 @@ CREATE TABLE users (
     last_name varchar(50),
     user_status user_status NOT NULL DEFAULT 'active',
     user_role user_role NOT NULL DEFAULT 'user',
-    active BOOLEAN DEFAULT false,
+    active BOOLEAN NOT NULL DEFAULT FALSE,
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     deactivation_date TIMESTAMPTZ,
     update_date TIMESTAMPTZ NOT NULL DEFAULT now()
