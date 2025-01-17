@@ -3,6 +3,8 @@ package com.gszp.backend.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.OffsetDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -19,4 +21,7 @@ public class Key {
 
     @Column(nullable = false)
     private Boolean expired = Boolean.FALSE;
+
+    @Column(name = "creation_date", nullable = false)
+    private OffsetDateTime creationDate = OffsetDateTime.now();
 }

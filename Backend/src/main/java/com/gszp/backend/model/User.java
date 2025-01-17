@@ -3,6 +3,9 @@ package com.gszp.backend.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.OffsetDateTime;
+import java.time.ZonedDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -36,5 +39,5 @@ public class User {
     private Boolean active = Boolean.FALSE;
 
     @Column(name = "deactivation_date", columnDefinition = "TIMESTAMPTZ")
-    private String deactivationDate;
+    private OffsetDateTime deactivationDate;
 }
