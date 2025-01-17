@@ -8,6 +8,7 @@ CREATE TABLE licences (
     FOREIGN KEY (type_id) BIGINT REFERENCES licence_type(type_id) ON DELETE RESTRICT,
     FOREIGN KEY (category_id) BIGINT REFERENCES categories(category_id) ON DELETE RESTRICT,
     FOREIGN KEY (publisher_id) BIGINT REFERENCES publishers(publisher_id) ON DELETE RESTRICT,
+    FOREIGN KEY (platform_id) BIGINT REFERENCES platforms(platform_id) ON DELETE RESTRICT,
     FOREIGN KEY (service_id) BIGINT REFERENCES services(service_id) ON DELETE SET NULL,
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     update_date TIMESTAMPTZ NOT NULL DEFAULT now()

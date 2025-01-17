@@ -17,6 +17,7 @@ add_script ./sql/data_types.sql
 add_script ./sql/functions.sql
 
 # tables
+add_script ./sql/tables/platforms.sql
 add_script ./sql/tables/licence_types.sql
 add_script ./sql/tables/categories.sql
 add_script ./sql/tables/users.sql
