@@ -58,4 +58,12 @@ public class Licence {
     @OneToMany(mappedBy = "licence")
     @Builder.Default
     private List<Key> keys = new ArrayList<>();
+
+    @OneToMany(mappedBy = "licence")
+    @Builder.Default
+    private List<Order> orders = new ArrayList<>();
+
+    @OneToMany(mappedBy = "licence")
+    @Builder.Default
+    private List<ShoppingCart> shoppingCartEntries = new ArrayList<>();
 }
