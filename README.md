@@ -36,6 +36,8 @@
     6. categories - kategorie licencji
     7. licence_types - typy licencji np. roczna, dożywotnia itp.
     8. platforms - platforma na której można zrealizować/aktywować klucz.
+    9. shopping_carts - zawartość koszyków zakupowych użytkowników
+    10. orders - zamówienia złożone przez użytkowników
 
 ### 2.3. Diagram
     
