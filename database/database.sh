@@ -24,6 +24,8 @@ add_script ./sql/tables/users.sql
 add_script ./sql/tables/publishers.sql
 add_script ./sql/tables/services.sql
 add_script ./sql/tables/licences.sql
+add_script ./sql/tables/orders.sql
+add_script ./sql/tables/shopping_carts.sql
 add_script ./sql/tables/keys.sql
 
 # privileges
