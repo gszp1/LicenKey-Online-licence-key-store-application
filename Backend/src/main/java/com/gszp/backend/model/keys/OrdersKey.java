@@ -16,5 +16,5 @@ public class OrdersKey implements Serializable {
 
     private Long userId;
 
-    private Long orderId;
+    private Long licenceId;
 }
