@@ -58,4 +58,12 @@ public class User {
     @OneToMany(mappedBy = "user")
     @Builder.Default
     private List<Key> keys = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    @Builder.Default
+    private List<ShoppingCart> shoppingCartEntries = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    @Builder.Default
+    private List<Order> orders = new ArrayList<>();
 }
