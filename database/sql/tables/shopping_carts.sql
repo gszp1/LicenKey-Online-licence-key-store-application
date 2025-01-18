@@ -2,7 +2,6 @@ CREATE TABLE shopping_carts (
     FK_user_id BIGINT,
     FK_licence_id BIGINT,
     quantity INT NOT NULL CHECK (quantity > 0),
-    unit_price DECIMAL(10, 2) NOT NULL CHECK (unit_price >= 0),
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     update_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     PRIMARY KEY (FK_user_id, FK_licence_id),
