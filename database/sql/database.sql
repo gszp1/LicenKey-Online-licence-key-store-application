@@ -162,6 +162,7 @@ EXECUTE FUNCTION refresh_update_date();
 CREATE TABLE keys (
     key_id BIGSERIAL PRIMARY KEY, 
     expired BOOLEAN NOT NULL DEFAULT FALSE,
+    key_code VARCHAR(20) NOT NULL UNIQUE,
     FK_licence_id BIGINT,
     FK_user_id BIGINT,
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
