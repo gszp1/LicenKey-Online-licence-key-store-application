@@ -24,12 +24,18 @@ repositories {
 }
 
 dependencies {
+    /* Spring Boot */
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
-    runtimeOnly("org.postgresql:postgresql")
+    implementation("org.springframework.boot:spring-boot-starter-security")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
+
+    /* PostgreSQL */
+    runtimeOnly("org.postgresql:postgresql")
+
+    /* Testing */
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     /* Lombok */
