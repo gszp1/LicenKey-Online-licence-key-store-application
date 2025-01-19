@@ -18,7 +18,7 @@ spring:
     show-sql: false
 server:
   port: 9090
-
+secret_key: 2971612730793f5c5e2637753066234d2159413339745979547873513f
 #Container config
 ---
 
@@ -44,3 +44,4 @@ spring:
     show-sql: false
 server:
   port: "${APPLICATION_PORT}"
+secret_key: 2971612730793f5c5e2637753066234d2159413339745979547873513f

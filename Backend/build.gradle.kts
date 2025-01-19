@@ -32,6 +32,9 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 
+    /* JWT */
+    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+
     /* PostgreSQL */
     runtimeOnly("org.postgresql:postgresql")
 
