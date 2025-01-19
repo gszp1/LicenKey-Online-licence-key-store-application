@@ -1,4 +1,4 @@
-package com.gszp.backend.util;
+package com.gszp.backend.auth;
 
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;

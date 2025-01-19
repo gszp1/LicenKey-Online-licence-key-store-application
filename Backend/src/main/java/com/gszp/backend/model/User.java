@@ -1,9 +1,9 @@
 package com.gszp.backend.model;
 
-import com.gszp.backend.util.UserRole;
-import com.gszp.backend.util.UserRoleConverter;
-import com.gszp.backend.util.UserStatus;
-import com.gszp.backend.util.UserStatusConverter;
+import com.gszp.backend.auth.UserRole;
+import com.gszp.backend.auth.UserRoleConverter;
+import com.gszp.backend.auth.UserStatus;
+import com.gszp.backend.auth.UserStatusConverter;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
