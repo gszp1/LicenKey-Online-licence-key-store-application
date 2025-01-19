@@ -19,6 +19,8 @@ spring:
 server:
   port: 9090
 secret_key: 2971612730793f5c5e2637753066234d2159413339745979547873513f
+# In milliseconds
+expiration_time: 3600000
 #Container config
 ---
 
@@ -45,3 +47,4 @@ spring:
 server:
   port: "${APPLICATION_PORT}"
 secret_key: 2971612730793f5c5e2637753066234d2159413339745979547873513f
+expiration_time: 3600000
