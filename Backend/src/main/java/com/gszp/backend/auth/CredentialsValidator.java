@@ -10,7 +10,7 @@ public class CredentialsValidator {
 
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 
-    private static  final Pattern PASSWORD_PATTERN = Pattern.compile(PASSWORD_REGEX);
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile(PASSWORD_REGEX);
 
     public static boolean validateEmail(String email) {
         return EMAIL_PATTERN.matcher(email).matches();

@@ -17,7 +17,7 @@ public enum UserStatus {
     private final String databaseValue;
 
     private static final Map<String, UserStatus> DB_VALUES =
-        Stream.of(values()).collect(Collectors.toMap(UserStatus::getDatabaseValue, UserStatus -> UserStatus));
+            Stream.of(values()).collect(Collectors.toMap(UserStatus::getDatabaseValue, UserStatus -> UserStatus));
 
     public static UserStatus getByDatabaseValue(String databaseValue) {
         return DB_VALUES.get(databaseValue);
