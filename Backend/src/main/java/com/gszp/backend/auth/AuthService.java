@@ -54,6 +54,9 @@ public class AuthService {
                 .username(request.getUsername())
                 .firstName(((firstName == null) || (firstName.isBlank())) ? null : firstName)
                 .lastName(((lastName == null) || (lastName.isBlank())) ? null : lastName)
+                .userStatus(UserStatus.ACTIVE)
+                .userRole(UserRole.USER)
+                .active(true)
                 .build();
         user = userRepository.save(user);
         return new AuthResponse(jwtService.generateToken(user));

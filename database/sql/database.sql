@@ -1,7 +1,3 @@
-CREATE TYPE user_status AS ENUM ('active', 'deactivated', 'banned');
-CREATE TYPE user_role AS ENUM ('user', 'admin');
--- CREATE TYPE licence_type AS ENUM ('monthly', 'trial', 'yearly', 'lifetime', 'weekly', 'daily')
-
 CREATE OR REPLACE FUNCTION refresh_update_date()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -58,13 +54,17 @@ CREATE TABLE users (
     username varchar(100) NOT NULL UNIQUE,
     first_name varchar(50),
     last_name varchar(50),
-    user_status user_status NOT NULL DEFAULT 'active',
-    user_role user_role NOT NULL DEFAULT 'user',
+    user_status varchar(20) NOT NULL DEFAULT 'active',
+    user_role varchar(20) NOT NULL DEFAULT 'user',
     active BOOLEAN NOT NULL DEFAULT FALSE,
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     deactivation_date TIMESTAMPTZ,
-    update_date TIMESTAMPTZ NOT NULL DEFAULT now()
+    update_date TIMESTAMPTZ NOT NULL DEFAULT now(),
+    CHECK (user_status IN ('active', 'banned', 'deactivated')),
+    CHECK (user_role IN ('admin', 'user'))
 );
+
+
 
 CREATE TRIGGER refresh_update_date_trg
 BEFORE UPDATE ON users

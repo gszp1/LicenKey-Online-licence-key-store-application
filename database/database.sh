@@ -11,7 +11,7 @@ add_script() {
 > $database_file_name
 
 # data types
-add_script ./sql/functionality/data_types.sql
+# add_script ./sql/functionality/data_types.sql
 
 # functions
 add_script ./sql/functionality/functions.sql
