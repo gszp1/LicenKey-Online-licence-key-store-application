@@ -41,6 +41,7 @@ public class AuthController {
         try {
             return ResponseEntity.ok(authService.authenticate(request));
         } catch (AuthenticationException ex) {
+            ex.printStackTrace();
             return ResponseEntity.status(401).body("Bad credentials");
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body("Something went wrong");

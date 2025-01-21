@@ -21,7 +21,6 @@ import java.util.Optional;
 public class AuthService {
 
     private final UserRepository userRepository;
-
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;

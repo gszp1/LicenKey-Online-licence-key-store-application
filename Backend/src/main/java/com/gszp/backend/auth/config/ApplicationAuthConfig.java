@@ -19,7 +19,7 @@ import static java.lang.String.format;
 @RequiredArgsConstructor
 public class ApplicationAuthConfig {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Bean
     public PasswordEncoder passwordEncoder() {

@@ -81,12 +81,12 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return userStatus != UserStatus.DEACTIVATED;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return userStatus == UserStatus.BANNED;
+        return userStatus != UserStatus.BANNED;
     }
 
     @Override
