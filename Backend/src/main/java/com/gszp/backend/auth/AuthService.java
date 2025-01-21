@@ -65,20 +65,26 @@ public class AuthService {
     private Optional<String> validateRegisterRequest(RegisterRequest request) {
 
         if (request.getEmail() == null || request.getEmail().isEmpty()) {
-            return Optional.of("Email is required");
+            return Optional.of("Email is required.");
         }
         if (request.getPassword() == null || request.getPassword().isEmpty()) {
-            return Optional.of("Password is required");
+            return Optional.of("Password is required.");
         }
         if (!request.getPassword().equals(request.getPasswordConfirmation())
         ) {
-            return Optional.of("Password and confirmation do not match");
+            return Optional.of("Password and confirmation do not match.");
         }
         if (!request.getEmail().equals(request.getEmailConfirmation())) {
-            return Optional.of("Email and confirmation do not match");
+            return Optional.of("Email and confirmation do not match.");
         }
         if (request.getUsername() == null || request.getUsername().isEmpty()) {
-            return Optional.of("Username is required");
+            return Optional.of("Username is required.");
+        }
+        if (!CredentialsValidator.validateEmail(request.getEmail())) {
+            return Optional.of("Email is invalid.");
+        }
+        if (!CredentialsValidator.validatePassword(request.getPassword())) {
+            return Optional.of("Password is invalid.");
         }
         return Optional.empty();
     }

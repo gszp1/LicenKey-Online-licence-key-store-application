@@ -1,8 +1,12 @@
 package com.gszp.backend.auth;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
+@NoArgsConstructor
 public class RegisterRequest {
 
     private String email;

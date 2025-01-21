@@ -25,10 +25,13 @@ public class AuthController {
         try {
             return ResponseEntity.ok(authService.register(request));
         } catch (InvalidRegisterRequestException irre) {
+            irre.printStackTrace();
             return ResponseEntity.badRequest().body(irre);
         } catch (DataIntegrityViolationException dive) {
+            dive.printStackTrace();
             return ResponseEntity.badRequest().body("User already exists");
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.internalServerError().body("Something went wrong");
         }
     }

@@ -2,7 +2,7 @@ package com.gszp.backend.auth;
 
 import java.util.regex.Pattern;
 
-public class EmailValidator {
+public class CredentialsValidator {
 
     private static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
