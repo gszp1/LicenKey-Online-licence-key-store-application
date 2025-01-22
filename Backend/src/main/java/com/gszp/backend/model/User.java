@@ -57,6 +57,9 @@ public class User implements UserDetails {
     @Column(name = "deactivation_date", columnDefinition = "TIMESTAMPTZ")
     private OffsetDateTime deactivationDate;
 
+    @Column(name = "creation_date", columnDefinition = "TIMESTAMPTZ")
+    private OffsetDateTime creationDate;
+
     @OneToMany(mappedBy = "user")
     @Builder.Default
     private List<Key> keys = new ArrayList<>();
