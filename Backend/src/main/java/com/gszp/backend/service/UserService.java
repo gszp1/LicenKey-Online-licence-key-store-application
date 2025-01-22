@@ -11,11 +11,8 @@ import com.gszp.backend.exception.OperationNotAllowedConflictException;
 import com.gszp.backend.exception.ResourceNotFoundException;
 import com.gszp.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,7 +20,6 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final AuthenticationManager authenticationManager;
 
     public UserDataResponse getUserData(UserDataRequest request) throws ResourceNotFoundException {
         var userOptional = userRepository.findByEmail(request.getEmail());
