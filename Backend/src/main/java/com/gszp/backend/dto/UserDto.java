@@ -3,6 +3,8 @@ package com.gszp.backend.dto;
 import com.gszp.backend.model.User;
 import lombok.*;
 
+import java.time.OffsetDateTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,7 +20,7 @@ public class UserDto {
 
     private String lastName;
 
-    private String creationDate;
+    private OffsetDateTime creationDate;
 
     public static UserDto fromUser(User user) {
         return UserDto.builder()
@@ -26,7 +28,7 @@ public class UserDto {
                 .username(user.getUsername())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
-                .creationDate(user.get)
+                .creationDate(user.getCreationDate())
                 .build();
     }
 }
