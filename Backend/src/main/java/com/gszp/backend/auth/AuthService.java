@@ -1,7 +1,7 @@
 package com.gszp.backend.auth;
 
 import com.gszp.backend.auth.config.JwtService;
-import com.gszp.backend.exception.InvalidAuthRequestException;
+import com.gszp.backend.exception.InvalidRequestPayloadException;
 import com.gszp.backend.model.User;
 import com.gszp.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -41,10 +41,10 @@ public class AuthService {
         return new AuthResponse(authToken);
     }
 
-    public AuthResponse register(RegisterRequest request) throws InvalidAuthRequestException {
+    public AuthResponse register(RegisterRequest request) throws InvalidRequestPayloadException {
         var validationResult = validateRegisterRequest(request);
         if (validationResult.isPresent()) {
-            throw new InvalidAuthRequestException(validationResult.get());
+            throw new InvalidRequestPayloadException(validationResult.get());
         }
         var firstName = request.getFirstName();
         var lastName = request.getLastName();

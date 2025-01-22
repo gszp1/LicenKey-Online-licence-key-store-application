@@ -11,5 +11,7 @@ public class UserPasswordUpdateRequest {
 
     private String email;
 
+    private String currentPassword;
+
     private String newPassword;
 }

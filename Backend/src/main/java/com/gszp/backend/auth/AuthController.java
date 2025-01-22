@@ -1,6 +1,6 @@
 package com.gszp.backend.auth;
 
-import com.gszp.backend.exception.InvalidAuthRequestException;
+import com.gszp.backend.exception.InvalidRequestPayloadException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +26,7 @@ public class AuthController {
         try {
             log.info("Received register request.");
             return ResponseEntity.ok(authService.register(request));
-        } catch (InvalidAuthRequestException irre) {
+        } catch (InvalidRequestPayloadException irre) {
             log.error("Register request failed due to invalid credentials.");
             return ResponseEntity.badRequest().body(irre);
         } catch (DataIntegrityViolationException dive) {
