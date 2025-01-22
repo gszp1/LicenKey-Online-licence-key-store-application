@@ -9,5 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UserPasswordUpdateRequest {
 
+    private String email;
+
     private String newPassword;
 }
