@@ -11,6 +11,7 @@ import com.gszp.backend.exception.OperationNotAllowedConflictException;
 import com.gszp.backend.exception.ResourceNotFoundException;
 import com.gszp.backend.logs.LogGenerator;
 import com.gszp.backend.logs.LogTemplate;
+import com.gszp.backend.model.User;
 import com.gszp.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,13 +25,9 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     public UserDataResponse getUserData(UserDataRequest request) throws ResourceNotFoundException {
-        var userOptional = userRepository.findByEmail(request.getEmail());
-        if (userOptional.isEmpty()) {
-            LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "User with given email does not exist");
-            throw new ResourceNotFoundException("User with given email does not exist");
-        }
+        User user = getUser(request.getEmail());
         LogGenerator.generateInfoLog(LogTemplate.REQUEST_SUCCESS, "User data retrieved.");
-        return UserDataResponse.fromUser(userOptional.get());
+        return UserDataResponse.fromUser(user);
     }
 
     public UserDataUpdateResponse updateUserData(
@@ -48,12 +45,7 @@ public class UserService {
             );
             throw new OperationNotAllowedConflictException("Username is already used.");
         }
-        var userOptional = userRepository.findByEmail(request.getEmail());
-        if (userOptional.isEmpty()) {
-            LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "User with given email does not exist.");
-            throw new ResourceNotFoundException("User with given email does not exist.");
-        }
-        var user = userOptional.get();
+        User user = getUser(request.getEmail());
         String firstName = request.getFirstName();
         String lastName = request.getLastName();
         user.setFirstName(((firstName == null) || (firstName.isBlank())) ? null : firstName);
@@ -67,11 +59,7 @@ public class UserService {
     public UserDataUpdateResponse updateUserPassword(
             UserPasswordUpdateRequest request
     ) throws InvalidRequestPayloadException, OperationNotAllowedConflictException, ResourceNotFoundException {
-        var userOptional = userRepository.findByEmail(request.getEmail());
-        if (userOptional.isEmpty()) {
-            LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "User with given email does not exist.");
-            throw new ResourceNotFoundException("User with given email does not exist.");
-        }
+        User user = getUser(request.getEmail());
         if (CredentialsValidator.validatePassword(request.getCurrentPassword())) {
             LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "Provided current password is invalid.");
             throw new InvalidRequestPayloadException("Current password is invalid.");
@@ -84,10 +72,18 @@ public class UserService {
             LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "Current password confirmation is invalid.");
             throw new OperationNotAllowedConflictException("Current password does not match old password.");
         }
-        var user = userOptional.get();
         user.setPasswordHash(passwordEncoder.encode(request.getNewPassword()));
         userRepository.save(user);
         LogGenerator.generateInfoLog(LogTemplate.REQUEST_SUCCESS, "User password updated.");
         return new UserDataUpdateResponse("User password updated.");
+    }
+
+    private User getUser(String email) throws ResourceNotFoundException {
+        var userOptional = userRepository.findByEmail(email);
+        if (userOptional.isEmpty()) {
+            LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "User with given email does not exist.");
+            throw new ResourceNotFoundException("User with given email does not exist.");
+        }
+        return userOptional.get();
     }
 }
