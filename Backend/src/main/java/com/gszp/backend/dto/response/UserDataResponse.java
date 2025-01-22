@@ -1,4 +1,4 @@
-package com.gszp.backend.dto;
+package com.gszp.backend.dto.response;
 
 import com.gszp.backend.model.User;
 import lombok.*;
@@ -10,8 +10,7 @@ import java.time.OffsetDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserDto {
-
+public class UserDataResponse {
     private String email;
 
     private String username;
@@ -22,8 +21,8 @@ public class UserDto {
 
     private OffsetDateTime creationDate;
 
-    public static UserDto fromUser(User user) {
-        return UserDto.builder()
+    public static UserDataResponse fromUser(User user) {
+        return UserDataResponse.builder()
                 .email(user.getEmail())
                 .username(user.getUsername())
                 .firstName(user.getFirstName())
