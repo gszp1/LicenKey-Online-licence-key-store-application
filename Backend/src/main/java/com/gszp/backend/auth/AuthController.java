@@ -1,6 +1,7 @@
 package com.gszp.backend.auth;
 
-import com.gszp.backend.exception.InvalidRegisterRequestException;
+import com.gszp.backend.exception.InvalidAuthRequestException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -22,12 +24,16 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
         try {
+            log.info("Received register request.");
             return ResponseEntity.ok(authService.register(request));
-        } catch (InvalidRegisterRequestException irre) {
+        } catch (InvalidAuthRequestException irre) {
+            log.error("Register request failed due to invalid credentials.");
             return ResponseEntity.badRequest().body(irre);
         } catch (DataIntegrityViolationException dive) {
+            log.error("Register request failed due to existing user with given credentials.");
             return ResponseEntity.badRequest().body("User already exists");
         } catch (Exception e) {
+            log.error("Register request failed due to internal service error.");
             return ResponseEntity.internalServerError().body("Something went wrong");
         }
     }
@@ -35,10 +41,13 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         try {
+            log.info("Received login request.");
             return ResponseEntity.ok(authService.authenticate(request));
         } catch (AuthenticationException ex) {
-            return ResponseEntity.status(401).body("Bad credentials");
+            log.info("Login request failed due to authentication failure.");
+            return ResponseEntity.status(401).body("Bad credentials.");
         } catch (Exception e) {
+            log.info("Login request failed due to internal service error.");
             return ResponseEntity.internalServerError().body("Something went wrong");
         }
     }

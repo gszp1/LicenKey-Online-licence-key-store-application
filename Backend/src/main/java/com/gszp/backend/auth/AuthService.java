@@ -1,10 +1,11 @@
 package com.gszp.backend.auth;
 
 import com.gszp.backend.auth.config.JwtService;
-import com.gszp.backend.exception.InvalidRegisterRequestException;
+import com.gszp.backend.exception.InvalidAuthRequestException;
 import com.gszp.backend.model.User;
 import com.gszp.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class AuthService {
 
@@ -34,13 +36,15 @@ public class AuthService {
             throw new UsernameNotFoundException(String.format("User %s not found", request.getEmail()));
         }
         var user = userOptional.get();
-        return new AuthResponse(jwtService.generateToken(user));
+        var authToken = jwtService.generateToken(user);
+        log.info("User login successful.");
+        return new AuthResponse(authToken);
     }
 
-    public AuthResponse register(RegisterRequest request) throws InvalidRegisterRequestException {
+    public AuthResponse register(RegisterRequest request) throws InvalidAuthRequestException {
         var validationResult = validateRegisterRequest(request);
         if (validationResult.isPresent()) {
-            throw new InvalidRegisterRequestException(validationResult.get());
+            throw new InvalidAuthRequestException(validationResult.get());
         }
         var firstName = request.getFirstName();
         var lastName = request.getLastName();
@@ -55,7 +59,9 @@ public class AuthService {
                 .active(true)
                 .build();
         user = userRepository.save(user);
-        return new AuthResponse(jwtService.generateToken(user));
+        var authToken = jwtService.generateToken(user);
+        log.info("User registered successfully.");
+        return new AuthResponse(authToken);
     }
 
     private Optional<String> validateRegisterRequest(RegisterRequest request) {
