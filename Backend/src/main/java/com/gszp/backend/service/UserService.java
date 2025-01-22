@@ -9,6 +9,8 @@ import com.gszp.backend.dto.response.UserDataUpdateResponse;
 import com.gszp.backend.exception.InvalidRequestPayloadException;
 import com.gszp.backend.exception.OperationNotAllowedConflictException;
 import com.gszp.backend.exception.ResourceNotFoundException;
+import com.gszp.backend.logs.LogGenerator;
+import com.gszp.backend.logs.LogTemplate;
 import com.gszp.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,8 +26,10 @@ public class UserService {
     public UserDataResponse getUserData(UserDataRequest request) throws ResourceNotFoundException {
         var userOptional = userRepository.findByEmail(request.getEmail());
         if (userOptional.isEmpty()) {
+            LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "User with given email does not exist");
             throw new ResourceNotFoundException("User with given email does not exist");
         }
+        LogGenerator.generateInfoLog(LogTemplate.REQUEST_SUCCESS, "User data retrieved.");
         return UserDataResponse.fromUser(userOptional.get());
     }
 
@@ -33,14 +37,20 @@ public class UserService {
             UserDataUpdateRequest request
     ) throws InvalidRequestPayloadException, OperationNotAllowedConflictException, ResourceNotFoundException {
         if (request.getUsername() == null || request.getUsername().isBlank()) {
+            LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "Invalid request payload.");
             throw new InvalidRequestPayloadException("Username not provided.");
         }
         var existingUser = userRepository.findByUsername(request.getUsername());
         if (existingUser.isPresent()) {
+            LogGenerator.generateInfoLog(
+                    LogTemplate.REQUEST_FAIL,
+                    "User with specified username already exists."
+            );
             throw new OperationNotAllowedConflictException("Username is already used.");
         }
         var userOptional = userRepository.findByEmail(request.getEmail());
         if (userOptional.isEmpty()) {
+            LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "User with given email does not exist.");
             throw new ResourceNotFoundException("User with given email does not exist.");
         }
         var user = userOptional.get();
@@ -50,6 +60,7 @@ public class UserService {
         user.setLastName(((lastName == null) || (lastName.isBlank())) ? null : lastName);
         user.setUsername(request.getUsername());
         userRepository.save(user);
+        LogGenerator.generateInfoLog(LogTemplate.REQUEST_SUCCESS, "User data updated.");
         return new UserDataUpdateResponse("User data updated.");
     }
 
@@ -58,20 +69,25 @@ public class UserService {
     ) throws InvalidRequestPayloadException, OperationNotAllowedConflictException, ResourceNotFoundException {
         var userOptional = userRepository.findByEmail(request.getEmail());
         if (userOptional.isEmpty()) {
+            LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "User with given email does not exist.");
             throw new ResourceNotFoundException("User with given email does not exist.");
         }
         if (CredentialsValidator.validatePassword(request.getCurrentPassword())) {
+            LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "Provided current password is invalid.");
             throw new InvalidRequestPayloadException("Current password is invalid.");
         }
         if (CredentialsValidator.validatePassword(request.getNewPassword())) {
+            LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "Provided new password is invalid.");
             throw new InvalidRequestPayloadException("New password is invalid.");
         }
         if (!passwordEncoder.matches(request.getCurrentPassword(), request.getNewPassword())) {
+            LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "Current password confirmation is invalid.");
             throw new OperationNotAllowedConflictException("Current password does not match old password.");
         }
         var user = userOptional.get();
         user.setPasswordHash(passwordEncoder.encode(request.getNewPassword()));
         userRepository.save(user);
+        LogGenerator.generateInfoLog(LogTemplate.REQUEST_SUCCESS, "User password updated.");
         return new UserDataUpdateResponse("User password updated.");
     }
 }
