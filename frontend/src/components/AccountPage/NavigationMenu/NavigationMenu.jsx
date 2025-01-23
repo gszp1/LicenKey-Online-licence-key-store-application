@@ -31,11 +31,6 @@ const NavigationMenu = ({clickAction, logoutAction}) => {
                 text={"Keys"}
             />
             <NavigationMenuEntry
-                entryId={"orders"}
-                clickAction={clickAction}
-                text={"Orders"}
-            />
-            <NavigationMenuEntry
                 entryId={"logout"}
                 clickAction={logoutAction}
                 text={"Logout"}
