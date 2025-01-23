@@ -1,0 +1,10 @@
+.page {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    width: 1440px;
+    height: calc(100%);
+    min-height: calc(1080px);
+    background-color: white;
+    padding-top: 200px;
+}
