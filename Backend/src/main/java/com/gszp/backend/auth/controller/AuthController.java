@@ -1,5 +1,8 @@
-package com.gszp.backend.auth;
+package com.gszp.backend.auth.controller;
 
+import com.gszp.backend.auth.dto.LoginRequest;
+import com.gszp.backend.auth.dto.RegisterRequest;
+import com.gszp.backend.auth.service.AuthService;
 import com.gszp.backend.exception.ExceptionHandler;
 import com.gszp.backend.logs.LogGenerator;
 import com.gszp.backend.logs.LogTemplate;

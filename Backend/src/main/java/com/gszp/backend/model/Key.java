@@ -23,10 +23,15 @@ public class Key {
     private String keyCode;
 
     @Column(nullable = false)
-    private Boolean expired = Boolean.FALSE;
+    private Boolean expired;
 
-    @Column(name = "creation_date", nullable = false)
-    private OffsetDateTime creationDate = OffsetDateTime.now();
+    @Column(
+            name = "creation_date",
+            nullable = false,
+            updatable = false,
+            insertable = false
+    )
+    private OffsetDateTime creationDate;
 
     @ManyToOne
     @JoinColumn(name = "FK_licence_id")

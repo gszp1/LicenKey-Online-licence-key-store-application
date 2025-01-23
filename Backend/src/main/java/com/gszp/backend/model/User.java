@@ -1,9 +1,9 @@
 package com.gszp.backend.model;
 
-import com.gszp.backend.auth.UserRole;
-import com.gszp.backend.auth.UserRoleConverter;
-import com.gszp.backend.auth.UserStatus;
-import com.gszp.backend.auth.UserStatusConverter;
+import com.gszp.backend.auth.model.UserRole;
+import com.gszp.backend.auth.model.UserRoleConverter;
+import com.gszp.backend.auth.model.UserStatus;
+import com.gszp.backend.auth.model.UserStatusConverter;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -44,11 +44,13 @@ public class User implements UserDetails {
 
     @Convert(converter = UserStatusConverter.class)
     @Column(name = "user_status")
-    private UserStatus userStatus;
+    @Builder.Default
+    private UserStatus userStatus = UserStatus.ACTIVE;
 
     @Convert(converter = UserRoleConverter.class)
     @Column(name = "user_role")
-    private UserRole userRole;
+    @Builder.Default
+    private UserRole userRole = UserRole.USER;
 
     @Column(nullable = false)
     @Builder.Default
@@ -57,7 +59,13 @@ public class User implements UserDetails {
     @Column(name = "deactivation_date", columnDefinition = "TIMESTAMPTZ")
     private OffsetDateTime deactivationDate;
 
-    @Column(name = "creation_date", columnDefinition = "TIMESTAMPTZ")
+    @Column(
+            name = "creation_date",
+            columnDefinition = "TIMESTAMPTZ",
+            nullable = false,
+            updatable = false,
+            insertable = false
+    )
     private OffsetDateTime creationDate;
 
     @OneToMany(mappedBy = "user")
@@ -75,6 +83,11 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return userRole.getGrantedAuthorities();
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
     }
 
     @Override

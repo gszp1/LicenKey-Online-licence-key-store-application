@@ -1,7 +1,7 @@
 CREATE OR REPLACE FUNCTION refresh_update_date()
 RETURNS TRIGGER AS $$
 BEGIN
-    NEW.update_date = now();
+    NEW.update_date = CURRENT_TIMESTAMP;
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
@@ -57,9 +57,9 @@ CREATE TABLE users (
     user_status varchar(20) NOT NULL DEFAULT 'active',
     user_role varchar(20) NOT NULL DEFAULT 'user',
     active BOOLEAN NOT NULL DEFAULT FALSE,
-    creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
+    creation_date TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     deactivation_date TIMESTAMPTZ,
-    update_date TIMESTAMPTZ NOT NULL DEFAULT now(),
+    update_date TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CHECK (user_status IN ('active', 'banned', 'deactivated')),
     CHECK (user_role IN ('admin', 'user'))
 );
@@ -70,6 +70,7 @@ CREATE TRIGGER refresh_update_date_trg
 BEFORE UPDATE ON users
 FOR EACH ROW
 EXECUTE FUNCTION refresh_update_date();
+
 
 CREATE TABLE publishers (
     publisher_id BIGSERIAL PRIMARY KEY,

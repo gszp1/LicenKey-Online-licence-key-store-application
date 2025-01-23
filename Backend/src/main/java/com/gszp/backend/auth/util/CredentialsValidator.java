@@ -1,4 +1,4 @@
-package com.gszp.backend.auth;
+package com.gszp.backend.auth.util;
 
 import java.util.regex.Pattern;
 

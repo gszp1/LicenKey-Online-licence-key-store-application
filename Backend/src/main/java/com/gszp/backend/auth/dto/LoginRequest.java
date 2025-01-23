@@ -1,4 +1,4 @@
-package com.gszp.backend.auth;
+package com.gszp.backend.auth.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

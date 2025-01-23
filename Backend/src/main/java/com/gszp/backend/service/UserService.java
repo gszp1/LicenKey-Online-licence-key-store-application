@@ -1,6 +1,6 @@
 package com.gszp.backend.service;
 
-import com.gszp.backend.auth.CredentialsValidator;
+import com.gszp.backend.auth.util.CredentialsValidator;
 import com.gszp.backend.dto.request.UserDataRequest;
 import com.gszp.backend.dto.request.UserDataUpdateRequest;
 import com.gszp.backend.dto.request.UserPasswordUpdateRequest;

@@ -2,6 +2,7 @@ package com.gszp.backend.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 
 import java.util.HashMap;
@@ -33,12 +34,17 @@ public class ExceptionHandler {
                 ResourceAlreadyExistsException.class,
                 e -> ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage())
         );
+        errorHandlers.put(
+                BadCredentialsException.class,
+                e -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage())
+        );
     }
 
     public static ResponseEntity<?> handleException(Exception ex) {
         var handler = errorHandlers.get(ex.getClass());
+        ex.printStackTrace();
         if (handler != null) {
-            handler.apply(ex);
+            return handler.apply(ex);
         }
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)

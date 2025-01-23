@@ -1,6 +1,11 @@
-package com.gszp.backend.auth;
+package com.gszp.backend.auth.service;
 
-import com.gszp.backend.auth.config.JwtService;
+import com.gszp.backend.auth.dto.AuthResponse;
+import com.gszp.backend.auth.dto.LoginRequest;
+import com.gszp.backend.auth.dto.RegisterRequest;
+import com.gszp.backend.auth.model.UserRole;
+import com.gszp.backend.auth.model.UserStatus;
+import com.gszp.backend.auth.util.CredentialsValidator;
 import com.gszp.backend.exception.InvalidRequestPayloadException;
 import com.gszp.backend.exception.ResourceAlreadyExistsException;
 import com.gszp.backend.exception.ResourceNotFoundException;
@@ -16,6 +21,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -43,7 +50,9 @@ public class AuthService {
             throw new ResourceNotFoundException("User with given email does not exist.");
         }
         var user = userOptional.get();
-        var authToken = jwtService.generateToken(user);
+        Map<String, Object> extraClaims = new HashMap<>();
+        extraClaims.put("Role", user.getUserRole().name());
+        var authToken = jwtService.generateToken(user, extraClaims);
         LogGenerator.generateInfoLog(LogTemplate.REQUEST_SUCCESS, "User authenticated.");
         return new AuthResponse(authToken);
     }
@@ -71,10 +80,13 @@ public class AuthService {
         try {
             user = userRepository.save(user);
         } catch (DataIntegrityViolationException dive) {
+            dive.printStackTrace();
             LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "Credentials already used.");
             throw new ResourceAlreadyExistsException("User with given credentials already exists.");
         }
-        var authToken = jwtService.generateToken(user);
+        Map<String, Object> extraClaims = new HashMap<>();
+        extraClaims.put("Role", user.getUserRole().name());
+        var authToken = jwtService.generateToken(user, extraClaims);
         LogGenerator.generateInfoLog(LogTemplate.REQUEST_SUCCESS, "User registered.");
         return new AuthResponse(authToken);
     }

@@ -1,5 +1,6 @@
 package com.gszp.backend.auth.config;
 
+import com.gszp.backend.auth.filter.JwtAuthFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

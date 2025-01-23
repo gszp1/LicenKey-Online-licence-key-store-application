@@ -33,7 +33,8 @@ public class Licence {
     private BigDecimal price;
 
     @Column(name = "available_for_sale", nullable = false)
-    private Boolean AvailableForSale = true;
+    @Builder.Default
+    private Boolean AvailableForSale = Boolean.TRUE;
 
     @ManyToOne
     @JoinColumn(name = "FK_platform_id")

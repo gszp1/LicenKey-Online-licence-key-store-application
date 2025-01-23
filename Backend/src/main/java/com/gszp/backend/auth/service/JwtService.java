@@ -1,4 +1,4 @@
-package com.gszp.backend.auth.config;
+package com.gszp.backend.auth.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

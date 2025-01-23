@@ -1,4 +1,4 @@
-package com.gszp.backend.auth;
+package com.gszp.backend.auth.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.gszp.backend.auth.Permission.*;
+import static com.gszp.backend.auth.model.Permission.*;
 
 @AllArgsConstructor
 @Getter
@@ -55,6 +55,7 @@ public enum UserRole {
                 .map(perm -> new SimpleGrantedAuthority(perm.getName()))
                 .collect(Collectors.toList());
         grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + this.name()));
+        System.out.println(grantedAuthorities);
         return grantedAuthorities;
     }
 }
