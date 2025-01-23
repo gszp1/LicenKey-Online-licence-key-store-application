@@ -64,7 +64,11 @@ const AccountPage = () => {
     const renderSection = () => {
         switch (section) {
             case 'information':
-                return <InformationSection/>
+                return (
+                    <InformationSection
+                        userData={userData}    
+                    />
+                )
             case 'modifyInformation':
                 return <ModifyInformationSection/>
             case 'orders':

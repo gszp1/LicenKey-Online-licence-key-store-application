@@ -3,7 +3,7 @@ import styles from "@/components/AccountPage/Sections/ModifyInformation/ModifyIn
 const ModifyInformationSection = () => {
     return (
         <div className={styles.section}>
-            ModifyInformationSection
+            <h1> Modify Your Account Information </h1>
         </div>
     )
 }

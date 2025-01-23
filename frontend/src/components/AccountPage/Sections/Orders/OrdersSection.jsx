@@ -3,7 +3,7 @@ import styles from "@/components/AccountPage/Sections/Orders/OrdersSection.modul
 const OrdersSection = () => {
     return (
         <div className={styles.section}>
-            OrdersSection
+            <h1> Your Orders </h1>
         </div>
     )
 }

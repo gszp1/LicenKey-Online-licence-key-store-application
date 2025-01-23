@@ -3,7 +3,7 @@ import styles from "@/components/AccountPage/Sections/ChangePassword/ChangePassw
 const ChangePasswordSection = () => {
     return (
         <div className={styles.section}>
-            ChangePasswordSection-placeholder
+            <h1> Change Password </h1>
         </div>
     )
 }

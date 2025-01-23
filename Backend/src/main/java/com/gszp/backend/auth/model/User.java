@@ -84,6 +84,10 @@ public class User implements UserDetails {
         return userRole.getGrantedAuthorities();
     }
 
+    public String getTrueUserName() {
+        return username;
+    }
+
     @Override
     public String getUsername() {
         return email;

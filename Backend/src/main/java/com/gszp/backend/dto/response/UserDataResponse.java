@@ -24,7 +24,7 @@ public class UserDataResponse {
     public static UserDataResponse fromUser(User user) {
         return UserDataResponse.builder()
                 .email(user.getEmail())
-                .username(user.getUsername())
+                .username(user.getTrueUserName())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .creationDate(user.getCreationDate())
