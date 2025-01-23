@@ -3,6 +3,8 @@ import { Link } from "react-router";
 import BenefitsList from "@/components/BenefitsList/BenefitsList.jsx";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
+import { useNavigate } from "react-router";
 
 const RegisterPage = () => {
     const [credentials, setCredentials] = useState({
@@ -24,6 +26,9 @@ const RegisterPage = () => {
         firstName: "",
         lastName: ""
     });
+
+    const [registerErrorPrompt, setRegisterErrorPrompt] = useState("");
+    const navigate = useNavigate();
 
     const updateValue = (e, credentialName) => {
         let newCredentials = {...credentials,
@@ -88,8 +93,34 @@ const RegisterPage = () => {
         );
     }
 
-    const sendData = () => {
-        validateCredentials();
+    const sendData = async () => {
+        if (validateCredentials() == false) {
+            setRegisterErrorPrompt("Failed to register due to invalid credentials.");
+            return;
+        }
+        const url = `${window._env_.BACKEND_API_URL}${"/api/auth/register"}`;
+        const registerCredentials = {...credentials};
+        try {
+            let response = await axios.post(
+                url,
+                registerCredentials,
+                {headers: {'Content-Type': 'application/json'}}
+            )
+            localStorage.setItem("AuthToken", response.data.contents);
+            navigate("/");
+        } catch (error) {
+            if (error.response) {
+                if (error.response.status === 500) {
+                    setRegisterErrorPrompt("Failed to register due to internal server error.");
+                } else {
+                    setRegisterErrorPrompt(error.response.data);
+                }
+            } else if (error.request) {
+                setRegisterErrorPrompt("Server does not respond. Try again later.");
+            } else {
+                setRegisterErrorPrompt("Failed to send register request.");
+            }
+        }
     }
 
     return (
@@ -99,13 +130,14 @@ const RegisterPage = () => {
                 errorPrompts={errorPrompts}
                 updateValue={updateValue}
                 sendData={sendData}
+                registerErrorPrompt={registerErrorPrompt}
             />
             <AdditionalInformation/>
         </div>
     );
 }
 
-const Credentials = ({credentials, errorPrompts, updateValue, sendData}) => {
+const Credentials = ({credentials, errorPrompts, updateValue, sendData, registerErrorPrompt}) => {
     return (
         <div className={styles.credentials}>
             <LeftSection
@@ -118,6 +150,7 @@ const Credentials = ({credentials, errorPrompts, updateValue, sendData}) => {
                 errorPrompts={errorPrompts}
                 updateValue={updateValue}
                 sendData={sendData}
+                registerErrorPrompt={registerErrorPrompt}
             />
         </div>
     );
@@ -182,7 +215,7 @@ const LeftSection = ({credentials, errorPrompts, updateValue}) => {
     );
 }
 
-const RightSection = ({credentials, errorPrompts, updateValue, sendData}) => {
+const RightSection = ({credentials, errorPrompts, updateValue, sendData, registerErrorPrompt}) => {
 
     return (
         <div className={styles.right_section}>
@@ -217,6 +250,9 @@ const RightSection = ({credentials, errorPrompts, updateValue, sendData}) => {
             <Link to="/login" style={{marginTop: '5px'}}>
                 <p>Already have an account?</p>
             </Link>
+            <p className={styles.error_prompt}> 
+                {registerErrorPrompt}
+            </p>
         </div>
     );
 }
@@ -266,20 +302,23 @@ Credentials.propTypes = {
     credentials: PropTypes.object.isRequired,
     errorPrompts: PropTypes.object.isRequired,
     updateValue: PropTypes.func.isRequired,
-    sendData: PropTypes.func.isRequired
+    sendData: PropTypes.func.isRequired,
+    registerErrorPrompt: PropTypes.string
 }
 
 LeftSection.propTypes = {
     credentials: PropTypes.object.isRequired,
     errorPrompts: PropTypes.object.isRequired,
-    updateValue: PropTypes.func.isRequired
+    updateValue: PropTypes.func.isRequired,
+    registerErrorPrompt: PropTypes.string
 }
 
 RightSection.propTypes = {
     credentials: PropTypes.object.isRequired,
     errorPrompts: PropTypes.object.isRequired,
     updateValue: PropTypes.func.isRequired,
-    sendData: PropTypes.func.isRequired
+    sendData: PropTypes.func.isRequired,
+    registerErrorPrompt: PropTypes.string
 }
 
 export default RegisterPage;
