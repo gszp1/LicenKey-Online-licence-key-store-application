@@ -7,11 +7,22 @@ import ChangePasswordSection from "@/components/AccountPage/Sections/ChangePassw
 
 import { useState } from "react";
 import NavigationMenu from "./NavigationMenu/NavigationMenu"
+import axios from "axios"
 
 const AccountPage = () => {
-    
     const [section, setSection] = useState("information")
+    const [userData, setUserData] = useState({
+        'email': '',
+        'username': '',
+        'firstName': '',
+        'lastName': '',
+        'creationDate': ''
+    });
     
+    const decodeToken = () => {
+        let decodedToken = jwt
+    }
+
     const renderSection = () => {
         switch (section) {
             case 'information':
