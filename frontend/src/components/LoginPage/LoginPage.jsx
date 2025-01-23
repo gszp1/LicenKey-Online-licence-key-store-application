@@ -35,6 +35,7 @@ const LoginPage = () => {
 
     const login = () => {
         validateCredentials();
+        
     }
 
     return (
