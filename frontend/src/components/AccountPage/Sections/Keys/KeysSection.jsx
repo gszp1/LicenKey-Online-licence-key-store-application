@@ -3,7 +3,7 @@ import styles from "@/components/AccountPage/Sections/Keys/KeysSection.module.cs
 const KeysSection = () => {
     return (
         <div className={styles.section}>
-
+            KeysSection
         </div>
     )
 }
