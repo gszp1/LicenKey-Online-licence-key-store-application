@@ -2,10 +2,14 @@ package com.gszp.backend.auth;
 
 import com.gszp.backend.auth.config.JwtService;
 import com.gszp.backend.exception.InvalidRequestPayloadException;
+import com.gszp.backend.exception.ResourceAlreadyExistsException;
+import com.gszp.backend.exception.ResourceNotFoundException;
+import com.gszp.backend.logs.LogGenerator;
+import com.gszp.backend.logs.LogTemplate;
 import com.gszp.backend.model.User;
 import com.gszp.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,7 +19,6 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-@Slf4j
 @RequiredArgsConstructor
 public class AuthService {
 
@@ -24,26 +27,33 @@ public class AuthService {
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
 
-    public AuthResponse authenticate(LoginRequest request) throws UsernameNotFoundException {
+
+    public AuthResponse authenticate(
+            LoginRequest request
+    ) throws UsernameNotFoundException, ResourceNotFoundException {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
                         request.getPassword()
                 )
         );
-        Optional<User> userOptional = userRepository.findByEmail(request.getEmail());
+        var userOptional = userRepository.findByEmail(request.getEmail());
         if (userOptional.isEmpty()) {
-            throw new UsernameNotFoundException(String.format("User %s not found", request.getEmail()));
+            LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "User with given email does not exist.");
+            throw new ResourceNotFoundException("User with given email does not exist.");
         }
         var user = userOptional.get();
         var authToken = jwtService.generateToken(user);
-        log.info("User login successful.");
+        LogGenerator.generateInfoLog(LogTemplate.REQUEST_SUCCESS, "User authenticated.");
         return new AuthResponse(authToken);
     }
 
-    public AuthResponse register(RegisterRequest request) throws InvalidRequestPayloadException {
+    public AuthResponse register(
+            RegisterRequest request
+    ) throws InvalidRequestPayloadException, ResourceAlreadyExistsException {
         var validationResult = validateRegisterRequest(request);
         if (validationResult.isPresent()) {
+            LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "Invalid request payload.");
             throw new InvalidRequestPayloadException(validationResult.get());
         }
         var firstName = request.getFirstName();
@@ -58,9 +68,14 @@ public class AuthService {
                 .userRole(UserRole.USER)
                 .active(true)
                 .build();
-        user = userRepository.save(user);
+        try {
+            user = userRepository.save(user);
+        } catch (DataIntegrityViolationException dive) {
+            LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "Credentials already used.");
+            throw new ResourceAlreadyExistsException("User with given credentials already exists.");
+        }
         var authToken = jwtService.generateToken(user);
-        log.info("User registered successfully.");
+        LogGenerator.generateInfoLog(LogTemplate.REQUEST_SUCCESS, "User registered.");
         return new AuthResponse(authToken);
     }
 

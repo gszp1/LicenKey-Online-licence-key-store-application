@@ -2,6 +2,7 @@ package com.gszp.backend.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 
 import java.util.HashMap;
 import java.util.function.Function;
@@ -23,6 +24,14 @@ public class ExceptionHandler {
         errorHandlers.put(
                 ResourceNotFoundException.class,
                 e -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage())
+        );
+        errorHandlers.put(
+                AuthenticationException.class,
+                e -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials.")
+        );
+        errorHandlers.put(
+                ResourceAlreadyExistsException.class,
+                e -> ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage())
         );
     }
 
