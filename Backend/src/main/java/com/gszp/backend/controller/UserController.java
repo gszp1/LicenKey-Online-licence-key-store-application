@@ -19,7 +19,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("")
+    @PostMapping("")
     @PreAuthorize("hasAuthority('user:read')")
     public ResponseEntity<?> getUserData(@RequestBody UserDataRequest request) {
         try {
