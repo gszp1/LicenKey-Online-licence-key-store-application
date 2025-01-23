@@ -32,6 +32,9 @@ public class Licence {
     @Column(precision = 10, scale = 2, nullable = false)
     private BigDecimal price;
 
+    @Column(name = "image_url", length = 256)
+    private String imageUrl;
+
     @Column(name = "available_for_sale", nullable = false)
     @Builder.Default
     private Boolean AvailableForSale = Boolean.TRUE;
