@@ -35,7 +35,7 @@ const LoginPage = () => {
 
     const login = () => {
         validateCredentials();
-        
+        var url = `${window._env_.BACKEND_API_URL}${"/api/auth/login"}`;
     }
 
     return (
