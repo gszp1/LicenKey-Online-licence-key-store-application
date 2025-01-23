@@ -55,10 +55,18 @@ const LoginPage = () => {
             localStorage.setItem('AuthToken', response.data.contents);
             navigate("/");
         } catch (error) {
-            if (error.response && error.response.status === 403) {
-                setErrorPrompt("Account is locked.");
+            if (error.response) {
+                if (error.response.status === 500) {
+                    setErrorPrompt("Request failed due to internal server error.");
+                } else if (error.response.status === 403) {
+                    setErrorPrompt("Account is locked.")
+                } else {
+                    setErrorPrompt(error.response.data);
+                }
+            } else if (error.request) {
+                setErrorPrompt("Server does not respond - try again later.");
             } else {
-                setErrorPrompt("Provided credentials are invalid.");
+                setErrorPrompt("Failed to send request to server.");
             }
         }
     }

@@ -116,7 +116,7 @@ const RegisterPage = () => {
                     setRegisterErrorPrompt(error.response.data);
                 }
             } else if (error.request) {
-                setRegisterErrorPrompt("Server does not respond. Try again later.");
+                setRegisterErrorPrompt("Server does not respond - Try again later.");
             } else {
                 setRegisterErrorPrompt("Failed to send register request.");
             }
