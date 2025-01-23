@@ -2,6 +2,19 @@ import styles from "@/components/AccountPage/Sections/Information/InformationSec
 import PropTypes from "prop-types";
 import {format} from 'date-fns'
 
+const DataEntry = ({header, content}) => {
+    return (
+        <>
+            <h2 className={styles.data_header}>
+                {header}
+            </h2>
+            <p className={styles.data_field}>
+                {content== null ? "Not-Specified": content}
+            </p>
+        </>
+    )
+}
+
 const InformationSection = ({userData}) => {
     return (
         <div className={styles.section}>
@@ -9,16 +22,31 @@ const InformationSection = ({userData}) => {
                 Account Information
             </h1>
             <div className={styles.section_content}>
-                <h2>Email</h2>
-                <p>{userData.email}</p>
-                <h2>Username</h2>
-                <p>{userData.username}</p>
-                <h2>First Name</h2>
-                <p>{userData.firstName== null ? "Not-Specified": userData.firstName}</p>
-                <h2>Last Name</h2>
-                <p>{userData.lastName == null ? "Not-Specified": userData.lastName}</p>
-                <h2>Join Date</h2>
-                <p>{format(Date(userData.creationDate), 'dd-MM-yyyy')}</p>
+                <div className={styles.data_box}>
+                    <DataEntry
+                        header={"Email"}
+                        content={userData.email}
+                    />
+                    <DataEntry
+                        header={"Username"}
+                        content={userData.username}
+                    />
+                </div>
+                <div className={styles.data_box}>
+                    <DataEntry
+                        header={"First Name"}
+                        content={userData.firstName}
+                    />
+                    <DataEntry
+                        header={"Last Name"}
+                        content={userData.lastName}
+                    />
+                    <DataEntry
+                        header={"Join Date"}
+                        content={userData.creationDate == null ? null
+                             : format(Date(userData.creationDate), 'dd-MM-yyyy')}
+                    />
+                </div>
             </div>
         </div>
     )
@@ -26,6 +54,11 @@ const InformationSection = ({userData}) => {
 
 InformationSection.propTypes = {
     userData: PropTypes.object.isRequired
+}
+
+DataEntry.propTypes = {
+    header: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired 
 }
 
 export default InformationSection;
