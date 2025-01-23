@@ -54,15 +54,27 @@ const NavigationBar = () => {
                         <SearchIcon fontSize="large"/>
                     </button>
                 </div>
-                <Link 
+                {localStorage.getItem("AuthToken") == null ? (
+                    <Link 
+                        style={{color: 'inherit', textDecoration: 'inherit' }}
+                        to="/login"
+                    >
+                        <div className={styles.account_button}>
+                            <PersonIcon sx={{fontSize: '3rem'}}/>
+                            <p>Login / Register</p>
+                        </div>
+                    </Link>
+                ) : (
+                    <Link 
                     style={{color: 'inherit', textDecoration: 'inherit' }}
-                    to="/login"
+                    to="/account"
                 >
                     <div className={styles.account_button}>
                         <PersonIcon sx={{fontSize: '3rem'}}/>
-                        <p>Login / Register</p>
+                        <p>Account</p>
                     </div>
                 </Link>
+                )} 
                 <Link 
                     style={{color: 'inherit', textDecoration: 'inherit' }}
                     to="/store/cart"    

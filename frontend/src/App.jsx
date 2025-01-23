@@ -4,9 +4,15 @@ import LoginPage from "@/components/LoginPage/LoginPage.jsx";
 import RegisterPage from "@/components/RegisterPage/RegisterPage.jsx";
 import ShoppingCartPage from "@/components/ShoppingCartPage/ShoppingCartPage.jsx";
 import AccountPage from "@/components/AccountPage/AccountPage";
-import {Routes, Route} from "react-router";
+import {Routes, Route, useLocation} from "react-router";
+import { useEffect } from "react";
 
 function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+  }, [location]);
+
   return (
     <>
       <NavigationBar/>
