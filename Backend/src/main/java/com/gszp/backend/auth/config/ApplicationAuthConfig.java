@@ -30,7 +30,7 @@ public class ApplicationAuthConfig {
     public UserDetailsService userDetailsService() {
         return username -> userRepository.findByEmail(username)
                 .orElseThrow(
-                        () -> new UsernameNotFoundException(format("Username: %s does not exist", username)
+                        () -> new UsernameNotFoundException(format("User with email: %s does not exist", username)
                         )
                 );
     }

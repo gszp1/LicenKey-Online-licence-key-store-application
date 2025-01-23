@@ -55,7 +55,6 @@ public enum UserRole {
                 .map(perm -> new SimpleGrantedAuthority(perm.getName()))
                 .collect(Collectors.toList());
         grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + this.name()));
-        System.out.println(grantedAuthorities);
         return grantedAuthorities;
     }
 }

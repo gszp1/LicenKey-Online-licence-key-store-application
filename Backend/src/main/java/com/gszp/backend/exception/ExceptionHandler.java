@@ -42,7 +42,6 @@ public class ExceptionHandler {
 
     public static ResponseEntity<?> handleException(Exception ex) {
         var handler = errorHandlers.get(ex.getClass());
-        ex.printStackTrace();
         if (handler != null) {
             return handler.apply(ex);
         }
