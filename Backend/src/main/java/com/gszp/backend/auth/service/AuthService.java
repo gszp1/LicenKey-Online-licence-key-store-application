@@ -80,7 +80,6 @@ public class AuthService {
         try {
             user = userRepository.save(user);
         } catch (DataIntegrityViolationException dive) {
-            dive.printStackTrace();
             LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "Credentials already used.");
             throw new ResourceAlreadyExistsException("User with given credentials already exists.");
         }
