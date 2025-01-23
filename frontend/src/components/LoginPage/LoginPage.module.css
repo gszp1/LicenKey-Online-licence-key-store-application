@@ -70,8 +70,15 @@
 }
 
 .login_button {
-    margin-top: 30px;
+    margin-bottom: 5px;
+}
+
+.register_button {
     margin-bottom: 150px;
+}
+
+.login_button, .register_button {
+    margin-top: 30px;
     width: 250px;
     height: 50px;
     font-size: 1.5rem;
@@ -82,13 +89,13 @@
     cursor: pointer;
 }
 
-.login_button:hover {
+.login_button:hover, .register_button:hover {
     scale: 1.1;
     border: 1px, orange, solid;
     background-color: rgba(216, 216, 216, 0.938);
 }
 
-.login_button:active {
+.login_button:active, .login_button:active {
     background-color: orange;
     color: white;
 }
