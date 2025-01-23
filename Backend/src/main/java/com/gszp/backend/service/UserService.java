@@ -38,14 +38,16 @@ public class UserService {
             throw new InvalidRequestPayloadException("Username not provided.");
         }
         var existingUser = userRepository.findByUsername(request.getUsername());
-        if (existingUser.isPresent()) {
+        User user = getUser(request.getEmail());
+        if (existingUser.isPresent() &&
+            !existingUser.get().getUserId().equals(user.getUserId())
+        ) {
             LogGenerator.generateInfoLog(
                     LogTemplate.REQUEST_FAIL,
                     "User with specified username already exists."
             );
             throw new OperationNotAllowedConflictException("Username is already used.");
         }
-        User user = getUser(request.getEmail());
         String firstName = request.getFirstName();
         String lastName = request.getLastName();
         user.setFirstName(((firstName == null) || (firstName.isBlank())) ? null : firstName);
