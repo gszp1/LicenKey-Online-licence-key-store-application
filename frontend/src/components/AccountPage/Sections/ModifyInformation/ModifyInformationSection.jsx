@@ -1,4 +1,4 @@
-import styles from "@/components/AccountPage/Sections/ModifyInformationSection.module.css"
+import styles from "@/components/AccountPage/Sections/ModifyInformation/ModifyInformationSection.module.css"
 
 const ModifyInformationSection = () => {
     return (

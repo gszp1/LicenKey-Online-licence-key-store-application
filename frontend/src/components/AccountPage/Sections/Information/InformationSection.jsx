@@ -1,4 +1,4 @@
-import styles from "@/components/AccountPage/Sections/InformationSection.module.css"
+import styles from "@/components/AccountPage/Sections/Information/InformationSection.module.css"
 
 const InformationSection = () => {
     return (
