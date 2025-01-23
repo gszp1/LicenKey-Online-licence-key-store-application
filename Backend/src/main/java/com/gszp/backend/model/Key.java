@@ -1,5 +1,6 @@
 package com.gszp.backend.model;
 
+import com.gszp.backend.auth.model.User;
 import jakarta.persistence.*;
 import lombok.*;
 

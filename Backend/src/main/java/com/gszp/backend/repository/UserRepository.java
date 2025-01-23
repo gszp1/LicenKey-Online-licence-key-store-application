@@ -1,6 +1,6 @@
 package com.gszp.backend.repository;
 
-import com.gszp.backend.model.User;
+import com.gszp.backend.auth.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

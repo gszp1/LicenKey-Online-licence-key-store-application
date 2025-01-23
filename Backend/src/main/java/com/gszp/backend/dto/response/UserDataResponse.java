@@ -1,6 +1,6 @@
 package com.gszp.backend.dto.response;
 
-import com.gszp.backend.model.User;
+import com.gszp.backend.auth.model.User;
 import lombok.*;
 
 import java.time.OffsetDateTime;

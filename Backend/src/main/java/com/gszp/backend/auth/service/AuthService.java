@@ -11,7 +11,7 @@ import com.gszp.backend.exception.ResourceAlreadyExistsException;
 import com.gszp.backend.exception.ResourceNotFoundException;
 import com.gszp.backend.logs.LogGenerator;
 import com.gszp.backend.logs.LogTemplate;
-import com.gszp.backend.model.User;
+import com.gszp.backend.auth.model.User;
 import com.gszp.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;

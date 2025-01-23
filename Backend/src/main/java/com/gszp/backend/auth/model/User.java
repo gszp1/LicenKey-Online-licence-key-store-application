@@ -1,9 +1,8 @@
-package com.gszp.backend.model;
+package com.gszp.backend.auth.model;
 
-import com.gszp.backend.auth.model.UserRole;
-import com.gszp.backend.auth.model.UserRoleConverter;
-import com.gszp.backend.auth.model.UserStatus;
-import com.gszp.backend.auth.model.UserStatusConverter;
+import com.gszp.backend.model.Key;
+import com.gszp.backend.model.Order;
+import com.gszp.backend.model.ShoppingCart;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
