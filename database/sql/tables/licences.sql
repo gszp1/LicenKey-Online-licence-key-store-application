@@ -4,6 +4,7 @@ CREATE TABLE licences (
     developer VARCHAR(128) NOT NULL,
     "description" TEXT,
     price DECIMAL(10, 2) NOT NULL,
+    image_url VARCHAR(256),
     available_for_sale BOOLEAN NOT NULL DEFAULT TRUE,
     FK_licence_type_id BIGINT,
     FK_category_id BIGINT,
