@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LogGenerator {
 
-    public static String generateInfoLog(LogTemplate template, String message) {
-        return String.format("%s - %s", template.getMessage(), message);
+    public static void generateInfoLog(LogTemplate template, String message) {
+        log.info("{} - {}", template.getMessage(), message);
     }
 }
