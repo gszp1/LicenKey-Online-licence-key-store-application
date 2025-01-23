@@ -1,5 +1,6 @@
 import styles from "@/components/AccountPage/Sections/Information/InformationSection.module.css"
 import PropTypes from "prop-types";
+import {format} from 'date-fns'
 
 const InformationSection = ({userData}) => {
     return (
@@ -17,7 +18,7 @@ const InformationSection = ({userData}) => {
                 <h2>Last Name</h2>
                 <p>{userData.lastName == null ? "Not-Specified": userData.lastName}</p>
                 <h2>Join Date</h2>
-                <p>{Date(userData.creationDate)}</p>
+                <p>{format(Date(userData.creationDate), 'dd-MM-yyyy')}</p>
             </div>
         </div>
     )
