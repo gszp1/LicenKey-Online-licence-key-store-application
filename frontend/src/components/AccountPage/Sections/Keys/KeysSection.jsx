@@ -1,6 +1,6 @@
 import styles from "@/components/AccountPage/Sections/Keys/KeysSection.module.css"
 
-const OrdersSection = () => {
+const KeysSection = () => {
     return (
         <div className={styles.section}>
 
@@ -8,4 +8,4 @@ const OrdersSection = () => {
     )
 }
 
-export default OrdersSection;
+export default KeysSection;

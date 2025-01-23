@@ -1,6 +1,6 @@
 import styles from "@/components/AccountPage/Sections/ChangePassword/ChangePasswordSection.module.css"
 
-const InformationSection = () => {
+const ChangePasswordSection = () => {
     return (
         <div className={styles.section}>
             InformationSection-placeholder
@@ -8,4 +8,4 @@ const InformationSection = () => {
     )
 }
 
-export default InformationSection;
+export default ChangePasswordSection;
