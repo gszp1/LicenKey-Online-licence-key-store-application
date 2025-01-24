@@ -1,0 +1,21 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: calc(100% - 256px);
+    border-top: 2px solid orange;
+}
+
+.section_header {
+    padding-left: 20px;
+    padding-top: 0.5rem;
+    width: 100%;
+    font-size: 2.5rem;
+    height: 3rem;
+    color: red;
+    margin-bottom: 0.5rem;
+}
+
+.section_content {
+    
+}
