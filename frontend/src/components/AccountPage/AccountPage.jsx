@@ -9,6 +9,7 @@ import NavigationMenu from "./NavigationMenu/NavigationMenu"
 import axios from "axios"
 import { jwtDecode } from "jwt-decode"
 import { useNavigate } from "react-router"
+import ErrorSection from "@/components/AccountPage/Sections/Error/ErrorSection.jsx"
 
 const AccountPage = () => {
     const [section, setSection] = useState("information")
@@ -77,6 +78,8 @@ const AccountPage = () => {
                 return <KeysSection/>
             case 'changePassword':
                 return <ChangePasswordSection/>
+            case 'error':
+                return <ErrorSection/>
             default:
                 return <InformationSection/>
         }

@@ -8,36 +8,38 @@ const ErrorSection = ({error}) => {
 
     let errorCode = 'Unknown';
     let errorMessage = 'Unexpected error occurred.';
-    if (error.response) {
-        errorCode = error.response.status || errorCode;
-        errorMessage = error.response.data || errorMessage;
-    } else if (error.request) {
-        errorMessage = "Server does not respond."
+    if (error != null) {
+        if (error.response) {
+            errorCode = error.response.status || errorCode;
+            errorMessage = error.response.data || errorMessage;
+        } else if (error.request) {
+            errorMessage = "Server does not respond."
+        }
     }
 
     useEffect(() => {
         localStorage.removeItem("AuthToken");
         setTimeout(() => {
             navigate("/");
-        }, 2000);
+        }, 5000);
     }, [navigate]);
     
     return (
         <div className={styles.section}>
             <h1 className={styles.section_header}> Error </h1>
             <div className={styles.section_content}>
-                <h2>Error Code</h2>
-                <p>{errorCode}</p>
-                <h2>Message</h2>
-                <p>{errorMessage}</p>
-                <h2>You will be now logged out.</h2>
+                <h2 className={styles.text_header_notifier}>Something went wrong!</h2>
+                <h2 className={styles.text_header}>Error Code</h2>
+                <p className={styles.text}>{errorCode}</p>
+                <h2 className={styles.text_header}>Message</h2>
+                <p className={styles.text}>{errorMessage}</p>
+                <h2 className={styles.text_header}>You will be now logged out and redirected to main page.</h2>
             </div>
         </div>
     )
 }
 
 ErrorSection.propTypes = {
-    logoutFunction: PropTypes.func.isRequired,
     error: PropTypes.object
 }
 

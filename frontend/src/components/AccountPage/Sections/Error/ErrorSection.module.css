@@ -17,5 +17,28 @@
 }
 
 .section_content {
-    
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.text_header_notifier {
+    color: red;
+    font-size: 4rem;
+    margin-top: 20px;
+}
+
+.text_header {
+    color: red;
+    font-size: 2.5rem;
+    margin-top: 20px;
+}
+
+.text {
+    color: darkred;
+    font-size: 2rem;
+    margin-bottom: 20px;
 }
