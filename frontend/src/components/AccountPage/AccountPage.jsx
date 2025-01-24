@@ -13,6 +13,7 @@ import ErrorSection from "@/components/AccountPage/Sections/Error/ErrorSection.j
 
 const AccountPage = () => {
     const [section, setSection] = useState("information")
+    const [executionError, setExecutionError] = useState(null);
     const [userData, setUserData] = useState({
         'email': '',
         'username': '',
@@ -30,7 +31,8 @@ const AccountPage = () => {
                 decodedToken = decodeToken();
                 email = decodedToken.sub;
             } catch (error) {
-                console.log("TODO" + error);
+                setExecutionError(error);
+                setSection("error");
             }
             let url = `${window._env_.BACKEND_API_URL}${'/api/users'}`;
             try {
@@ -49,10 +51,10 @@ const AccountPage = () => {
                     'lastName': response.data.lastName,
                     'creationDate': response.data.creationDate
                 };
-                console.log(data);
                 setUserData(data);
             } catch (error) {
-                console.log("TODO" + error);
+                setExecutionError(error);
+                setSection("error");
             }
         }
         getUserData();
@@ -79,7 +81,11 @@ const AccountPage = () => {
             case 'changePassword':
                 return <ChangePasswordSection/>
             case 'error':
-                return <ErrorSection/>
+                return (
+                    <ErrorSection
+                        error={executionError}
+                    />
+                )
             default:
                 return <InformationSection/>
         }
