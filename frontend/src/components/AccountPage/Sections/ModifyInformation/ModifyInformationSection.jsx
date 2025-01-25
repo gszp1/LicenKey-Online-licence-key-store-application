@@ -14,25 +14,31 @@ const ModifyInformationSection = ({userData, setError, setSection}) => {
         <div className={styles.section}>
             <h1 className={styles.section_header}> Modify Your Account Information </h1>
             <div className={styles.section_content}>
-                <label> Email </label>
+                <label className={styles.input_label}> Email </label>
                 <input
+                    className={styles.input_field}
                     readOnly
                     value={localUserData['email']}
                 />
-                <label> Username </label>
+                <label className={styles.input_label}> Username </label>
                 <input
+                   className={styles.input_field}
                     value={localUserData['username']}
                     onChange={(e) => updateCredenials(e, 'username')}
                 />
-                <label> First Name </label>
+                <label className={styles.input_label}> First Name </label>
                 <input
+                  className={styles.input_field}
                     value={localUserData['firstName']}
                 />
-                <label> Last Name </label>
+                <label className={styles.input_label}> Last Name </label>
                 <input
+                    className={styles.input_field}
                     value={localUserData['lastName']}
                 />
-                <button>
+                <button
+                    className={styles.modify_info_button}
+                >
                     Modify Information
                 </button>
             </div>
