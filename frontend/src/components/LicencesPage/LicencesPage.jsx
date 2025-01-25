@@ -2,7 +2,7 @@ import styles from "@/components/LicencesPage/LicencesPage.module.css"
 import axios from "axios";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import { StatusCodes, getReasonPhrase } from 'http-status-codes';
+import { getReasonPhrase } from 'http-status-codes';
 
 const LicencesPage = ({searchKeyword}) => {
     const [licences, setLicences] = useState(null);
