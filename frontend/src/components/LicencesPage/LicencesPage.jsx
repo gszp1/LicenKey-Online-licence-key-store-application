@@ -2,6 +2,7 @@ import styles from "@/components/LicencesPage/LicencesPage.module.css"
 import axios from "axios";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import { StatusCodes, getReasonPhrase } from 'http-status-codes';
 
 const LicencesPage = ({searchKeyword}) => {
     const [licences, setLicences] = useState(null);
@@ -28,9 +29,11 @@ const LicencesPage = ({searchKeyword}) => {
     const displayErrorMessage = () => {
         let errorMessage = "Server does not respond - try again later.";
         let errorHeader = "Server error";
+        let errorStatus = "Unknown";
         if (executionError.response) {
             if (executionError.response.status) {
                 errorHeader = executionError.response.status;
+                errorStatus = getReasonPhrase(executionError.response.status);
             }
             if (executionError.response.data) {
                 errorMessage = executionError.response.data;
@@ -39,8 +42,9 @@ const LicencesPage = ({searchKeyword}) => {
         }
         return (
             <>
-                <p style={styles.error_header}>{errorHeader}</p>
-                <p style={styles.error_message}>{errorMessage}</p>
+                <p className={styles.error_header}>{errorHeader}</p>
+                <p className={styles.error_status}>{`Status: ${errorStatus}`}</p>
+                <p className={styles.error_message}>{errorMessage}</p>
             </>
         );
     }
