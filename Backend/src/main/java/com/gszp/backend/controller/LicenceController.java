@@ -22,7 +22,7 @@ public class LicenceController {
         }
     }
 
-    @GetMapping("")
+    @GetMapping("/all")
     public ResponseEntity<?> getLicences(@RequestParam(value = "keyword", required = false) String keyword) {
         try {
             return ResponseEntity.ok(licenceService.getLicences(keyword));
