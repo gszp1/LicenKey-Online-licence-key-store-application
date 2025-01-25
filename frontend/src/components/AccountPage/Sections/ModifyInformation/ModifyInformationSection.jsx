@@ -4,7 +4,8 @@ import { useState } from "react";
 
 const ModifyInformationSection = ({userData, setUserData, setError, setSection}) => {
     const [localUserData, setLocalUserData] = useState({...userData});
-    
+    const [prompt, setPrompt] = useState({'message': '', 'color': 'red'});
+
     const updateCredenials = (e, propertyName) => {
         setLocalUserData({...localUserData, [propertyName]: e.target.value});
     }
@@ -42,6 +43,12 @@ const ModifyInformationSection = ({userData, setUserData, setError, setSection})
                 >
                     Modify Information
                 </button>
+                <p 
+                    className={styles.result_prompt}
+                    style={{'color': prompt.color}}    
+                > 
+                    {prompt.message}
+                </p>
             </div>
         </div>
     );
