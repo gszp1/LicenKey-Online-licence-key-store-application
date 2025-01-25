@@ -14,4 +14,6 @@ public class UserPasswordUpdateRequest {
     private String currentPassword;
 
     private String newPassword;
+
+    private String passwordConfirmation;
 }

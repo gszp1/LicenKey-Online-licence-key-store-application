@@ -62,6 +62,17 @@ public class UserService {
             UserPasswordUpdateRequest request
     ) throws InvalidRequestPayloadException, OperationNotAllowedConflictException, ResourceNotFoundException {
         User user = getUser(request.getEmail());
+        validatePasswordPayload(request, user);
+        user.setPasswordHash(passwordEncoder.encode(request.getNewPassword()));
+        userRepository.save(user);
+        LogGenerator.generateInfoLog(LogTemplate.REQUEST_SUCCESS, "User password updated.");
+        return new UserDataUpdateResponse("User password updated.");
+    }
+
+    private void validatePasswordPayload(
+            UserPasswordUpdateRequest request,
+            User user
+    ) throws InvalidRequestPayloadException, OperationNotAllowedConflictException {
         if (CredentialsValidator.validatePassword(request.getCurrentPassword())) {
             LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "Provided current password is invalid.");
             throw new InvalidRequestPayloadException("Current password is invalid.");
@@ -70,15 +81,17 @@ public class UserService {
             LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "Provided new password is invalid.");
             throw new InvalidRequestPayloadException("New password is invalid.");
         }
-        if (!passwordEncoder.matches(request.getCurrentPassword(), request.getNewPassword())) {
+        if (!request.getNewPassword().equals(request.getPasswordConfirmation())) {
+            LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL,
+                    "Confirmation password is not equal to new password.");
+            throw new InvalidRequestPayloadException("Confirmation password is not equal to new password.");
+        }
+        if (!passwordEncoder.matches(request.getCurrentPassword(), user.getPasswordHash())) {
             LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "Current password confirmation is invalid.");
             throw new OperationNotAllowedConflictException("Current password does not match old password.");
         }
-        user.setPasswordHash(passwordEncoder.encode(request.getNewPassword()));
-        userRepository.save(user);
-        LogGenerator.generateInfoLog(LogTemplate.REQUEST_SUCCESS, "User password updated.");
-        return new UserDataUpdateResponse("User password updated.");
     }
+
 
     private User getUser(String email) throws ResourceNotFoundException {
         var userOptional = userRepository.findByEmail(email);
