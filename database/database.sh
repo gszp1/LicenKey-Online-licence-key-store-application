@@ -30,3 +30,6 @@ add_script ./sql/tables/keys.sql
 
 # privileges
 add_script ./sql/functionality/privileges.sql
+
+# example data - REMOVE LATER OR CHANGE
+add_script ./sql/example-data.sql
