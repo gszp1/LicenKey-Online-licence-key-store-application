@@ -4,9 +4,9 @@ import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from "react-router";
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
-const NavigationBar = () => {
-    const [scrollY, setScrollY] = useState(0)
+const NavigationBar = ({keyword, setSearchKeyword}) => {
     const [showBottomSection, setShowBottomSection] = useState(true);
     
     useEffect(() => {
@@ -27,7 +27,6 @@ const NavigationBar = () => {
         
         const onScroll = () => {
             const y = window.scrollY;
-            setScrollY(y);
             setShowBottomSection(y < 74);
             fillBar();
         }
@@ -36,6 +35,10 @@ const NavigationBar = () => {
         window.addEventListener('scroll', onScroll)
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
+
+    const updateKeyword = (e) => {
+        setSearchKeyword(e.target.value);
+    }
 
     return (
         <div className={styles.navigation_bar}>
@@ -49,6 +52,8 @@ const NavigationBar = () => {
                 <div className={styles.search_bar}>
                     <input
                         placeholder="Search in store"
+                        value={keyword}
+                        onChange={updateKeyword}
                     />
                     <button>
                         <SearchIcon fontSize="large"/>
@@ -94,7 +99,12 @@ const NavigationBar = () => {
                 <div className={styles.bottom_section}></div>
             )}
         </div>
-    )
+    );
+}
+
+NavigationBar.propTypes = {
+    keyword: PropTypes.string.isRequired,
+    setSearchKeyword: PropTypes.func.isRequired
 }
 
 export default NavigationBar;
