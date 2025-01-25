@@ -6,8 +6,7 @@ const ModifyInformationSection = ({userData, setError, setSection}) => {
     const [localUserData, setLocalUserData] = useState({...userData});
     
     const updateCredenials = (e, propertyName) => {
-        let newLocalUserData = {...localUserData, [propertyName]: e.target.value};
-        setLocalUserData(newLocalUserData);
+        setLocalUserData({...localUserData, [propertyName]: e.target.value});
     }
 
     return (
