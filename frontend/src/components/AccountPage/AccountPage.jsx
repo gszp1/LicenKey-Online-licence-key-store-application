@@ -73,7 +73,11 @@ const AccountPage = () => {
                     />
                 )
             case 'modifyInformation':
-                return <ModifyInformationSection/>
+                return (
+                    <ModifyInformationSection
+                        userData={userData}
+                    />
+                )
             case 'orders':
                 return <OrdersSection/>
             case 'keys':
