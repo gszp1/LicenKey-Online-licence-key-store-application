@@ -9,7 +9,6 @@ import com.gszp.backend.repository.LicenceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -21,11 +20,11 @@ public class LicenceService {
     public LicenceDescriptionResponse getLicenceDescription(
             Long id
     ) throws ResourceNotFoundException {
-       Optional<Licence> licence = licenceRepository.findById(id);
-       if (licence.isEmpty()) {
-           throw new ResourceNotFoundException("Licence with given id does not exist.");
-       }
-       return new LicenceDescriptionResponse(licence.get().getDescription());
+        Optional<Licence> licence = licenceRepository.findById(id);
+        if (licence.isEmpty()) {
+            throw new ResourceNotFoundException("Licence with given id does not exist.");
+        }
+        return new LicenceDescriptionResponse(licence.get().getDescription());
     }
 
     public LicencesResponse getLicences(String keyword) {

@@ -1,14 +1,10 @@
 package com.gszp.backend.controller;
 
 import com.gszp.backend.exception.ExceptionHandler;
-import com.gszp.backend.model.Licence;
 import com.gszp.backend.service.LicenceService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/licences")

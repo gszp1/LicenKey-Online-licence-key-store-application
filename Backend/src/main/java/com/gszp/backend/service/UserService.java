@@ -1,5 +1,6 @@
 package com.gszp.backend.service;
 
+import com.gszp.backend.auth.model.User;
 import com.gszp.backend.auth.util.CredentialsValidator;
 import com.gszp.backend.dto.request.UserDataRequest;
 import com.gszp.backend.dto.request.UserDataUpdateRequest;
@@ -11,7 +12,6 @@ import com.gszp.backend.exception.OperationNotAllowedConflictException;
 import com.gszp.backend.exception.ResourceNotFoundException;
 import com.gszp.backend.logs.LogGenerator;
 import com.gszp.backend.logs.LogTemplate;
-import com.gszp.backend.auth.model.User;
 import com.gszp.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,7 +40,7 @@ public class UserService {
         var existingUser = userRepository.findByUsername(request.getUsername());
         User user = getUser(request.getEmail());
         if (existingUser.isPresent() &&
-            !existingUser.get().getUserId().equals(user.getUserId())
+                !existingUser.get().getUserId().equals(user.getUserId())
         ) {
             LogGenerator.generateInfoLog(
                     LogTemplate.REQUEST_FAIL,
