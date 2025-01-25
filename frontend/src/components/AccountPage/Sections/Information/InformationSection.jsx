@@ -58,7 +58,7 @@ InformationSection.propTypes = {
 
 DataEntry.propTypes = {
     header: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired 
+    content: PropTypes.string 
 }
 
 export default InformationSection;

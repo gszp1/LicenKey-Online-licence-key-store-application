@@ -73,11 +73,11 @@ public class UserService {
             UserPasswordUpdateRequest request,
             User user
     ) throws InvalidRequestPayloadException, OperationNotAllowedConflictException {
-        if (CredentialsValidator.validatePassword(request.getCurrentPassword())) {
+        if (!CredentialsValidator.validatePassword(request.getCurrentPassword())) {
             LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "Provided current password is invalid.");
             throw new InvalidRequestPayloadException("Current password is invalid.");
         }
-        if (CredentialsValidator.validatePassword(request.getNewPassword())) {
+        if (!CredentialsValidator.validatePassword(request.getNewPassword())) {
             LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "Provided new password is invalid.");
             throw new InvalidRequestPayloadException("New password is invalid.");
         }

@@ -70,6 +70,7 @@ const ChangePasswordSection = ({email, setSection, setError}) => {
         }
         console.log("here too")
         const url = `${window._env_.BACKEND_API_URL}${'/api/users/password'}`;
+        console.log(credentials)
         try {
             let response = await axios.patch(
                 url,
@@ -79,7 +80,8 @@ const ChangePasswordSection = ({email, setSection, setError}) => {
                     'Content-Type': 'application/json'
                 }}
             );
-            setChangePrompt({'changePrompt': response, 'color': 'green'});
+            console.log(response)
+            setChangePrompt({'changePrompt': response.data.contents, 'color': 'green'});
         } catch (error) {
             if (error.response) {
                 if (error.response.status == 400 || error.response.status == 409) {
