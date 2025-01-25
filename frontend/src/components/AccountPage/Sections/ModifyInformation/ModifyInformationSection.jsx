@@ -29,11 +29,13 @@ const ModifyInformationSection = ({userData, setError, setSection}) => {
                 <input
                   className={styles.input_field}
                     value={localUserData['firstName']}
+                    onChange={(e) => updateCredenials(e, 'firstName')}
                 />
                 <label className={styles.input_label}> Last Name </label>
                 <input
                     className={styles.input_field}
                     value={localUserData['lastName']}
+                    onChange={(e) => updateCredenials(e, 'lastName')}
                 />
                 <button
                     className={styles.modify_info_button}
