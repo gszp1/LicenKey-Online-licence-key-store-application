@@ -9,15 +9,23 @@
     padding-top: 200px;
 }
 
-.no_licences_header {
+.error_header {
+    color: red;
+}
+
+.error_message {
+    color: darkred;
+}
+
+.error_header, .no_licences_header {
     margin-left: auto;
     margin-right: auto;
     font-size: 4rem;
     margin-top: 100px;
     margin-bottom: 20px;
-}  
+}
 
-.no_licences_message {
+.error_message, .no_licences_message {
     margin-left: auto;
     margin-right: auto;
     font-size: 2rem;
