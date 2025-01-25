@@ -45,7 +45,6 @@ const LoginPage = () => {
         }
         var url = `${window._env_.BACKEND_API_URL}${"/api/auth/login"}`;
         var loginCredentials = {...credentials}
-        console.log(loginCredentials);
         try {
             let response = await axios.post(
                 url,
