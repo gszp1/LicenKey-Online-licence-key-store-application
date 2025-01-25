@@ -76,6 +76,9 @@ const AccountPage = () => {
                 return (
                     <ModifyInformationSection
                         userData={userData}
+                        setUserData={setUserData}
+                        setError={setExecutionError}
+                        setSection={setSection}
                     />
                 )
             case 'changePassword':

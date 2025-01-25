@@ -2,7 +2,7 @@ import styles from "@/components/AccountPage/Sections/ModifyInformation/ModifyIn
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-const ModifyInformationSection = ({userData, setError, setSection}) => {
+const ModifyInformationSection = ({userData, setUserData, setError, setSection}) => {
     const [localUserData, setLocalUserData] = useState({...userData});
     
     const updateCredenials = (e, propertyName) => {
@@ -50,7 +50,8 @@ const ModifyInformationSection = ({userData, setError, setSection}) => {
 ModifyInformationSection.propTypes = {
     userData: PropTypes.object.isRequired,
     setError: PropTypes.func.isRequired,
-    setSection: PropTypes.func.isRequired
+    setSection: PropTypes.func.isRequired,
+    setUserData: PropTypes.func.isRequired
 }
 
 
