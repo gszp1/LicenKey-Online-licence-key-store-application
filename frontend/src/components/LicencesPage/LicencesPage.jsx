@@ -47,9 +47,16 @@ const LicencesPage = ({searchKeyword}) => {
 
     const displayNoLicences = () => {
         return (
-            <p>
-                {searchKeyword ? 'No licences meet search criteria' : "Looks like we don't have any licences in stock. Try again later."}
-            </p>
+            <>
+                <p className={styles.no_licences_header}>
+                    No Licences Found
+                </p>
+                <p className={styles.no_licences_message}>
+                    {searchKeyword ?
+                        'No licences meet search criteria' :
+                        "Looks like we don't have any licences in stock. Try again later."}
+                </p>
+            </>
         )
     }
 
