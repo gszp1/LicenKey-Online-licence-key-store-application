@@ -3,7 +3,8 @@ import HomePage from "@/components/HomePage/HomePage.jsx"
 import LoginPage from "@/components/LoginPage/LoginPage.jsx";
 import RegisterPage from "@/components/RegisterPage/RegisterPage.jsx";
 import ShoppingCartPage from "@/components/ShoppingCartPage/ShoppingCartPage.jsx";
-import AccountPage from "@/components/AccountPage/AccountPage";
+import AccountPage from "@/components/AccountPage/AccountPage.jsx";
+import LicencesPage from "@/components/LicencesPage/LicencesPage.jsx";
 import {Routes, Route, useLocation} from "react-router";
 import { useEffect, useState } from "react";
 
@@ -21,7 +22,8 @@ function App() {
         setSearchKeyword={setSearchKeyword}
       />
       <Routes>
-        <Route path="/" element={<HomePage/>}/>
+        {/* <Route path="/" element={<HomePage/>}/> */}
+        <Route path="/" element={<LicencesPage searchKeyword={searchKeyword}/>}/>
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/register" element={<RegisterPage/>}/>
         <Route path="/store/cart" element={<ShoppingCartPage/>}/>

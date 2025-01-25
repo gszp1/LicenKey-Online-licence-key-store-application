@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 const LicencesPage = ({searchKeyword}) => {
     const [licences, setLicences] = useState(null);
-    const [executionError, setExecutionError] = useState('');
+    const [executionError, setExecutionError] = useState(null);
 
     useEffect(() => {
         const fetchLicences = async () => {
@@ -17,7 +17,7 @@ const LicencesPage = ({searchKeyword}) => {
                       'keyword': searchKeyword  
                     }}
                 );
-                setLicences(response.data);
+                setLicences(response.data.licences);
             } catch(error) {
                 setExecutionError(error);
             }
@@ -25,7 +25,7 @@ const LicencesPage = ({searchKeyword}) => {
         fetchLicences()
     }, [searchKeyword]);
 
-    const getErrorMessage = () => {
+    const displayErrorMessage = () => {
         let errorMessage = "Server does not respond - try again later.";
         let errorHeader = "Server error";
         if (executionError.response) {
@@ -35,15 +35,37 @@ const LicencesPage = ({searchKeyword}) => {
             if (executionError.response.data) {
                 errorMessage = executionError.response.data;
             }
+            setExecutionError(null);
         }
         return (
-            <div></div>
+            <>
+                <p style={styles.error_header}>{errorHeader}</p>
+                <p style={styles.error_message}>{errorMessage}</p>
+            </>
         );
+    }
+
+    const displayNoLicences = () => {
+        return (
+            <p>
+                {searchKeyword ? 'No licences meet search criteria' : "Looks like we don't have licences in stock. Try again later."}
+            </p>
+        )
+    }
+
+    const displayLicences = () => {
+        return (
+            <>
+            </>
+        )
     }
 
     return (
         <div className={styles.page}>
-            {executionError && }
+            {executionError ? displayErrorMessage() : (
+                (licences && licences.length === 0) ? displayNoLicences() :
+                displayLicences() 
+            )}
         </div>
     );
 }
