@@ -78,12 +78,21 @@ const AccountPage = () => {
                         userData={userData}
                     />
                 )
-            case 'orders':
-                return <OrdersSection/>
-            case 'keys':
-                return <KeysSection/>
             case 'changePassword':
-                return <ChangePasswordSection/>
+                return (
+                    <ChangePasswordSection
+                        setSection={setSection}
+                        setError={setExecutionError}
+                    />
+                )
+            case 'orders':
+                return (
+                    <OrdersSection/>
+                )
+            case 'keys':
+                return (
+                    <KeysSection/>
+                )
             case 'error':
                 return (
                     <ErrorSection
@@ -91,7 +100,9 @@ const AccountPage = () => {
                     />
                 )
             default:
-                return <InformationSection/>
+                <InformationSection
+                    userData={userData}    
+                />
         }
     }
 
