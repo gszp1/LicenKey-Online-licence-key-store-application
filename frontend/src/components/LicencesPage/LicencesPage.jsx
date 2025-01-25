@@ -67,6 +67,9 @@ const LicencesPage = ({searchKeyword}) => {
     const displayLicences = () => {
         return (
             <>
+                <div className={styles.licences_list_header}>
+                    {`${searchKeyword ? 'Criteria Matching Licences' : 'Available Licences'}  (${licences.length})`}
+                </div>
             </>
         )
     }
@@ -75,7 +78,7 @@ const LicencesPage = ({searchKeyword}) => {
         <div className={styles.page}>
             {executionError ? displayErrorMessage() : (
                 (licences && licences.length === 0) ? displayNoLicences() :
-                displayLicences() 
+                (licences && displayLicences()) 
             )}
         </div>
     );
