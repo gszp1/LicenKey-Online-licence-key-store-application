@@ -60,12 +60,15 @@ const ChangePasswordSection = ({email, setSection, setError}) => {
             prompts["passwordConfirmation"] = "Password confirmation is not equal to password.";
         }
         setErrorPrompts(prompts);
+        return !(prompts["currentPassword"] || prompts["newPassword"] || prompts["passwordConfirmation"]);
     }
 
     const sendRequest = async () => {
+        console.log("Here")
         if (!validateCredentials()) {
             return;
         }
+        console.log("here too")
         const url = `${window._env_.BACKEND_API_URL}${'/api/users/password'}`;
         try {
             let response = await axios.patch(

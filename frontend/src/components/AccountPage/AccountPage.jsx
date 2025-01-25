@@ -81,6 +81,7 @@ const AccountPage = () => {
             case 'changePassword':
                 return (
                     <ChangePasswordSection
+                        email={userData['email']}
                         setSection={setSection}
                         setError={setExecutionError}
                     />
