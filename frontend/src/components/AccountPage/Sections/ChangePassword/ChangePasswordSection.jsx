@@ -97,35 +97,43 @@ const ChangePasswordSection = ({email, setSection, setError}) => {
             <h1 className={styles.section_header}> Change Password </h1>
             <div className={styles.section_content}>
                 <div className={styles.password_box}>
-                    <label> Current Password </label>
+                    <label className={styles.input_label}> Current Password </label>
                     <input
+                        className={styles.input_field}
                         value={credentials['currentPassword']}
                         onChange={(e) => valueChangeAction(e, 'currentPassword')}
                         type='password'
                     />
-                    <p> {errorPrompts['currentPassword']} </p>
-                    <label> New Password </label>
+                    <p className={styles.input_prompt}> {errorPrompts['currentPassword']} </p>
+                    <label className={styles.input_label}> New Password </label>
                     <input
+                        className={styles.input_field}
                         value={credentials['newPassword']}
                         onChange={(e) => valueChangeAction(e, 'newPassword')}
                         type='password'
                     />
-                    <p> {errorPrompts['newPassword']} </p>
-                    <label> Confirm New Password </label>
+                    <p className={styles.input_prompt}> {errorPrompts['newPassword']} </p>
+                    <label className={styles.input_label}> Confirm New Password </label>
                     <input
+                        className={styles.input_field}
                         value={credentials['passwordConfirmation']}
                         onChange={(e) => valueChangeAction(e, 'passwordConfirmation')}
                         type='password'
                     />
-                    <p> {errorPrompts['passwordConfirmation']} </p>
+                    <p className={styles.input_prompt}> {errorPrompts['passwordConfirmation']} </p>
+                    <button 
+                        className={styles.change_password_button}
+                        onClick={sendRequest}
+                     >
+                        Change Password
+                    </button>
+                    <p 
+                        className={styles.input_prompt}
+                        style={{'color': changePrompt['color']}}
+                    >
+                        {changePrompt['changePrompt']}
+                     </p>
                 </div>
-                <button 
-                    className={styles.change_password_button}
-                    onClick={sendRequest}
-                >
-                    Change Password
-                </button>
-                <p style={{'color': changePrompt['color']}}> {changePrompt['changePrompt']} </p>
                 <div className={styles.information_box}>
                     <ol>
                         <li>
