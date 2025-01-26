@@ -16,8 +16,8 @@
     align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
-    padding-left: 130px;
-    padding-right: 130px;
+    padding-left: 155px;
+    padding-right: 155px;
 }
 
 .name_and_identifier {
@@ -54,9 +54,30 @@
 .data {
     display: flex;
     flex-direction: column;
-    width: 600px;
-    background-color: aqua;
+    box-sizing: border-box;
+    width: 500px;
     margin-right: 30px;
+    box-shadow: 2px 2px 10px 1px rgba(192, 192, 192, 0.938);
+    background-color: rgb(231, 229, 229);
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.data_entry {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 2rem;
+}
+
+.data_entry_header {
+    font-size: 1.3rem;
+    color: orange;
+}
+
+.data_entry_value {
+    font-size: 1.1rem;
 }
 
 .order {

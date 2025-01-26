@@ -50,6 +50,39 @@ const LicencePage = () => {
         );
     }
 
+    const createDataEntries = (licence) => {
+        let wantedProperties = {
+            'Category': licence['category'],
+            'Platform': licence['platform'],
+            'Type': licence['type'],
+            'Publisher': licence['publisher'],
+            'Developer': licence['developer'],
+        }
+        let properties = Object.keys(wantedProperties);
+        return (
+            <>
+                <div className={styles.data}>
+                    {properties.map((property, index) => {
+                        return createDataEntry(property, wantedProperties[property], index);
+                    })}
+                </div>
+            </>
+          );
+    }
+
+    const createDataEntry = (header, value, index) => {
+        return (
+            <div 
+                className={styles.data_entry}
+                key={index}
+            >
+                <p className={styles.data_entry_header}>{header+':\u00A0\u00A0'}</p>
+                <p className={styles.data_entry_value}>{value}</p>
+            </div>
+        )
+    }
+
+
     return (
         <div className={styles.page}>
             <div className={styles.data_box}>
@@ -62,8 +95,7 @@ const LicencePage = () => {
                         className={styles.image}
                         src={image || '/src/assets/images/placeholder_img.png'}
                     />
-                    <div className={styles.data}>
-                    </div>
+                    {createDataEntries(licence)}
                     <div className={styles.order}>
                         <p className={styles.price}> {licence['price']+'$'} </p>
                         <p className={styles.available}>{licence['availableForSale'] ? 'Available' : 'Not Available'}</p>
