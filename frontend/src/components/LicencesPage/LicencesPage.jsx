@@ -134,17 +134,20 @@ const LicencesPage = ({searchKeyword}) => {
         return (
             <>
                 <div className={styles.entry_data_column}>
-                    {properties.map((property, idx) => {
-                        return createDataEntry(property, wantedProperties[property], idx);
+                    {properties.map((property, index) => {
+                        return createDataEntry(property, wantedProperties[property], index);
                     })}
                 </div>
             </>
           );
     }
 
-    const createDataEntry = (header, value) => {
+    const createDataEntry = (header, value, index) => {
         return (
-            <div className={styles.data_entry}>
+            <div 
+                className={styles.data_entry}
+                key={index}
+            >
                 <p className={styles.data_entry_header}>{header+':\u00A0\u00A0'}</p>
                 <p className={styles.data_entry_value}>{value}</p>
             </div>
