@@ -5,10 +5,12 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from "react-router";
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router";
 
 const NavigationBar = ({keyword, setSearchKeyword}) => {
     const [showBottomSection, setShowBottomSection] = useState(true);
-    
+    const navigate = useNavigate();
+
     useEffect(() => {
         const fillBar = () => {
             const y = window.scrollY;
@@ -55,7 +57,11 @@ const NavigationBar = ({keyword, setSearchKeyword}) => {
                         value={keyword}
                         onChange={updateKeyword}
                     />
-                    <button>
+                    <button
+                        onClick={() => {
+                            navigate("/");
+                        }}
+                    >
                         <SearchIcon fontSize="large"/>
                     </button>
                 </div>
@@ -64,7 +70,9 @@ const NavigationBar = ({keyword, setSearchKeyword}) => {
                         style={{color: 'inherit', textDecoration: 'inherit' }}
                         to="/login"
                     >
-                        <div className={styles.account_button}>
+                        <div 
+                            className={styles.account_button}
+                        >
                             <PersonIcon sx={{fontSize: '3rem'}}/>
                             <p>Login / Register</p>
                         </div>
