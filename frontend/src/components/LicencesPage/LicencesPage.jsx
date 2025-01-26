@@ -97,11 +97,21 @@ const LicencesPage = ({searchKeyword}) => {
                     </div>
                     <div className={styles.list_entry_right_section}>
                         <h2 className={styles.price}>{licence['price']+'$'}</h2>
+                        <p className={styles.available}>{licence['availableForSale'] ? 'Available' : 'Not Available'}</p>
                         <div className={styles.button_box}>
-                            <button className={styles.cart_button}>
-                                <ShoppingCartIcon sx={{fontSize: '2rem'}}/>
-                                Add To Cart
-                            </button>
+                            {licence['availableForSale'] ? 
+                                (   
+                                    <button className={styles.cart_button}>
+                                        <ShoppingCartIcon sx={{fontSize: '2rem'}}/>
+                                        Add To Cart
+                                    </button>
+                                ) : (
+                                    <button className={styles.cart_button_disabled}>
+                                        <ShoppingCartIcon sx={{fontSize: '2rem'}}/>
+                                        Add To Cart
+                                    </button>
+                                )
+                            }
                         </div>
                     </div>
                 </div>

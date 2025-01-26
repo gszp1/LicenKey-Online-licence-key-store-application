@@ -132,9 +132,22 @@
     font-size: 2rem;
 }
 
+.available {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 20px;
+    font-size: 1.4rem;
+    height: 30px;
+    padding-top: 10px;
+    color: rgb(146, 146, 146);
+}
+
 .button_box {
     box-sizing: border-box;
-    height: calc(100% - 50px);
+    height: calc(100% - 80px);
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
@@ -146,6 +159,21 @@
     width: 160px;
     height: 50px;
     background-color: rgba(11, 238, 30, 0.7);
+    border-radius: 10px;
+    border: 0px;
+    box-shadow: 1px 5px 10px 2px rgba(145, 154, 158, 0.5);
+    cursor: pointer;
+    font-size: 1.3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.cart_button_disabled {
+    width: 160px;
+    height: 50px;
+    background-color: lightgray(11, 238, 30, 0.7);
     border-radius: 10px;
     border: 0px;
     box-shadow: 1px 5px 10px 2px rgba(145, 154, 158, 0.5);
