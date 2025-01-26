@@ -1,10 +1,60 @@
 .page {
     box-sizing: border-box;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 1440px;
     height: 100%;
     min-height: 1080px;
     background-color: white;
     padding-top: 200px;
 }
+
+.header_box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    height: 80px;
+    border-bottom: 3px solid orange;
+    border-top: 3px solid orange;
+    padding-left: 30px;
+    font-size: 3rem;
+    background-color: rgba(252, 252, 252, 0.938);
+    box-shadow: 2px 2px 10px 1px rgba(192, 192, 192, 0.938);
+}
+
+.main_box {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    box-sizing: border-box;
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: 80px;
+}
+
+.cart_content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
+    min-height: 600px;
+    width: 800px;
+    background-color: rgb(240, 240, 240);
+    border-top: 2px solid orange;
+}
+
+.order_menu {
+    background-color: rgb(240, 240, 240);
+}
+
+.order_button_box {
+
+}
+
+
+
+
+
