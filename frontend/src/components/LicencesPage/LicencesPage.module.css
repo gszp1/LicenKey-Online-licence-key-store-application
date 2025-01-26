@@ -54,3 +54,27 @@
     color: orange;
     margin-bottom: 20px;
 }
+
+.licence_list_entry {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid orange;
+    margin-bottom: 15px;
+    height: 296px;
+    width: 1300px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: rgba(252, 252, 252, 0.938);
+    box-shadow: 2px 2px 10px 1px rgba(192, 192, 192, 0.938);
+}
+
+.image_box {
+    height: 256px;
+    width: 256px;
+    border: 1px orange solid;
+}

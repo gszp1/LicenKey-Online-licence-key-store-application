@@ -70,8 +70,25 @@ const LicencesPage = ({searchKeyword}) => {
                 <div className={styles.licences_list_header}>
                     {`${searchKeyword ? 'Criteria Matching Licences' : 'Available Licences'}  (${licences.length})`}
                 </div>
+                {licences.map((licence, index) => (
+                    createLicenceCard(licence, index)
+                ))}
             </>
         )
+    }
+
+    const createLicenceCard = (licence, index) => {
+        return (
+            <div
+                className={styles.licence_list_entry}
+                key={index}
+            >   
+                <div className={styles.image_box}>
+
+                </div>
+                licence    
+            </div>
+        );
     }
 
     return (
