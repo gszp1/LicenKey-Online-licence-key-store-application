@@ -88,18 +88,49 @@ const LicencesPage = ({searchKeyword}) => {
 
                 </div>
                 <div className={styles.licence_data_box}>
-
-                </div>
-                <div className={styles.buttons_box}>
-                    <button className={styles.page_button}>
-                        Search Licence Page
-                    </button>
-                    <button className={styles.cart_button}>
-                        Add To Cart
-                    </button>
+                    <div className={styles.list_entry_left_section}>
+                        <h2 className={styles.name}>{licence['name']}</h2>
+                        {createDataEntries(licence)}
+                    </div>
+                    <div className={styles.list_entry_right_section}>
+                        <h2 className={styles.price}>{licence['price']+'$'}</h2>
+                        <div className={styles.button_box}>
+                            <button className={styles.cart_button}>
+                                Add To Cart
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
+    }
+
+    const createDataEntries = (licence) => {
+        let wantedProperties = {
+            'Category': licence['category'],
+            'Platform': licence['platform'],
+            'Publisher': licence['publisher'],
+            'Type': licence['type']
+        }
+        let properties = Object.keys(wantedProperties);
+        return (
+            <>
+                <div className={styles.entry_data_column}>
+                    {properties.map((property, idx) => {
+                        return createDataEntry(property, wantedProperties[property], idx);
+                    })}
+                </div>
+            </>
+          );
+    }
+
+    const createDataEntry = (header, value) => {
+        return (
+            <div className={styles.data_entry}>
+                <p className={styles.data_entry_header}>{header+':\u00A0\u00A0'}</p>
+                <p className={styles.data_entry_value}>{value}</p>
+            </div>
+        )
     }
 
     return (
