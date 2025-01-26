@@ -87,7 +87,17 @@ const LicencesPage = ({searchKeyword}) => {
                 <div className={styles.image_box}>
 
                 </div>
-                licence    
+                <div className={styles.licence_data_box}>
+
+                </div>
+                <div className={styles.buttons_box}>
+                    <button className={styles.page_button}>
+                        Search Licence Page
+                    </button>
+                    <button className={styles.cart_button}>
+                        Add To Cart
+                    </button>
+                </div>
             </div>
         );
     }

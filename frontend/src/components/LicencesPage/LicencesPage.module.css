@@ -90,5 +90,22 @@
     height: 256px;
     width: 256px;
     border: 1px orange solid;
+    margin-right: 30px;
     box-shadow: 2px 2px 10px 1px rgba(192, 192, 192, 0.938);
+}
+
+.licence_data_box {
+    
+}
+
+.buttons_box {
+
+}
+
+.page_button {
+
+}
+
+.cart_button {
+
 }
