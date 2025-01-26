@@ -1,8 +1,13 @@
 import styles from '@/components/ShoppingCartPage/ShoppingCartPage.module.css'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
+import { useState } from 'react';
 
 const ShoppingCartPage = () => {
+
+    const [cartItems, setCartItems] = useState(null);
+    const [totalPrice, setTotalPrice] = useState('2137')
 
     const cartMenu = () => {
         return (
@@ -28,10 +33,11 @@ const ShoppingCartPage = () => {
         return (
             <div className={styles.order_menu}>
                 <p className={styles.total_price_header}>Total Price:</p>
-                <p className={styles.total_price}>2137</p>
+                <p className={styles.total_price}>{`${totalPrice}$`}</p>
                 <div className={styles.order_button_box}>
                     <button className={styles.order_button}>
-                        Place Order
+                        <CheckCircleOutlineOutlinedIcon sx={{fontSize: '1.5rem'}}/>
+                        {'\u00A0Place Order'}
                     </button>
                 </div>
             </div>
@@ -42,7 +48,7 @@ const ShoppingCartPage = () => {
         <div className={styles.page}>
             <div className={styles.header_box}>
                 <ShoppingCartIcon sx={{fontSize: '3rem'}}/>
-                Shopping Cart
+                {'\u00A0Shopping Cart'}
             </div>
             <div className={styles.main_box}>
                 {cartMenu()}
