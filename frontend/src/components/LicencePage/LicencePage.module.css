@@ -168,6 +168,8 @@
 .description_box {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
     min-height: 200px;
     width: 1130px;
     margin-left: 155px;
@@ -196,3 +198,24 @@
     padding-bottom: 5px;
 }
 
+.error_status {
+    box-sizing: border-box;
+    color: red;
+    padding-left: 20px;
+    font-size: 2rem;
+}
+
+.error_header {
+    box-sizing: border-box;
+    padding-left: 20px;
+    font-size: 3rem;
+    margin-bottom: 10px;
+    color: red;
+}
+
+.error_message {
+    box-sizing: border-box;
+    padding-left: 20px;
+    font-size: 2rem;
+    color: darkred;
+}
