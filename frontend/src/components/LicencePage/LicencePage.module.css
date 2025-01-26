@@ -21,18 +21,18 @@
 }
 
 .name_and_identifier {
-    height: 4rem;
     width: 100%;
 }
 
 .name {
-    height: 2.4rem;
-    font-size: 2rem;
+    height: 3rem;
+    font-size: 3rem;
+    margin-bottom: 10px;
 }
 
 .identifier {
-    height: 1.6rem;
-    font-size: 1.2rem;
+    height: 2rem;
+    font-size: 1.5rem;
 }
 
 .image_data_order {
