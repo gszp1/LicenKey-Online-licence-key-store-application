@@ -3,6 +3,7 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { getReasonPhrase } from 'http-status-codes';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const LicencesPage = ({searchKeyword}) => {
     const [licences, setLicences] = useState(null);
@@ -98,6 +99,7 @@ const LicencesPage = ({searchKeyword}) => {
                         <h2 className={styles.price}>{licence['price']+'$'}</h2>
                         <div className={styles.button_box}>
                             <button className={styles.cart_button}>
+                                <ShoppingCartIcon sx={{fontSize: '2rem'}}/>
                                 Add To Cart
                             </button>
                         </div>
