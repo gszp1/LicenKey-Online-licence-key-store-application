@@ -7,6 +7,7 @@ import { getReasonPhrase } from 'http-status-codes';
 const LicencesPage = ({searchKeyword}) => {
     const [licences, setLicences] = useState(null);
     const [executionError, setExecutionError] = useState(null);
+    const [image, setImage] = useState(null)
 
     useEffect(() => {
         const fetchLicences = async () => {
@@ -84,9 +85,10 @@ const LicencesPage = ({searchKeyword}) => {
                 key={index}
             >   
                 <p className={styles.licence_list_entry_index}>{index + 1}</p>
-                <div className={styles.image_box}>
-
-                </div>
+                <img 
+                    className={styles.image_box}
+                    src={image || '/src/assets/images/placeholder_img.png'}
+                />
                 <div className={styles.licence_data_box}>
                     <div className={styles.list_entry_left_section}>
                         <h2 className={styles.name}>{licence['name']}</h2>
