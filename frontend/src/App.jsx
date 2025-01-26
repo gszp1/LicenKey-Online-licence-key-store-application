@@ -26,7 +26,7 @@ function App() {
         <Route path="/" element={<LicencesPage searchKeyword={searchKeyword}/>}/>
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/register" element={<RegisterPage/>}/>
-        <Route path="/store/cart" element={<ShoppingCartPage/>}/>
+        <Route path="/cart" element={<ShoppingCartPage/>}/>
         <Route path="/account" element={<AccountPage/>}/>
       </Routes>
     </>

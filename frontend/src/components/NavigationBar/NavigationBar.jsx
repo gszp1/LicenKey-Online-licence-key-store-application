@@ -82,7 +82,7 @@ const NavigationBar = ({keyword, setSearchKeyword}) => {
                 )} 
                 <Link 
                     style={{color: 'inherit', textDecoration: 'inherit' }}
-                    to="/store/cart"    
+                    to="/cart"    
                 >
                     <div className={styles.shopping_cart_button}>
                         <ShoppingCartIcon sx={{fontSize: '3rem'}}/>
