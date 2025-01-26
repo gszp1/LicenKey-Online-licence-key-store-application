@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { getReasonPhrase } from 'http-status-codes';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import LicencePage from "@/components/LicencePage/LicencePage.jsx"
+import { Link } from "react-router";
 
 const LicencesPage = ({searchKeyword}) => {
     const [licences, setLicences] = useState(null);
@@ -81,7 +83,9 @@ const LicencesPage = ({searchKeyword}) => {
 
     const createLicenceCard = (licence, index) => {
         return (
-            <div
+            <Link
+                to={`/licences/${licence['licenceId']}`}
+                state={{licence}}
                 className={styles.licence_list_entry}
                 key={index}
             >   
@@ -115,7 +119,7 @@ const LicencesPage = ({searchKeyword}) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </Link>
         );
     }
 

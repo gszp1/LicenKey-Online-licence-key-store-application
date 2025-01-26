@@ -25,7 +25,7 @@ function App() {
       <Routes>
         {/* <Route path="/" element={<HomePage/>}/> */}
         <Route path="/" element={<LicencesPage searchKeyword={searchKeyword}/>}/>
-        <Route path="/licence/:licenceId" element={<LicencePage/>}/>
+        <Route path="/licences/:licenceId" element={<LicencePage/>}/>
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/register" element={<RegisterPage/>}/>
         <Route path="/cart" element={<ShoppingCartPage/>}/>
