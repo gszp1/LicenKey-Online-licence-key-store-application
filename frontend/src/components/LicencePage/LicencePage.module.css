@@ -8,3 +8,29 @@
     background-color: white;
     padding-top: 200px;
 }
+
+.data_box {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.name_and_identifier {
+    height: 4rem;
+    width: 100%;
+}
+
+.name {
+    padding-left: 30px;
+    height: 2.4rem;
+    font-size: 2rem;
+}
+
+.identifier {
+    padding-left: 30px;
+    height: 1.6rem;
+    font-size: 1.2rem;
+}

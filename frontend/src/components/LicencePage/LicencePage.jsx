@@ -51,12 +51,16 @@ const LicencePage = () => {
     return (
         <div className={styles.page}>
             <div className={styles.data_box}>
-            </div>
-            {executionError ? displayError() : (
-                <div className={styles.description}>
-                    {description || 'Description for this licence was not provided.'}
+                <div className={styles.name_and_identifier}>
+                    <p className={styles.name}>{licence['name']}</p>
+                    <p className={styles.identifier}>{`Identifier:\u00A0\u00A0${licence['licenceId']}`}</p>
                 </div>
-            )}
+            </div>
+            {/* {executionError ? displayError() : ( */}
+                {/* <div className={styles.description}> */}
+                    {/* {description || 'Description for this licence was not provided.'} */}
+                {/* </div> */}
+            {/* )} */}
         </div>
     )
 }
