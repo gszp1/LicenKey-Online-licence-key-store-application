@@ -74,8 +74,8 @@ const LicencesPage = ({searchKeyword}) => {
                 <div className={styles.licences_list_header}>
                     {`${searchKeyword ? 'Licences Matching Criterias' : 'Available Licences'}  (${licences.length})`}
                 </div>
-                {licences.map((licence, index) => (
-                    createLicenceCard(licence, index)
+                {licences.map((licence) => (
+                    createLicenceCard(licence, licence['licenceId'])
                 ))}
             </>
         )
