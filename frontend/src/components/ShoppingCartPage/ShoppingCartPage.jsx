@@ -1,10 +1,26 @@
 import styles from '@/components/ShoppingCartPage/ShoppingCartPage.module.css'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+
 const ShoppingCartPage = () => {
 
     const cartMenu = () => {
         return (
-            <div></div>
+            <div className={styles.cart_menu}>
+                <div className={styles.cart_menu_header}>
+                    <p className={styles.cart_menu_header_text}>Licences in Cart</p>
+                    <div className={styles.clear_cart_button_box}>
+                        <button className={styles.clear_cart_button}>
+                            <HighlightOffIcon sx={{fontSize: '1.5rem'}}/>
+                            {'\u00A0Clear Cart'}
+                        </button>
+
+                    </div>
+                </div>
+                <div className={styles.cart_content}>
+
+                </div>
+            </div>
         );
     }
 
