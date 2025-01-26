@@ -67,9 +67,22 @@
     margin-bottom: 15px;
     height: 296px;
     width: 1300px;
-    padding-left: 30px;
     padding-right: 30px;
     background-color: rgba(252, 252, 252, 0.938);
+    box-shadow: 2px 2px 10px 1px rgba(192, 192, 192, 0.938);
+}
+
+.licence_list_entry_index {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    margin-right: 30px;
+    height: 100%;
+    font-size: 2rem;
+    color: orange;
+    background-color: rgba(240, 240, 240);
+    border-right: 1px solid lightgray;
     box-shadow: 2px 2px 10px 1px rgba(192, 192, 192, 0.938);
 }
 
@@ -77,4 +90,5 @@
     height: 256px;
     width: 256px;
     border: 1px orange solid;
+    box-shadow: 2px 2px 10px 1px rgba(192, 192, 192, 0.938);
 }

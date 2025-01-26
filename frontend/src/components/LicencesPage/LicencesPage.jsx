@@ -83,6 +83,7 @@ const LicencesPage = ({searchKeyword}) => {
                 className={styles.licence_list_entry}
                 key={index}
             >   
+                <p className={styles.licence_list_entry_index}>{index + 1}</p>
                 <div className={styles.image_box}>
 
                 </div>
