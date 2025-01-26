@@ -117,11 +117,15 @@ const LicencePage = () => {
                     </div>
                 </div>
             </div>
-            {/* {executionError ? displayError() : ( */}
-                {/* <div className={styles.description}> */}
-                    {/* {description || 'Description for this licence was not provided.'} */}
-                {/* </div> */}
-            {/* )} */}
+            <div className={styles.description_box}>
+                <h1 className={styles.description_header}> Description </h1>
+                {executionError ? displayError() : (
+                    <div className={styles.description_text}>
+                        {description || 'No description provided.'}
+                    </div>
+                )}
+            </div>
+
         </div>
     )
 }
