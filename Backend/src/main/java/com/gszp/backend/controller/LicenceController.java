@@ -15,7 +15,7 @@ public class LicenceController {
 
     private final LicenceService licenceService;
 
-    @GetMapping("/description/{id}")
+    @GetMapping("/{id}/description")
     public ResponseEntity<?> getLicenceDescription(@PathVariable("id") Long licenceId) {
         try {
             LogGenerator.generateInfoLog(LogTemplate.RECEIVED_REQUEST, "Request for licence description.");
