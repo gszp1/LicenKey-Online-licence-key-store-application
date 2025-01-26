@@ -251,7 +251,7 @@ VALUES
         'A suite of productivity applications.', 
         149.99, 
         'https://www.microsoft.com/office/image.jpg', 
-        TRUE, 
+        FALSE,
         2,
         1,
         2,
@@ -259,4 +259,5 @@ VALUES
         2
     )
 RETURNING licence_id;
+
 
