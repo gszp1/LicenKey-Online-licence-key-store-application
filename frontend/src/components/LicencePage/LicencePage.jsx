@@ -3,11 +3,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { getReasonPhrase } from "http-status-codes";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const LicencePage = () => {
     const location = useLocation();
     const {licence} = location.state;
     const [description, setDescription] = useState(null);
+    const [image, setImage] = useState(null);
     const [executionError, setExecutionError] = useState(null);
 
     useEffect(() => {
@@ -54,6 +56,33 @@ const LicencePage = () => {
                 <div className={styles.name_and_identifier}>
                     <p className={styles.name}>{licence['name']}</p>
                     <p className={styles.identifier}>{`Identifier:\u00A0\u00A0${licence['licenceId']}`}</p>
+                </div>
+                <div className={styles.image_data_order}>
+                    <img
+                        className={styles.image}
+                        src={image || '/src/assets/images/placeholder_img.png'}
+                    />
+                    <div className={styles.data}>
+                    </div>
+                    <div className={styles.order}>
+                        <p className={styles.price}> {licence['price']+'$'} </p>
+                        <p className={styles.available}>{licence['availableForSale'] ? 'Available' : 'Not Available'}</p>
+                        <div className={styles.button_box}>
+                        {licence['availableForSale'] ? 
+                            (   
+                                <button className={styles.cart_button}>
+                                    <ShoppingCartIcon sx={{fontSize: '2rem'}}/>
+                                    Add To Cart
+                                </button>
+                            ) : (
+                                <button className={styles.cart_button_disabled}>
+                                    <ShoppingCartIcon sx={{fontSize: '2rem'}}/>
+                                    Add To Cart
+                                </button>
+                            )
+                        }
+                        </div>
+                    </div>
                 </div>
             </div>
             {/* {executionError ? displayError() : ( */}

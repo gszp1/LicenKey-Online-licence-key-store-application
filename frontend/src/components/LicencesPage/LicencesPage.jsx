@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { getReasonPhrase } from 'http-status-codes';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import LicencePage from "@/components/LicencePage/LicencePage.jsx"
 import { Link } from "react-router";
 
 const LicencesPage = ({searchKeyword}) => {
