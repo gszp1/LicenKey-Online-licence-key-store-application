@@ -1,5 +1,6 @@
 package com.gszp.backend.auth.model;
 
+import com.gszp.backend.model.ConfirmedCart;
 import com.gszp.backend.model.Key;
 import com.gszp.backend.model.Order;
 import com.gszp.backend.model.ShoppingCart;
@@ -78,6 +79,10 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     @Builder.Default
     private List<Order> orders = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    @Builder.Default
+    private List<ConfirmedCart> confirmedCartEntries = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
