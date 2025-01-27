@@ -7,7 +7,7 @@ import { useState } from 'react';
 const ShoppingCartPage = () => {
 
     const [cartItems, setCartItems] = useState(null);
-    const [totalPrice, setTotalPrice] = useState('2137')
+    const [totalPrice, setTotalPrice] = useState(0)
 
     const cartMenu = () => {
         return (
