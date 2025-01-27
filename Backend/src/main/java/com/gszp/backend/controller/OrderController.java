@@ -1,6 +1,8 @@
 package com.gszp.backend.controller;
 
 import com.gszp.backend.exception.ExceptionHandler;
+import com.gszp.backend.logs.LogGenerator;
+import com.gszp.backend.logs.LogTemplate;
 import com.gszp.backend.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,7 @@ public class OrderController {
     @PostMapping("")
     public ResponseEntity<?> createOrder(@AuthenticationPrincipal UserDetails userDetails) {
         try {
+            LogGenerator.generateInfoLog(LogTemplate.RECEIVED_REQUEST, "Received request for placing and order");
             return ResponseEntity.ok(orderService.createOrder(userDetails.getUsername()));
         } catch (Exception e) {
             return ExceptionHandler.handleException(e);
