@@ -2,12 +2,28 @@ import styles from '@/components/ShoppingCartPage/ShoppingCartPage.module.css'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const ShoppingCartPage = () => {
 
     const [cartItems, setCartItems] = useState(null);
     const [totalPrice, setTotalPrice] = useState(0)
+
+    const sendClearCartRequest = async () => {
+        const url = `${window._env_.BACKEND_API_URL}${'/api/shopping-carts/all'}`;
+        try {
+            let response = await axios.delete(
+                url,
+                {headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('AuthToken')}`
+                }}
+            )
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const cartMenu = () => {
         return (
@@ -15,7 +31,14 @@ const ShoppingCartPage = () => {
                 <div className={styles.cart_menu_header}>
                     <p className={styles.cart_menu_header_text}>Licences in Cart</p>
                     <div className={styles.clear_cart_button_box}>
-                        <button className={styles.clear_cart_button}>
+                        <button 
+                            className={styles.clear_cart_button}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                sendClearCartRequest();
+                            }}    
+                        >
                             <HighlightOffIcon sx={{fontSize: '1.5rem'}}/>
                             {'\u00A0Clear Cart'}
                         </button>
