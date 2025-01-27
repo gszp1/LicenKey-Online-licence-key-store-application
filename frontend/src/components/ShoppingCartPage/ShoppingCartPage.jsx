@@ -70,7 +70,6 @@ const ShoppingCartPage = () => {
             if (item['quantity'] == 1) {
                 setCartItems(cartItems.filter((_, id) => id !== index));
             } else {
-                
                 const updatedCartItems = cartItems.map((cartItem, idx) => {
                     if (idx === index) {
                         return { ...cartItem, quantity: cartItem.quantity - 1 };
@@ -80,6 +79,34 @@ const ShoppingCartPage = () => {
                 setCartItems(updatedCartItems);   
             }
             setTotalPrice(totalPrice - price);
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const increaseQuantity = async(item, index) => {
+        const url = `${window._env_.BACKEND_API_URL}${'/api/shopping-carts/quantity/increase'}`;
+        try {
+            let response = await axios.patch(
+                url,
+                { 'licenceId': item['licenceId'] },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('AuthToken')}`,
+                        'Content-Type': 'application/json'
+                    }
+                }
+            )
+            let price = item['price'];
+            setTotalPrice(totalPrice + price);
+            const updatedCartItems = cartItems.map((cartItem, idx) => {
+                if (idx === index) {
+                    return { ...cartItem, quantity: cartItem.quantity + 1 };
+                }
+                return cartItem;
+            });
+            setCartItems(updatedCartItems);   
             console.log(response);
         } catch (error) {
             console.log(error);
@@ -132,10 +159,17 @@ const ShoppingCartPage = () => {
                             />
                             <div className={styles.item_data}>
                                 <p className={styles.item_name}>{item['name']}</p>
-                                <p className={styles.item_price}>{(item['price'] * item['quantity']) +'$'}</p>
+                                <p className={styles.item_price}>{item['price'] +'$'}</p>
                             </div>
                             <div className={styles.item_quantity_box}>
-                                <button className={styles.increase}>
+                                <button
+                                    className={styles.increase}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        increaseQuantity(item, index);
+                                    }} 
+                                >
                                     <AddIcon sx={{fontSize: '2rem'}}/>
                                 </button>
                                 <div className={styles.item_quantity}>{item['quantity']}</div>
