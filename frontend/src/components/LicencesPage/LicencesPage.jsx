@@ -29,6 +29,23 @@ const LicencesPage = ({searchKeyword}) => {
         fetchLicences()
     }, [searchKeyword]);
 
+    const sendAddToCartRequest = async (licenceId) => {
+        const url = `${window._env_.BACKEND_API_URL}${'/api/shopping-carts'}`;
+        try {
+            let response = await axios.post(
+                url,
+                { 'licenceId': licenceId },
+                {headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('AuthToken')}`
+                }}
+            );
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const displayErrorMessage = () => {
         let errorMessage = "Server does not respond - try again later.";
         let errorHeader = "Server error";
@@ -104,12 +121,19 @@ const LicencesPage = ({searchKeyword}) => {
                         <div className={styles.button_box}>
                             {licence['availableForSale'] ? 
                                 (   
-                                    <button className={styles.cart_button}>
+                                    <button className={styles.cart_button}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            e.preventDefault();
+                                            sendAddToCartRequest(licence['licenceId']);
+                                        }}
+                                    >
                                         <ShoppingCartIcon sx={{fontSize: '2rem'}}/>
                                         Add To Cart
                                     </button>
                                 ) : (
-                                    <button className={styles.cart_button_disabled}>
+                                    <button className={styles.cart_button_disabled}
+                                    >
                                         <ShoppingCartIcon sx={{fontSize: '2rem'}}/>
                                         Add To Cart
                                     </button>
