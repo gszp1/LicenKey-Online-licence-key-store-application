@@ -1,6 +1,8 @@
 import styles from '@/components/ShoppingCartPage/ShoppingCartPage.module.css'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from '@mui/icons-material/Add';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -71,11 +73,41 @@ const ShoppingCartPage = () => {
     }
 
     const displayCartContents = () => {
-        if (!cartItems || cartItems.length == 0) {
-            return <p className={styles.cart_empty_message}>
-                Your Cart is Empty.
-            </p>
-        }
+        return (
+            (!cartItems || cartItems.length == 0) ? (
+                <p className={styles.cart_empty_message}>
+                    Your Cart is Empty.
+                </p>
+            ) : (
+                cartItems.map((item, index) => {
+                    return (
+                        <div 
+                            className={styles.cart_item}
+                            key={index}
+                        >
+                            <div className={styles.item_index}>
+                                {index + 1}
+                            </div>
+                            <img className={styles.item_image}
+                            />
+                            <div className={styles.item_data}>
+                                <p className={styles.item_name}>{item['name']}</p>
+                                <p className={styles.item_price}>{(item['price'] * item['quantity']) +'$'}</p>
+                            </div>
+                            <div className={styles.item_quantity_box}>
+                                <button className={styles.increase}>
+                                    <AddIcon sx={{fontSize: '2rem'}}/>
+                                </button>
+                                <div className={styles.item_quantity}>{item['quantity']}</div>
+                                <button className={styles.decrease}>
+                                    <RemoveIcon sx={{fontSize: '2rem'}}/>
+                                </button>
+                            </div>
+                        </div>
+                    )
+                })
+            )
+        );
     }
 
     const orderMenu = () => {
