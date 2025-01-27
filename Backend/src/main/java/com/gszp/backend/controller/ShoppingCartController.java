@@ -1,8 +1,10 @@
 package com.gszp.backend.controller;
 
+import com.gszp.backend.dto.request.AddShoppingCartEntryRequest;
 import com.gszp.backend.exception.ExceptionHandler;
 import com.gszp.backend.logs.LogGenerator;
 import com.gszp.backend.logs.LogTemplate;
+import com.gszp.backend.model.ShoppingCart;
 import com.gszp.backend.service.ShoppingCartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +38,19 @@ public class ShoppingCartController {
             shoppingCartService.clearShoppingCart(userDetails.getUsername());
             return ResponseEntity.ok("Shopping cart has been cleared.");
         } catch(Exception e) {
+            return ExceptionHandler.handleException(e);
+        }
+    }
+
+    @PostMapping("")
+    public ResponseEntity<?> addToShoppingCart(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestBody AddShoppingCartEntryRequest request
+    ) {
+        try {
+            shoppingCartService.addToShoppingCart(userDetails.getUsername(), request);
+            return ResponseEntity.ok("Licence was added to shopping cart.");
+        } catch (Exception e) {
             return ExceptionHandler.handleException(e);
         }
     }
