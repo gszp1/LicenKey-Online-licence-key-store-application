@@ -29,4 +29,14 @@ public class ShoppingCartController {
         }
     }
 
+    @DeleteMapping("/all")
+    public ResponseEntity<?> deleteShoppingCart(@AuthenticationPrincipal UserDetails userDetails) {
+        try {
+            LogGenerator.generateInfoLog(LogTemplate.RECEIVED_REQUEST, "Request for clearing shopping cart.");
+            shoppingCartService.clearShoppingCart(userDetails.getUsername());
+            return ResponseEntity.ok("Shopping cart has been cleared.");
+        } catch(Exception e) {
+            return ExceptionHandler.handleException(e);
+        }
+    }
 }
