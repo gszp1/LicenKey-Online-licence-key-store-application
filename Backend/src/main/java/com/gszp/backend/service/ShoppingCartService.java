@@ -13,6 +13,7 @@ import com.gszp.backend.model.keys.ShoppingCartKey;
 import com.gszp.backend.repository.LicenceRepository;
 import com.gszp.backend.repository.ShoppingCartRepository;
 import com.gszp.backend.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,7 @@ public class ShoppingCartService {
 
     public GetShoppingCartsResponse getShoppingCarts(
             String userEmail
-    ) throws ResourceNotFoundException {
+    ) {
         var shoppingCartEntries = shoppingCartRepository.getShoppingCartsByUserEmail(userEmail)
                 .stream()
                 .map(ShoppingCartDto::fromShoppingCart)
@@ -46,6 +47,7 @@ public class ShoppingCartService {
         LogGenerator.generateInfoLog(LogTemplate.REQUEST_SUCCESS, "Cleared shopping cart.");
     }
 
+    @Transactional
     public void addToShoppingCart(
             String userEmail, ShoppingCartEntryRequest request
     ) throws ResourceNotFoundException {
@@ -95,6 +97,7 @@ public class ShoppingCartService {
         );
     }
 
+    @Transactional
     public void decreaseQuantity(
             String userEmail,
             ShoppingCartEntryRequest request
