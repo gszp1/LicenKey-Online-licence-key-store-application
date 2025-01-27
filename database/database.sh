@@ -27,6 +27,7 @@ add_script ./sql/tables/licences.sql
 add_script ./sql/tables/orders.sql
 add_script ./sql/tables/shopping_carts.sql
 add_script ./sql/tables/keys.sql
+add_script ./sql/tables/confirmed_carts.sql
 
 # privileges
 add_script ./sql/functionality/privileges.sql

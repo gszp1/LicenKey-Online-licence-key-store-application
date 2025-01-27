@@ -15,8 +15,6 @@ CREATE TABLE users (
     CHECK (user_role IN ('admin', 'user'))
 );
 
-
-
 CREATE TRIGGER refresh_update_date_trg
 BEFORE UPDATE ON users
 FOR EACH ROW
