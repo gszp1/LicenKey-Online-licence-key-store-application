@@ -147,6 +147,7 @@ const ShoppingCartPage = () => {
                 </p>
             ) : (
                 cartItems.map((item, index) => {
+                    let image = null;
                     return (
                         <div 
                             className={styles.cart_item}
@@ -156,6 +157,7 @@ const ShoppingCartPage = () => {
                                 {index + 1}
                             </div>
                             <img className={styles.item_image}
+                                src={image || '/src/assets/images/placeholder_img.png'}
                             />
                             <div className={styles.item_data}>
                                 <p className={styles.item_name}>{item['name']}</p>
