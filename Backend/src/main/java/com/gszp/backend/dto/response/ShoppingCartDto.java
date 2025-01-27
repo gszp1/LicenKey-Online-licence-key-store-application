@@ -20,12 +20,15 @@ public class ShoppingCartDto {
 
     private Integer quantity;
 
+    private String imageUrl;
+
     public static ShoppingCartDto fromShoppingCart(ShoppingCart shoppingCart) {
         return ShoppingCartDto.builder()
                 .licenceId(shoppingCart.getLicence().getLicenceId())
                 .name(shoppingCart.getLicence().getName())
                 .price(shoppingCart.getLicence().getPrice())
                 .quantity(shoppingCart.getQuantity())
+                .imageUrl(shoppingCart.getLicence().getImageUrl())
                 .build();
     }
 }
