@@ -16,6 +16,13 @@ spring:
     database: postgresql
     open-in-view: false
     show-sql: false
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9093
+      retries: 3
+      acks: all
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 server:
   port: 9090
 secret_key: 2971612730793f5c5e2637753066234d2159413339745979547873513f
@@ -44,6 +51,13 @@ spring:
     database: postgresql
     open-in-view: false
     show-sql: false
+  kafka:
+    producer:
+      bootstrap-servers: "${KAFKA_BOOTSTRAP_SERVER}"
+      retries: "${RETRIES}"
+      acks: "${ACKS}"
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 server:
   port: "${APPLICATION_PORT}"
 secret_key: 2971612730793f5c5e2637753066234d2159413339745979547873513f
