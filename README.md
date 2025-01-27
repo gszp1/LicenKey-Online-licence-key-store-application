@@ -38,6 +38,8 @@
     8. platforms - platforma na której można zrealizować/aktywować klucz.
     9. shopping_carts - zawartość koszyków zakupowych użytkowników
     10. orders - zamówienia złożone przez użytkowników
+    11. confirmed_carts - zatwierdzone koszyki czekające na przetworzenie na zamówienie - pozwalają użytkownikom kontynuowanie 
+        zakupów bez wpływu na nie przetworzone zamówienie
 
 ### 2.3. Diagram
     
