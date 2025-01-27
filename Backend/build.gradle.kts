@@ -46,6 +46,11 @@ dependencies {
     /* Lombok */
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
+
+    /* Kafka */
+    implementation("org.springframework.kafka:spring-kafka:3.3.0")
+    implementation("org.apache.kafka:kafka-clients:3.9.0")
+    implementation("com.fasterxml.jackson.core:jackson-core:2.18.1")
 }
 
 tasks.withType<Test> {
