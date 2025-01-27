@@ -10,6 +10,25 @@ const ShoppingCartPage = () => {
     const [cartItems, setCartItems] = useState(null);
     const [totalPrice, setTotalPrice] = useState(0)
 
+    useEffect(() => {
+        const fetchCartItems = async () => {
+            const url = `${window._env_.BACKEND_API_URL}/api/shopping-carts`;
+            try {
+                let response = await axios.get(
+                    url,
+                    {headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('AuthToken')}`
+                    }}
+                );
+                console.log(response);
+                setCartItems(response.data.shoppingCartEntries);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchCartItems();
+    }, [])
+
     const sendClearCartRequest = async () => {
         const url = `${window._env_.BACKEND_API_URL}${'/api/shopping-carts/all'}`;
         try {
@@ -42,14 +61,21 @@ const ShoppingCartPage = () => {
                             <HighlightOffIcon sx={{fontSize: '1.5rem'}}/>
                             {'\u00A0Clear Cart'}
                         </button>
-
                     </div>
                 </div>
                 <div className={styles.cart_content}>
-
+                    {displayCartContents()}
                 </div>
             </div>
         );
+    }
+
+    const displayCartContents = () => {
+        if (!cartItems || cartItems.length == 0) {
+            return <p className={styles.cart_empty_message}>
+                Your Cart is Empty.
+            </p>
+        }
     }
 
     const orderMenu = () => {
