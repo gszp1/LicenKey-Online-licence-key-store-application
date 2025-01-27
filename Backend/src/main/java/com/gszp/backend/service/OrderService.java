@@ -2,6 +2,8 @@ package com.gszp.backend.service;
 
 import com.gszp.backend.auth.model.User;
 import com.gszp.backend.exception.ResourceNotFoundException;
+import com.gszp.backend.kafka.KafkaMessageProducer;
+import com.gszp.backend.kafka.dto.KafkaOrderMessage;
 import com.gszp.backend.logs.LogGenerator;
 import com.gszp.backend.logs.LogTemplate;
 import com.gszp.backend.model.ConfirmedCart;
@@ -30,7 +32,10 @@ public class OrderService {
     private final UserRepository userRepository;
 
     private final LicenceRepository licenceRepository;
+
     private final ConfirmedCartRepository confirmedCartRepository;
+
+    private final KafkaMessageProducer kafkaMessageProducer;
 
     @Transactional
     public UUID createOrder(
@@ -68,8 +73,12 @@ public class OrderService {
         LogGenerator.generateInfoLog(LogTemplate.REQUEST_PROCESSING, "Created confirmed cart entries.");
         // clear cart
         shoppingCartRepository.deleteAll(shoppingCartEntries);
-        // send Event with UUID - TODO
+        // send Event with UUID
+        LogGenerator.generateInfoLog(LogTemplate.REQUEST_PROCESSING, "Sending event with UUID: " + orderUUID);
+        kafkaMessageProducer.sendOrderMessage(new KafkaOrderMessage(orderUUID));
+
         LogGenerator.generateInfoLog(LogTemplate.REQUEST_SUCCESS, "Successfully handled order.");
+
         return orderUUID;
     }
 
