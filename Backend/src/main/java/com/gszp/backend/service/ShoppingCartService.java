@@ -146,8 +146,8 @@ public class ShoppingCartService {
     }
 
     private Optional<ShoppingCart> getShoppingCartEntry(
-        String userEmail,
-        Long licenceId
+            String userEmail,
+            Long licenceId
     ) throws ResourceNotFoundException {
         var user = getUserByEmail(userEmail);
         var licence = getLicenceById(licenceId);

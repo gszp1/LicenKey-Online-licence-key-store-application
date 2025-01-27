@@ -14,7 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name="confirmed_carts")
+@Table(name = "confirmed_carts")
 public class ConfirmedCart {
 
     @EmbeddedId
@@ -22,12 +22,12 @@ public class ConfirmedCart {
 
     @ManyToOne
     @MapsId("userId")
-    @JoinColumn(name="FK_user_id")
+    @JoinColumn(name = "FK_user_id")
     private User user;
 
     @ManyToOne
     @MapsId("licenceId")
-    @JoinColumn(name="FK_licence_id")
+    @JoinColumn(name = "FK_licence_id")
     private Licence licence;
 
     @Column(nullable = false)
@@ -36,6 +36,6 @@ public class ConfirmedCart {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
-    @Column( columnDefinition="uuid", name="order_identifier", nullable = false)
+    @Column(columnDefinition = "uuid", name = "order_identifier", nullable = false)
     private UUID orderIdentifier;
 }

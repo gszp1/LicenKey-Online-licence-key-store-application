@@ -25,7 +25,7 @@ public class ShoppingCartController {
         try {
             LogGenerator.generateInfoLog(LogTemplate.RECEIVED_REQUEST, "Request for shopping cart entries.");
             return ResponseEntity.ok(shoppingCartService.getShoppingCarts(userDetails.getUsername()));
-        } catch(Exception e) {
+        } catch (Exception e) {
             return ExceptionHandler.handleException(e);
         }
     }
@@ -36,7 +36,7 @@ public class ShoppingCartController {
             LogGenerator.generateInfoLog(LogTemplate.RECEIVED_REQUEST, "Request for clearing shopping cart.");
             shoppingCartService.clearShoppingCart(userDetails.getUsername());
             return ResponseEntity.ok("Shopping cart has been cleared.");
-        } catch(Exception e) {
+        } catch (Exception e) {
             return ExceptionHandler.handleException(e);
         }
     }
