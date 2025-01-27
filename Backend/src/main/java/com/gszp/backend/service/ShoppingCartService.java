@@ -1,7 +1,7 @@
 package com.gszp.backend.service;
 
 import com.gszp.backend.auth.model.User;
-import com.gszp.backend.dto.request.AddShoppingCartEntryRequest;
+import com.gszp.backend.dto.request.ShoppingCartEntryRequest;
 import com.gszp.backend.dto.response.GetShoppingCartsResponse;
 import com.gszp.backend.dto.response.ShoppingCartDto;
 import com.gszp.backend.exception.ResourceNotFoundException;
@@ -47,7 +47,7 @@ public class ShoppingCartService {
     }
 
     public void addToShoppingCart(
-            String userEmail, AddShoppingCartEntryRequest request
+            String userEmail, ShoppingCartEntryRequest request
     ) throws ResourceNotFoundException {
         var user = getUserByEmail(userEmail);
         var licence = getLicenceById(request.getLicenceId());
@@ -78,6 +78,52 @@ public class ShoppingCartService {
         );
     }
 
+    public void increaseQuantity(
+            String userEmail,
+            ShoppingCartEntryRequest request
+    ) throws ResourceNotFoundException {
+        var shoppingCartOp = getShoppingCartEntry(userEmail, request.getLicenceId());
+        if (shoppingCartOp.isEmpty()) {
+            LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "Given shopping cart entry does not exist.");
+            throw new ResourceNotFoundException("Given shopping cart entry does not exist.");
+        }
+        var shoppingCart = shoppingCartOp.get();
+        shoppingCart.setQuantity(shoppingCart.getQuantity() + 1);
+        shoppingCartRepository.save(shoppingCart);
+        LogGenerator.generateInfoLog(LogTemplate.REQUEST_SUCCESS,
+                "Increased quantity of shopping cart entry."
+        );
+    }
+
+    public void decreaseQuantity(
+            String userEmail,
+            ShoppingCartEntryRequest request
+    ) throws ResourceNotFoundException {
+        var user = getUserByEmail(userEmail);
+        var licence = getLicenceById(request.getLicenceId());
+        var shoppingCartOp = shoppingCartRepository.
+                getShoppingCartByUserIdAndLicenceId(user.getUserId(), licence.getLicenceId());
+        if (shoppingCartOp.isEmpty()) {
+            LogGenerator.generateInfoLog(LogTemplate.REQUEST_FAIL, "Given shopping cart entry does not exist.");
+            throw new ResourceNotFoundException("Given shopping cart entry does not exist.");
+        }
+        var shoppingCart = shoppingCartOp.get();
+
+        if (shoppingCart.getQuantity() == 1) { // Remove from shopping cart if quantity drops to 0
+            user.getShoppingCartEntries().remove(shoppingCart);
+            userRepository.save(user);
+            licence.getShoppingCartEntries().remove(shoppingCart);
+            licenceRepository.save(licence);
+            shoppingCartRepository.delete(shoppingCart);
+            return;
+        }
+        shoppingCart.setQuantity(shoppingCart.getQuantity() - 1);
+        shoppingCartRepository.save(shoppingCart);
+        LogGenerator.generateInfoLog(LogTemplate.REQUEST_SUCCESS,
+                "Increased quantity of shopping cart entry."
+        );
+    }
+
     private User getUserByEmail(String userEmail) throws ResourceNotFoundException {
         Optional<User> userOp = userRepository.findByEmail(userEmail);
         if (userOp.isEmpty()) {
@@ -94,5 +140,14 @@ public class ShoppingCartService {
             throw new ResourceNotFoundException("Licence with given id does not exist");
         }
         return licenceOp.get();
+    }
+
+    private Optional<ShoppingCart> getShoppingCartEntry(
+        String userEmail,
+        Long licenceId
+    ) throws ResourceNotFoundException {
+        var user = getUserByEmail(userEmail);
+        var licence = getLicenceById(licenceId);
+        return shoppingCartRepository.getShoppingCartByUserIdAndLicenceId(user.getUserId(), licence.getLicenceId());
     }
 }

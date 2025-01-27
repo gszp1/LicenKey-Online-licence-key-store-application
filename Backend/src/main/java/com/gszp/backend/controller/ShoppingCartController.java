@@ -1,10 +1,9 @@
 package com.gszp.backend.controller;
 
-import com.gszp.backend.dto.request.AddShoppingCartEntryRequest;
+import com.gszp.backend.dto.request.ShoppingCartEntryRequest;
 import com.gszp.backend.exception.ExceptionHandler;
 import com.gszp.backend.logs.LogGenerator;
 import com.gszp.backend.logs.LogTemplate;
-import com.gszp.backend.model.ShoppingCart;
 import com.gszp.backend.service.ShoppingCartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -45,13 +44,43 @@ public class ShoppingCartController {
     @PostMapping("")
     public ResponseEntity<?> addToShoppingCart(
             @AuthenticationPrincipal UserDetails userDetails,
-            @RequestBody AddShoppingCartEntryRequest request
+            @RequestBody ShoppingCartEntryRequest request
     ) {
         try {
+            LogGenerator.generateInfoLog(LogTemplate.RECEIVED_REQUEST, "Request for adding shopping cart entry.");
             shoppingCartService.addToShoppingCart(userDetails.getUsername(), request);
             return ResponseEntity.ok("Licence was added to shopping cart.");
         } catch (Exception e) {
             return ExceptionHandler.handleException(e);
         }
     }
+
+    @PatchMapping("/quantity/increase")
+    public ResponseEntity<?> increaseQuantity(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestBody ShoppingCartEntryRequest request
+    ) {
+        try {
+            LogGenerator.generateInfoLog(LogTemplate.RECEIVED_REQUEST, "Request for quantity increase in entry.");
+            shoppingCartService.increaseQuantity(userDetails.getUsername(), request);
+            return ResponseEntity.ok("Quantity increased.");
+        } catch (Exception e) {
+            return ExceptionHandler.handleException(e);
+        }
+    }
+
+    @PatchMapping("/quantity/decrease")
+    public ResponseEntity<?> decreaseQuantity(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestBody ShoppingCartEntryRequest request
+    ) {
+        try {
+            LogGenerator.generateInfoLog(LogTemplate.RECEIVED_REQUEST, "Request quantity decrease in entry.");
+            shoppingCartService.decreaseQuantity(userDetails.getUsername(), request);
+            return ResponseEntity.ok("Quantity decreased.");
+        } catch (Exception e) {
+            return ExceptionHandler.handleException(e);
+        }
+    }
+
 }

@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AddShoppingCartEntryRequest {
+public class ShoppingCartEntryRequest {
 
     private Long licenceId;
 }
