@@ -46,6 +46,7 @@ public class OrderService {
         }
         // generate UUID for order
         final UUID orderUUID = UUID.randomUUID();
+        LogGenerator.generateInfoLog(LogTemplate.REQUEST_PROCESSING, "Generated unique UUID for new order.");
         // change cart contents into confirmed cart contents
         List<ConfirmedCart> confirmedCarts = shoppingCartEntries
                 .stream()
@@ -64,9 +65,11 @@ public class OrderService {
         // update user
         user.getConfirmedCartEntries().addAll(confirmedCarts);
         user = userRepository.save(user);
+        LogGenerator.generateInfoLog(LogTemplate.REQUEST_PROCESSING, "Created confirmed cart entries.");
         // clear cart
         shoppingCartRepository.deleteAll(shoppingCartEntries);
         // send Event with UUID - TODO
+        LogGenerator.generateInfoLog(LogTemplate.REQUEST_SUCCESS, "Successfully handled order.");
         return orderUUID;
     }
 
