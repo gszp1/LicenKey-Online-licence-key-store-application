@@ -40,6 +40,7 @@ const ShoppingCartPage = () => {
                     'Authorization': `Bearer ${localStorage.getItem('AuthToken')}`
                 }}
             )
+            setCartItems(null);
             console.log(response);
         } catch (error) {
             console.log(error);
