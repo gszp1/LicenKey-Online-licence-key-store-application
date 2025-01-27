@@ -6,6 +6,8 @@ import com.gszp.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class OrderService {
@@ -17,4 +19,8 @@ public class OrderService {
     private final UserRepository userRepository;
 
     private final LicenceRepository licenceRepository;
+
+    public UUID createOrder(String userEmail) {
+
+    }
 }
