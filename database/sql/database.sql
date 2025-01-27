@@ -182,6 +182,7 @@ CREATE TABLE confirmed_carts(
     FK_licence_id BIGINT,
     quantity INT NOT NULL CHECK (quantity > 0),
     order_identifier UUID NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     update_date TIMESTAMPTZ NOT NULL DEFAULT now(),
     PRIMARY KEY (FK_user_id, FK_licence_id),

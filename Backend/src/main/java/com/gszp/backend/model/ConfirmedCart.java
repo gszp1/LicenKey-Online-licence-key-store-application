@@ -36,6 +36,6 @@ public class ConfirmedCart {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
-    @Column(nullable = false)
+    @Column( columnDefinition="uuid", name="order_identifier", nullable = false)
     private UUID orderIdentifier;
 }
