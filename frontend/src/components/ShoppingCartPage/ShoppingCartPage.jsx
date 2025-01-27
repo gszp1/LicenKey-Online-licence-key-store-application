@@ -113,6 +113,24 @@ const ShoppingCartPage = () => {
         }
     }
 
+    const sendCreateOrderRequest = async() => {
+        const url =`${window._env_.BACKEND_API_URL}${'/api/orders'}`;
+        try {
+            let response = await axios.post(
+                url,
+                {},
+                {headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('AuthToken')}`
+                }}
+            );
+            console.log(response.data);
+            setTotalPrice(0);
+            setCartItems([]);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const cartMenu = () => {
         return (
             <div className={styles.cart_menu}>
@@ -199,7 +217,14 @@ const ShoppingCartPage = () => {
                 <p className={styles.total_price_header}>Total Price:</p>
                 <p className={styles.total_price}>{`${totalPrice}$`}</p>
                 <div className={styles.order_button_box}>
-                    <button className={styles.order_button}>
+                    <button 
+                        className={styles.order_button}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            sendCreateOrderRequest();
+                        }}        
+                    >
                         <CheckCircleOutlineOutlinedIcon sx={{fontSize: '1.5rem'}}/>
                         {'\u00A0Place Order'}
                     </button>
