@@ -37,6 +37,9 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.kafka:spring-kafka-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    implementation("io.cloudevents:cloudevents-api:4.0.1")
+    implementation("io.cloudevents:cloudevents-http-restful-ws:4.0.1")
 }
 
 dependencyManagement {
