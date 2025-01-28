@@ -1,4 +1,4 @@
-package com.gszp.backend.model.keys;
+package com.gszp.orderfunction.model;
 
 import jakarta.persistence.Embeddable;
 import lombok.*;

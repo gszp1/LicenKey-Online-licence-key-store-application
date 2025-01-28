@@ -1,9 +1,7 @@
-package com.gszp.backend.model.keys;
+package com.gszp.orderfunction.model;
 
 import jakarta.persistence.Embeddable;
 import lombok.*;
-
-import java.io.Serializable;
 
 @Getter
 @Setter
@@ -11,7 +9,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Embeddable
-public class OrdersKey implements Serializable {
+public class ConfirmedCartKey {
 
     private Long userId;
 
