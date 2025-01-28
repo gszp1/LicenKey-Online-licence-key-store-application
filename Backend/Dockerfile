@@ -21,4 +21,4 @@ RUN gradle build --no-daemon -x test
 
 EXPOSE 9000
 
-ENTRYPOINT ["java", "-jar", "/app/build/libs/backend-1.0.0.jar"]
+ENTRYPOINT ["java", "-jar", "/backend-app/build/libs/backend-1.0.0.jar"]
