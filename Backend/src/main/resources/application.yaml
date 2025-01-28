@@ -64,7 +64,10 @@ spring:
       acks: "${ACKS}"
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    topics:
+      orders-topic: "${ORDERS_TOPIC}"
+      notification-topic: "${NOTIFICATION_TOPIC}"
 server:
-  port: "${APPLICATION_PORT}"
+  port: 9000
 secret_key: 2971612730793f5c5e2637753066234d2159413339745979547873513f
 expiration_time: 3600000
