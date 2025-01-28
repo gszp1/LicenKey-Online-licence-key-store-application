@@ -26,18 +26,28 @@ repositories {
 extra["springCloudVersion"] = "2024.0.0"
 
 dependencies {
+    // Database
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.cloud:spring-cloud-function-context")
-    implementation("org.springframework.kafka:spring-kafka")
-    compileOnly("org.projectlombok:lombok")
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("org.postgresql:postgresql")
-    annotationProcessor("org.projectlombok:lombok")
+
+    // Spring Cloud
+    implementation("org.springframework.cloud:spring-cloud-function-context")
+
+    // Kafka
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.kafka:spring-kafka-test")
+    implementation("org.springframework.kafka:spring-kafka")
+
+    // Lombok
+    annotationProcessor("org.projectlombok:lombok")
+    compileOnly("org.projectlombok:lombok")
+
+    // Spring
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
+    // CloudEvents
     implementation("io.cloudevents:cloudevents-api:4.0.1")
     implementation("io.cloudevents:cloudevents-http-restful-ws:4.0.1")
 }
