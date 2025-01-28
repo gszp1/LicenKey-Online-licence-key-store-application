@@ -26,6 +26,8 @@ spring:
     topics:
       orders-topic: orders
       notification-topic: notifications
+  cors:
+    allowed-host: 'http://localhost'
 server:
   port: 9090
 secret_key: 2971612730793f5c5e2637753066234d2159413339745979547873513f
@@ -67,6 +69,8 @@ spring:
     topics:
       orders-topic: "${ORDERS_TOPIC}"
       notification-topic: "${NOTIFICATION_TOPIC}"
+  cors:
+    allowed-host: 'http://192.168.56.1'
 server:
   port: 9000
 secret_key: 2971612730793f5c5e2637753066234d2159413339745979547873513f

@@ -2,6 +2,7 @@ package com.gszp.backend.auth.config;
 
 import com.gszp.backend.auth.filter.JwtAuthFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -24,6 +25,9 @@ import java.util.List;
 @RequiredArgsConstructor
 @EnableMethodSecurity
 public class SpringSecurityConfig {
+
+    @Value("${spring.cors.allowed-host}")
+    private String corsAllowedHost;
 
     private final JwtAuthFilter jwtAuthFilter;
 
@@ -56,7 +60,7 @@ public class SpringSecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
-        configuration.addAllowedOrigin("http://localhost:9091");
+        configuration.addAllowedOrigin(corsAllowedHost);
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
 
