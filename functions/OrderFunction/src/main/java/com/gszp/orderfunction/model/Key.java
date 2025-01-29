@@ -20,7 +20,7 @@ public class Key {
     @Column(name = "key_id")
     private Long keyId;
 
-    @Column(name = "key_code", nullable = true, unique = true)
+    @Column(name = "key_code", length = 100, unique = true)
     @Builder.Default
     private String keyCode = null;
 

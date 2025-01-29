@@ -20,7 +20,7 @@ public class Key {
     @Column(name = "key_id")
     private Long keyId;
 
-    @Column(name = "key_code", nullable = false, unique = true)
+    @Column(name = "key_code", length = 100, unique = true)
     private String keyCode;
 
     @Column(nullable = false)
