@@ -35,9 +35,9 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-function-context")
 
     // Kafka
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.kafka:spring-kafka-test")
-    implementation("org.springframework.kafka:spring-kafka")
+//    testImplementation("org.springframework.boot:spring-boot-starter-test")
+//    testImplementation("org.springframework.kafka:spring-kafka-test")
+//    implementation("org.springframework.kafka:spring-kafka")
 
     // Lombok
     annotationProcessor("org.projectlombok:lombok")

@@ -4,3 +4,19 @@ spring:
   cloud:
     function:
       definition: handleOrderEvent
+  datasource:
+    url: "${DATASOURCE_URL}"
+    username: "${DATASOURCE_USER}"
+    password: "${DATASOURCE_PASSWORD}"
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    database: postgresql
+    open-in-view: false
+    show-sql: false
+server:
+  port: 9001
