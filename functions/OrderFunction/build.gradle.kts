@@ -33,6 +33,7 @@ dependencies {
 
     // Spring Cloud
     implementation("org.springframework.cloud:spring-cloud-function-context")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 
     // Kafka
 //    testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -64,7 +65,6 @@ tasks.withType<Test> {
 }
 
 tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
-    archiveBaseName.set("order-function")
-    archiveVersion.set("1.0.0")
+    archiveFileName.set("order-function.jar")
     mainClass.set("com.gszp.orderfunction.OrderFunctionApplication")
 }
