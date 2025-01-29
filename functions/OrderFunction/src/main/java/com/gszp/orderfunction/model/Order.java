@@ -16,7 +16,7 @@ import java.util.UUID;
 public class Order {
 
     @EmbeddedId
-    private OrdersKey key;
+    private OrderKey key;
 
     @ManyToOne()
     @MapsId("userId")

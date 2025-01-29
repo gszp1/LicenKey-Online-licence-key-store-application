@@ -46,6 +46,7 @@ dependencies {
     // Spring
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    implementation("org.springframework.boot:spring-boot-starter-web")
 
     // CloudEvents
     implementation("io.cloudevents:cloudevents-api:4.0.1")

@@ -11,7 +11,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Embeddable
-public class OrdersKey implements Serializable {
+public class OrderKey implements Serializable {
 
     private Long userId;
 
