@@ -2,6 +2,7 @@ CREATE TABLE keys (
     key_id BIGSERIAL PRIMARY KEY, 
     expired BOOLEAN NOT NULL DEFAULT FALSE,
     key_code VARCHAR(100) UNIQUE,
+    order_id UUID NOT NULL,
     FK_licence_id BIGINT,
     FK_user_id BIGINT,
     creation_date TIMESTAMPTZ NOT NULL DEFAULT now(),
