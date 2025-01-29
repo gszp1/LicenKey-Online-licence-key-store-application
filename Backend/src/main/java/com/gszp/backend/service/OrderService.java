@@ -18,10 +18,10 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -59,12 +59,11 @@ public class OrderService {
                 .toList();
         confirmedCarts = confirmedCartRepository.saveAll(confirmedCarts);
         // update licences
-        List<Licence> licences = shoppingCartEntries
-                .stream()
-                .map(ShoppingCart::getLicence)
-                .collect(Collectors.toList());
-        for (Licence licence : licences) {
-            licence.getConfirmedCartEntries().addAll(confirmedCarts);
+        List<Licence> licences = new ArrayList<>();
+        for (ConfirmedCart confirmedCart : confirmedCarts) {
+            Licence licence = confirmedCart.getLicence();
+            licence.getConfirmedCartEntries().add(confirmedCart);
+            licences.add(licence);
         }
         licences = licenceRepository.saveAll(licences);
         // update user
@@ -72,6 +71,15 @@ public class OrderService {
         user = userRepository.save(user);
         LogGenerator.generateInfoLog(LogTemplate.REQUEST_PROCESSING, "Created confirmed cart entries.");
         // clear cart
+        user.getShoppingCartEntries().removeAll(shoppingCartEntries);
+        user = userRepository.save(user);
+        licences = new ArrayList<>();
+        for (var entry: shoppingCartEntries) {
+            Licence licence = entry.getLicence();
+            licence.getShoppingCartEntries().remove(entry);
+            licences.add(licence);
+        }
+        licences = licenceRepository.saveAll(licences);
         shoppingCartRepository.deleteAll(shoppingCartEntries);
         // send Event with UUID
         LogGenerator.generateInfoLog(LogTemplate.REQUEST_PROCESSING, "Sending event with UUID: " + orderUUID);
