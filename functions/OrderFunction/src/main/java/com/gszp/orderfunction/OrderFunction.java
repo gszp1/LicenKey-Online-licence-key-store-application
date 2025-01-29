@@ -12,7 +12,7 @@ public class OrderFunction {
     @Bean
     public Consumer<CloudEvent> handleOrderEvent() {
         return event -> {
-            
+
         };
     }
 
