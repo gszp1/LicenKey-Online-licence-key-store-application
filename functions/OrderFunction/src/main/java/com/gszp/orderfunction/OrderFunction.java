@@ -25,7 +25,7 @@ public class OrderFunction {
                 return;
             }
             var eventData = objectMapper.convertValue(event, OrderEventDto.class);
-            a
+
         };
     }
 
