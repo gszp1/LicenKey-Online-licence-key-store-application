@@ -88,6 +88,8 @@ public class OrderFunction {
             // Update User with key
             user.getKeys().addAll(keys);
             user = userRepository.save(user);
+
+            // TODO: Send event to generate new keys
         };
     }
 
