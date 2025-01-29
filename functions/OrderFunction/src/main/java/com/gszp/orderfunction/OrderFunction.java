@@ -3,22 +3,15 @@ package com.gszp.orderfunction;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gszp.orderfunction.dto.OrderEventDto;
 import com.gszp.orderfunction.model.*;
-import com.gszp.orderfunction.repository.ConfirmedCartRepository;
-import com.gszp.orderfunction.repository.LicenceRepository;
-import com.gszp.orderfunction.repository.OrderRepository;
-import com.gszp.orderfunction.repository.UserRepository;
+import com.gszp.orderfunction.repository.*;
 import io.cloudevents.CloudEvent;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -36,6 +29,8 @@ public class OrderFunction {
     private final LicenceRepository licenceRepository;
 
     private final UserRepository userRepository;
+
+    private final KeyRepository keyRepository;
 
     @Bean
     @Transactional
@@ -75,7 +70,24 @@ public class OrderFunction {
             clearConfirmedCart(confirmedCartEntries, user);
 
             // Create Key entries without keyCodes.
-
+            Map<Licence, List<Key>> keysMap = mapOrdersToKeys(orderEntries);
+            List<Key> keys = new ArrayList<>();
+            for (Licence licence : keysMap.keySet()) {
+                keys.addAll(keysMap.get(licence));
+            }
+            // Update Licences and keys
+            keys = keyRepository.saveAll(keys);
+            licences = new ArrayList<>();
+            for (Licence licence : keysMap.keySet()) {
+                List<Key> localKeys = keysMap.get(licence);
+                licence.getKeys().addAll(localKeys);
+                licences.add(licence);
+            }
+            // Update Licences with keys
+            licences = licenceRepository.saveAll(licences);
+            // Update User with key
+            user.getKeys().addAll(keys);
+            user = userRepository.save(user);
         };
     }
 
@@ -117,15 +129,25 @@ public class OrderFunction {
         confirmedCartRepository.deleteAll(confirmedCartEntries);
     }
 
+    private Map<Licence, List<Key>> mapOrdersToKeys(List<Order> orderEntries) {
+        HashMap<Licence, List<Key>> keysMap = new HashMap<>();
+        for (Order order : orderEntries) {
+            keysMap.put(order.getLicence(), mapOrderEntryToKeys(order));
+        }
+        return keysMap;
+    }
+
     private List<Key> mapOrderEntryToKeys(Order orderEntry) {
         List<Key> keys = new ArrayList<>();
         for (int i = 0; i < orderEntry.getQuantity(); ++i) {
             Key key = Key.builder()
                     .user(orderEntry.getUser())
                     .licence(orderEntry.getLicence())
-                    .
-                    .build()
+                    .orderId(orderEntry.getOrderId())
+                    .build();
+            keys.add(key);
         }
+        return keys;
     }
 
 }

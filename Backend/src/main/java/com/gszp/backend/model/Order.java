@@ -36,6 +36,6 @@ public class Order {
     @Column(nullable = false)
     private Integer quantity;
 
-    @Column(nullable = false)
+    @Column(name = "order_id", nullable = false)
     private UUID orderId;
 }

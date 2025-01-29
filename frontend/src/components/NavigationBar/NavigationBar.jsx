@@ -56,6 +56,7 @@ const NavigationBar = ({keyword, setSearchKeyword}) => {
                         placeholder="Search in store"
                         value={keyword}
                         onChange={updateKeyword}
+                        autoComplete="off"
                     />
                     <button
                         onClick={() => {

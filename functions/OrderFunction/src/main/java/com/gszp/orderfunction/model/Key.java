@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.OffsetDateTime;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -42,4 +43,7 @@ public class Key {
     @ManyToOne
     @JoinColumn(name = "FK_user_id")
     private User user;
+
+    @Column(name="order_id", nullable = false)
+    private UUID orderId;
 }
