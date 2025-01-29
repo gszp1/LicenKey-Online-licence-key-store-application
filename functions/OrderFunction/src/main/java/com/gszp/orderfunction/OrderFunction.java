@@ -11,6 +11,7 @@ import io.cloudevents.CloudEvent;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -73,6 +74,8 @@ public class OrderFunction {
             // Clear Confirmed Shopping Cart
             clearConfirmedCart(confirmedCartEntries, user);
 
+            // Create Key entries without keyCodes.
+
         };
     }
 
@@ -113,5 +116,17 @@ public class OrderFunction {
         licenceRepository.saveAll(licences);
         confirmedCartRepository.deleteAll(confirmedCartEntries);
     }
+
+    private List<Key> mapOrderEntryToKeys(Order orderEntry) {
+        List<Key> keys = new ArrayList<>();
+        for (int i = 0; i < orderEntry.getQuantity(); ++i) {
+            Key key = Key.builder()
+                    .user(orderEntry.getUser())
+                    .licence(orderEntry.getLicence())
+                    .
+                    .build()
+        }
+    }
+
 }
 
