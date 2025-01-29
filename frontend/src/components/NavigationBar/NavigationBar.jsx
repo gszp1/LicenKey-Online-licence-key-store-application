@@ -52,12 +52,15 @@ const NavigationBar = ({keyword, setSearchKeyword}) => {
                     />
                 </Link>
                 <div className={styles.search_bar}>
-                    <input
-                        placeholder="Search in store"
-                        value={keyword}
-                        onChange={updateKeyword}
-                        autoComplete="off"
-                    />
+                    <form autoComplete="off">
+                        <input
+                            placeholder="Search in store"
+                            type="text"
+                            value={keyword}
+                            onChange={updateKeyword}
+                            autoComplete="nope"
+                        />
+                    </form>
                     <button
                         onClick={() => {
                             navigate("/");
