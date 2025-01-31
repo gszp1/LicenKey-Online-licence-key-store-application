@@ -3,6 +3,7 @@ package com.gszp.orderfunction.model;
 import jakarta.persistence.Embeddable;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 @Getter
@@ -11,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Embeddable
-public class ConfirmedCartKey {
+public class ConfirmedCartKey implements Serializable {
 
     private Long userId;
 
