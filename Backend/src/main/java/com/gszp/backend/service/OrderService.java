@@ -102,12 +102,15 @@ public class OrderService {
     private ConfirmedCart mapToConfirmedCart(ShoppingCart shoppingCart, UUID orderUUID) {
         return ConfirmedCart.builder()
                 .price(shoppingCart.getLicence().getPrice())
-                .orderIdentifier(orderUUID)
                 .quantity(shoppingCart.getQuantity())
                 .user(shoppingCart.getUser())
                 .licence(shoppingCart.getLicence())
                 .user(shoppingCart.getUser())
-                .key(new ConfirmedCartKey(shoppingCart.getUser().getUserId(), shoppingCart.getKey().getLicenceId()))
+                .key(new ConfirmedCartKey(
+                        shoppingCart.getUser().getUserId(),
+                        shoppingCart.getKey().getLicenceId(),
+                        orderUUID)
+                )
                 .build();
     }
 }

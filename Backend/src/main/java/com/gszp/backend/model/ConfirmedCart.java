@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Entity
 @Getter
@@ -35,7 +34,4 @@ public class ConfirmedCart {
 
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
-
-    @Column(columnDefinition = "uuid", name = "order_identifier", nullable = false)
-    private UUID orderIdentifier;
 }
