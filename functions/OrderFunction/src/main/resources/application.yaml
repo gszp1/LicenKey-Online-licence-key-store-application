@@ -18,5 +18,12 @@ spring:
     database: postgresql
     open-in-view: false
     show-sql: false
+#logging:
+#  level:
+#    root: DEBUG
+#    org:
+#      springframework:
+#        cloud:
+#          function: DEBUG
 server:
   port: 9001

@@ -2,6 +2,8 @@ package com.gszp.orderfunction.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.springframework.data.repository.cdi.Eager;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

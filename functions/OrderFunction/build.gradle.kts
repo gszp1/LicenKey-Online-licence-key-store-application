@@ -34,6 +34,8 @@ dependencies {
     // Spring Cloud
     implementation("org.springframework.cloud:spring-cloud-function-context")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("org.springframework.cloud:spring-cloud-function-web")
+
 
     // Kafka
 //    testImplementation("org.springframework.boot:spring-boot-starter-test")

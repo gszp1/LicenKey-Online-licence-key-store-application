@@ -12,6 +12,6 @@ import java.util.UUID;
 @Repository
 public interface ConfirmedCartRepository extends JpaRepository<ConfirmedCart, ConfirmedCartKey> {
 
-    @EntityGraph(attributePaths = {"licence", "user"})
+    @EntityGraph(attributePaths = {"licence", "user" })
     List<ConfirmedCart> getConfirmedCartsByOrOrderIdentifier(UUID orderIdentifier);
 }

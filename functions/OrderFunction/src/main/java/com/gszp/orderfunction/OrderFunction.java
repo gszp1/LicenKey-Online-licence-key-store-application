@@ -4,11 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gszp.orderfunction.dto.OrderEventDto;
 import com.gszp.orderfunction.model.*;
 import com.gszp.orderfunction.repository.*;
-import io.cloudevents.CloudEvent;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.Hibernate;
 import org.springframework.context.annotation.Bean;
+import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -34,8 +35,9 @@ public class OrderFunction {
 
     @Bean
     @Transactional
-    public Consumer<CloudEvent> handleOrderEvent() {
+    public Consumer<Message<String>> handleOrderEvent() {
         return event -> {
+            log.info("Received event: {}", event.getPayload());
             Optional<OrderEventDto> dtoOp = readEventData(event);
             if (dtoOp.isEmpty()) {
                 log.info("Event data is empty");
@@ -43,31 +45,50 @@ public class OrderFunction {
             }
             // Retrieve event data from CloudEvent
             var eventData = dtoOp.get();
+            log.info("Read event data: {}", eventData.getOrderUUID());
             List<ConfirmedCart> confirmedCartEntries =
                     confirmedCartRepository.getConfirmedCartsByOrOrderIdentifier(eventData.getOrderUUID());
             if (confirmedCartEntries.isEmpty()) {
                 log.info("No confirmed cart entries found");
                 return;
             }
+            log.info("Retrieved cart entries in quantity: {}", confirmedCartEntries.size());
+
             // Map cart entries to order entries
             final UUID orderUUID = eventData.getOrderUUID();
             var orderEntries = confirmedCartEntries.stream()
                     .map(entry -> mapCartEntryToOrder(entry, orderUUID))
                     .collect(Collectors.toList());
             orderEntries = orderRepository.saveAll(orderEntries);
+            log.info("Mapped cart entries to order entries.");
+
             // Update user record
-            var user = orderEntries.getFirst().getUser();
+            var user = userRepository.getByUserId(orderEntries.getFirst().getUser().getUserId());
             user.getOrders().addAll(orderEntries);
+            log.info("Orders added to licences.");
+
             // Update licences records
-            List<Licence> licences = new ArrayList<>();
+            List<Long> licencesIds = orderEntries
+                    .stream().map(e -> e.getLicence().getLicenceId()).toList();
+            List<Licence> licencesList = licenceRepository.getLicencesByLicenceId(licencesIds);
+            Map<Long, Licence> licences = licencesList.stream()
+                    .collect(Collectors.toMap(Licence::getLicenceId, e -> e));
             for (Order order : orderEntries) {
                 Licence licence = order.getLicence();
-                licence.getOrders().add(order);
-                licences.add(licence);
+                if (!licences.containsKey(licence.getLicenceId())) {
+                    licence.getOrders().add(order);
+                    licences.put(licence.getLicenceId(), licence);
+                } else {
+                    licences.get(licence.getLicenceId()).getOrders().add(order);
+                }
             }
-            licences = licenceRepository.saveAll(licences);
+            log.info("Licences records updated.");
+            List<Licence> allLicenses = licences.values().stream().toList();
+            allLicenses = licenceRepository.saveAll(allLicenses);
+
             // Clear Confirmed Shopping Cart
-            clearConfirmedCart(confirmedCartEntries, user);
+            confirmedCartRepository.deleteAll(confirmedCartEntries);
+            log.info("Cleared confirmed shopping cart.");
 
             // Create Key entries without keyCodes.
             Map<Licence, List<Key>> keysMap = mapOrdersToKeys(orderEntries);
@@ -75,32 +96,25 @@ public class OrderFunction {
             for (Licence licence : keysMap.keySet()) {
                 keys.addAll(keysMap.get(licence));
             }
-            // Update Licences and keys
             keys = keyRepository.saveAll(keys);
-            licences = new ArrayList<>();
-            for (Licence licence : keysMap.keySet()) {
-                List<Key> localKeys = keysMap.get(licence);
-                licence.getKeys().addAll(localKeys);
-                licences.add(licence);
-            }
-            // Update Licences with keys
-            licences = licenceRepository.saveAll(licences);
+            log.info("Created key entries.");
+
             // Update User with key
-            user.getKeys().addAll(keys);
             user = userRepository.save(user);
 
             // TODO: Send event to generate new keys
         };
     }
 
-    private Optional<OrderEventDto> readEventData(CloudEvent event) {
-        if (event.getData() == null) {
+    private Optional<OrderEventDto> readEventData(Message<String> event) {
+        String payload = event.getPayload();
+        if (payload.isEmpty()) {
             return Optional.empty();
         }
         try {
-            byte[] dataBytes = event.getData().toBytes();
-            return Optional.of(objectMapper.readValue(dataBytes, OrderEventDto.class));
+            return Optional.of(objectMapper.readValue(payload, OrderEventDto.class));
         } catch (Exception e) {
+            log.error("Error reading event data", e);
             return Optional.empty();
         }
     }
@@ -114,21 +128,6 @@ public class OrderFunction {
                 .quantity(confirmedCart.getQuantity())
                 .unitPrice(confirmedCart.getPrice())
                 .build();
-    }
-
-    private void clearConfirmedCart(
-            List<ConfirmedCart> confirmedCartEntries, User user
-    ) {
-        user.getConfirmedCartEntries().removeAll(confirmedCartEntries);
-        userRepository.save(user);
-        List<Licence> licences = new ArrayList<>();
-        confirmedCartEntries.forEach(confirmedCart -> {
-            Licence licence = confirmedCart.getLicence();
-            licence.getConfirmedCartEntries().remove(confirmedCart);
-            licences.add(licence);
-        });
-        licenceRepository.saveAll(licences);
-        confirmedCartRepository.deleteAll(confirmedCartEntries);
     }
 
     private Map<Licence, List<Key>> mapOrdersToKeys(List<Order> orderEntries) {

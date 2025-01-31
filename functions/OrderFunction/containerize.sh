@@ -1,5 +1,7 @@
 #!/bin/bash
 
+./gradlew clean build -x test
+
 docker rm order-function
 sleep 1
 
