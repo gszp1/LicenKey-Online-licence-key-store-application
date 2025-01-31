@@ -42,7 +42,7 @@ public class OrderFunction {
                 return;
             }
             // Retrieve event data from CloudEvent
-            var eventData = objectMapper.convertValue(event, OrderEventDto.class);
+            var eventData = dtoOp.get();
             List<ConfirmedCart> confirmedCartEntries =
                     confirmedCartRepository.getConfirmedCartsByOrOrderIdentifier(eventData.getOrderUUID());
             if (confirmedCartEntries.isEmpty()) {
