@@ -1,7 +1,7 @@
 package com.gszp.backend.model;
 
 import com.gszp.backend.auth.model.User;
-import com.gszp.backend.model.keys.OrdersKey;
+import com.gszp.backend.model.keys.OrderKey;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,7 +19,7 @@ import java.util.UUID;
 public class Order {
 
     @EmbeddedId
-    private OrdersKey key;
+    private OrderKey key;
 
     @ManyToOne()
     @MapsId("userId")
