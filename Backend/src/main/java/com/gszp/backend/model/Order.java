@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Entity
@@ -38,4 +39,12 @@ public class Order {
 
     @Column(name = "order_id", nullable = false)
     private UUID orderId;
+
+    @Column(
+            name = "creation_date",
+            nullable = false,
+            updatable = false,
+            insertable = false
+    )
+    private OffsetDateTime creationDate;
 }
