@@ -20,6 +20,8 @@ public class KeyDto {
 
     private String publisher;
 
+    private String imageUrl;
+
     public static KeyDto fromKey(Key key) {
         return KeyDto.builder()
                 .keyCode(key.getKeyCode())
@@ -27,6 +29,7 @@ public class KeyDto {
                 .name(key.getLicence().getName())
                 .platform(key.getLicence().getPlatform().getName())
                 .publisher(key.getLicence().getPublisher().getName())
+                .imageUrl(key.getLicence().getImageUrl())
                 .build();
     }
 }
