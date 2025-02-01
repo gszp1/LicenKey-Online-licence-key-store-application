@@ -67,12 +67,12 @@ public class OrderService {
     private Map<UUID, List<Order>> groupOrderEntriesByOrderUUID(List<Order> orders) {
         HashMap<UUID, List<Order>> groupedOrders = new HashMap<>();
         for (Order order : orders) {
-            if (!groupedOrders.containsKey(order.getOrderId())) {
+            if (!groupedOrders.containsKey(order.getKey().getOrderId())) {
                 List<Order> ordersGroup = new ArrayList<>();
                 ordersGroup.add(order);
-                groupedOrders.put(order.getOrderId(), ordersGroup);
+                groupedOrders.put(order.getKey().getOrderId(), ordersGroup);
             } else {
-                groupedOrders.get(order.getOrderId()).add(order);
+                groupedOrders.get(order.getKey().getOrderId()).add(order);
             }
         }
         return groupedOrders;
