@@ -18,11 +18,14 @@ public class OrderEntryDataDto {
 
     private Integer quantity;
 
+    private String imageUrl;
+
     public static OrderEntryDataDto fromOrder(Order order) {
         return OrderEntryDataDto.builder()
                 .price(order.getUnitPrice())
                 .licenceName(order.getLicence().getName())
                 .quantity(order.getQuantity())
+                .imageUrl(order.getLicence().getImageUrl())
                 .build();
     }
 }
