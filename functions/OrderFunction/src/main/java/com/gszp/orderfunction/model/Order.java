@@ -28,9 +28,6 @@ public class Order {
     @JoinColumn(name = "FK_licence_id")
     private Licence licence;
 
-    @Column(name = "order_id", nullable = false)
-    private UUID orderId;
-
     @Column(name = "unit_price", nullable = false, precision = 10, scale = 2)
     private BigDecimal unitPrice;
 

@@ -7,7 +7,6 @@ import com.gszp.orderfunction.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.Hibernate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
@@ -121,10 +120,14 @@ public class OrderFunction {
 
     private Order mapCartEntryToOrder(ConfirmedCart confirmedCart, UUID orderUUID) {
         return Order.builder()
-                .orderId(orderUUID)
                 .user(confirmedCart.getUser())
                 .licence(confirmedCart.getLicence())
-                .key(new OrderKey(confirmedCart.getKey().getUserId(), confirmedCart.getLicence().getLicenceId()))
+                .key(new OrderKey(
+                                confirmedCart.getKey().getUserId(),
+                                confirmedCart.getLicence().getLicenceId(),
+                                orderUUID
+                        )
+                )
                 .quantity(confirmedCart.getQuantity())
                 .unitPrice(confirmedCart.getPrice())
                 .build();
@@ -144,7 +147,7 @@ public class OrderFunction {
             Key key = Key.builder()
                     .user(orderEntry.getUser())
                     .licence(orderEntry.getLicence())
-                    .orderId(orderEntry.getOrderId())
+                    .orderId(orderEntry.getKey().getOrderId())
                     .build();
             keys.add(key);
         }
