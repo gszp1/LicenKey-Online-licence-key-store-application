@@ -1,6 +1,9 @@
 package com.gszp.backend.service;
 
 import com.gszp.backend.auth.model.User;
+import com.gszp.backend.dto.response.GetOrdersResponse;
+import com.gszp.backend.dto.response.OrderEntryDataDto;
+import com.gszp.backend.dto.response.OrderEntryDto;
 import com.gszp.backend.exception.ResourceNotFoundException;
 import com.gszp.backend.kafka.KafkaMessageProducer;
 import com.gszp.backend.kafka.dto.KafkaOrderMessage;
@@ -8,20 +11,17 @@ import com.gszp.backend.logs.LogGenerator;
 import com.gszp.backend.logs.LogTemplate;
 import com.gszp.backend.model.ConfirmedCart;
 import com.gszp.backend.model.Licence;
+import com.gszp.backend.model.Order;
 import com.gszp.backend.model.ShoppingCart;
 import com.gszp.backend.model.keys.ConfirmedCartKey;
-import com.gszp.backend.repository.ConfirmedCartRepository;
-import com.gszp.backend.repository.LicenceRepository;
-import com.gszp.backend.repository.ShoppingCartRepository;
-import com.gszp.backend.repository.UserRepository;
+import com.gszp.backend.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.math.BigDecimal;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +36,47 @@ public class OrderService {
     private final ConfirmedCartRepository confirmedCartRepository;
 
     private final KafkaMessageProducer kafkaMessageProducer;
+
+    private final OrderRepository orderRepository;
+
+    public GetOrdersResponse getOrders(String userEmail) {
+        List<Order> orders = orderRepository.getAllOrdersByUserEmail(userEmail);
+        Map<UUID, List<Order>> groupedOrders = groupOrderEntriesByOrderUUID(orders);
+        List<OrderEntryDto> ordersDto = new ArrayList<>();
+        for (UUID orderIdentifier : groupedOrders.keySet()) {
+            var orderGroup = groupedOrders.get(orderIdentifier);
+            var orderDto = OrderEntryDto.builder()
+                    .orderIdentifier(orderIdentifier)
+                    .placingDate(orderGroup.getFirst().getCreationDate())
+                    .build();
+            orderDto.setOrderEntries(
+                    orderGroup.stream()
+                            .map(e -> {
+                                orderDto.setTotalPrice(
+                                        orderDto.getTotalPrice()
+                                                .add(e.getUnitPrice().multiply(BigDecimal.valueOf(e.getQuantity())))
+                                );
+                                return OrderEntryDataDto.fromOrder(e);
+                            }).collect(Collectors.toList())
+            );
+            ordersDto.add(orderDto);
+        }
+        return new GetOrdersResponse(ordersDto);
+    }
+
+    private Map<UUID, List<Order>> groupOrderEntriesByOrderUUID(List<Order> orders) {
+        HashMap<UUID, List<Order>> groupedOrders = new HashMap<>();
+        for (Order order : orders) {
+            if (!groupedOrders.containsKey(order.getOrderId())) {
+                List<Order> ordersGroup = new ArrayList<>();
+                ordersGroup.add(order);
+                groupedOrders.put(order.getOrderId(), ordersGroup);
+            } else {
+                groupedOrders.get(order.getOrderId()).add(order);
+            }
+        }
+        return groupedOrders;
+    }
 
     @Transactional
     public UUID createOrder(
@@ -74,7 +115,7 @@ public class OrderService {
         user.getShoppingCartEntries().removeAll(shoppingCartEntries);
         user = userRepository.save(user);
         licences = new ArrayList<>();
-        for (var entry: shoppingCartEntries) {
+        for (var entry : shoppingCartEntries) {
             Licence licence = entry.getLicence();
             licence.getShoppingCartEntries().remove(entry);
             licences.add(licence);

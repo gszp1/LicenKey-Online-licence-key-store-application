@@ -15,7 +15,8 @@ import java.util.UUID;
 @Builder
 public class OrderEntryDto {
 
-    private BigDecimal totalPrice;
+    @Builder.Default
+    private BigDecimal totalPrice = BigDecimal.ZERO;
 
     private UUID orderIdentifier;
 
