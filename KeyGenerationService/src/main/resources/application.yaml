@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: KeyGenerationService
+key:
+  generation:
+    template: "XXXX-XXXX-XXXX"
+server:
+  port: 9002
+---
+spring:
+  profiles:
+    active: cloud
+  application:
+    name: KeyGenerationService
+key:
+  generation:
+    template: "${KEY_CODE_TEMPLATE}" # There are no specified template requirements, the only one is that only 'X'
+server:                              # Character will be replaced with random sign
+  port: 9002
