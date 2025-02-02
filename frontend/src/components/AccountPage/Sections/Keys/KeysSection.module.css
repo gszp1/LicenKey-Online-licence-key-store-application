@@ -37,6 +37,7 @@
 }
 
 .keys_field {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -48,4 +49,5 @@
     border-top: 2px solid orange;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
+    padding-bottom: 20px;
 }

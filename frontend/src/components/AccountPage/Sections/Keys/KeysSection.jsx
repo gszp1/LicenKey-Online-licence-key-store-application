@@ -25,13 +25,31 @@ const KeysSection = ({setError, setSection}) => {
         fetchKeys();
     }, [setError, setSection]);
 
+    const displayKeys = () => {
+        return (
+            <>
+                {keys.map((key, index) => { return displaySingleKey(key, index)})}
+            </>
+        )
+    }
+
+    const displaySingleKey = (key, index) => {
+        return (
+            <div
+                key={index}
+            >
+                hello world
+            </div>
+        )
+    }
+
     return (
         <div className={styles.section}>
             <h1 className={styles.section_header}> Your Licence Keys </h1>
             <div className={styles.section_content}>
                 <p className={styles.keys_header}> Keys </p>
                 <div className={styles.keys_field}>
-
+                    {displayKeys()}
                 </div>
             </div>
         </div>
