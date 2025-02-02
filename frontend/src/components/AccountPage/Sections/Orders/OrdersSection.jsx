@@ -64,13 +64,21 @@ const OrdersSection = ({setError, setSection}) => {
         )
     }
 
+    const displayNoKeysMessage = () => {
+        return (
+            <p className={styles.no_orders_message}>
+                {"You haven't placed any orders"}
+            </p>
+        )
+    }
+
     return (
         <div className={styles.section}>
             <h1 className={styles.section_header}> Your Orders </h1>
             <div className={styles.section_content}>
-                <p className={styles.orders_header}> Orders </p>
+                <p className={styles.orders_header}> {"Orders\u00A0\u00A0" + `(${orders ? orders.length : 0})`}</p>
                 <div className={styles.orders_field}>
-                    {displayOrders()}
+                    {(orders && orders.length != 0) ? displayOrders() : displayNoKeysMessage()}
                 </div>
             </div>
         </div>

@@ -69,13 +69,21 @@ const KeysSection = ({setError, setSection}) => {
         )
     }
 
+    const displayNoKeysMessage = () => {
+        return (
+            <p className={styles.no_keys_message}>
+                {"You currently don't own any keys"}
+            </p>
+        )
+    }
+
     return (
         <div className={styles.section}>
             <h1 className={styles.section_header}> Your Licence Keys </h1>
             <div className={styles.section_content}>
                 <p className={styles.keys_header}> {"Keys\u00A0\u00A0" + `(${keys ? keys.length : 0})`}</p>
                 <div className={styles.keys_field}>
-                    {displayKeys()}
+                    {(keys && keys.length != 0) ? displayKeys() : displayNoKeysMessage()}
                 </div>
             </div>
         </div>

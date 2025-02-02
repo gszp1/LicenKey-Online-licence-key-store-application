@@ -37,6 +37,7 @@
 }
 
 .orders_field {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -48,4 +49,17 @@
     border-top: 2px solid orange;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+
+.no_orders_message {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    width: 100%;
+    font-size: 2.5rem;
 }
