@@ -54,7 +54,10 @@ const OrdersSection = ({setError, setSection}) => {
                         <p className={styles.order_info_value}> {`${format(order.placingDate, 'dd-MM-yyyy')}`} </p>
                     </div>
                 </div>
-                {displayOrderedItems(order)}
+                <p className={styles.licences_header}> {`Ordered items:\u00A0\u00A0(${order.orderEntries.length})`} </p>
+                <div className={styles.licences_field}>
+                    {displayOrderedItems(order)}
+                </div>
             </div>
         )
     }
