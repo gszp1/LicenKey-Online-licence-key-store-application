@@ -19,7 +19,9 @@ public class KeyService {
         String template = keyTemplate == null ? "XXXX-XXXX-XXXX" : keyTemplate;
         StringBuilder key = new StringBuilder(template);
         for (int i = 0; i < key.length(); ++i) {
-            key.setCharAt(i, allowedCharacters.charAt(random.nextInt(allowedCharacters.length())));
+            if (key.charAt(i) == 'X') {
+                key.setCharAt(i, allowedCharacters.charAt(random.nextInt(allowedCharacters.length())));
+            }
         }
         return key.toString();
     }
