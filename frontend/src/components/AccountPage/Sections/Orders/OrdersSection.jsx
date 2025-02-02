@@ -2,6 +2,7 @@ import styles from "@/components/AccountPage/Sections/Orders/OrdersSection.modul
 import axios from "axios";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import {format} from 'date-fns'
 
 const OrdersSection = ({setError, setSection}) => {
     const [orders, setOrders] = useState([]);
@@ -35,13 +36,24 @@ const OrdersSection = ({setError, setSection}) => {
 
     const displaySingleOrder = (order, index) => {
         return (
-            <div
+            <div className={styles.order_entry}
                 key={index}
             >
-                <div>
-                    hello
-                    {displayOrderedItems(order)}
+                <div className={styles.order_info}>
+                    <div className={styles.order_info_entry}>
+                        <p className={styles.order_info_label}> {"Identifier:\u00A0"}</p>
+                        <p className={styles.order_info_value}> {order.orderIdentifier} </p>
+                    </div>
+                    <div className={styles.order_info_entry}>
+                        <p className={styles.order_info_label}> {"Price:\u00A0"}</p>
+                        <p className={styles.order_info_value}> {`${order.totalPrice}$`} </p>
+                    </div>
+                    <div className={styles.order_info_entry}>
+                        <p className={styles.order_info_label}> {"Placement date:\u00A0"}</p>
+                        <p className={styles.order_info_value}> {`${format(order.placingDate, 'dd-MM-yyyy')}`} </p>
+                    </div>
                 </div>
+                {displayOrderedItems(order)}
             </div>
         )
     }
