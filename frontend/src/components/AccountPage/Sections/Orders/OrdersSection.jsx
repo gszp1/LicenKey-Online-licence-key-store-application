@@ -38,7 +38,8 @@ const OrdersSection = ({setError, setSection}) => {
         return (
             <div className={styles.order_entry}
                 key={index}
-            >
+            >   
+                <p className={styles.order_index}>{index + 1}</p>
                 <div className={styles.order_info}>
                     <div className={styles.order_info_entry}>
                         <p className={styles.order_info_label}> {"Identifier:\u00A0"}</p>
