@@ -15,8 +15,9 @@ public class KeyService {
 
     private final String allowedCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmopqrstuvwxyz0123456789";
 
-    private String generateKey() {
-        StringBuilder key = new StringBuilder(keyTemplate);
+    public String generateKey() {
+        String template = keyTemplate == null ? "XXXX-XXXX-XXXX" : keyTemplate;
+        StringBuilder key = new StringBuilder(template);
         for (int i = 0; i < key.length(); ++i) {
             key.setCharAt(i, allowedCharacters.charAt(random.nextInt(allowedCharacters.length())));
         }
