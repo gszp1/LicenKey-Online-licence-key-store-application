@@ -142,7 +142,9 @@
 .licences_field {
     width: 800px;
     height: auto;
-    min-height: 80px;
+    min-height: 90px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     background-color: rgb(211, 211, 211);
     box-shadow: 2px 2px 10px 1px rgba(192, 192, 192, 0.938);
     margin-left: auto;
@@ -151,4 +153,78 @@
     margin-bottom: 20px;
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
+}
+
+.order_item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgb(212, 212, 212);
+    box-shadow: 2px 2px 10px 1px rgba(175, 175, 175, 0.938);
+    height: 94px;
+    width: 750px;
+    border-radius: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+.order_item_index {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    height: 100%;
+    width: 40px;
+    background-color: rgb(230, 230, 230);
+    box-shadow: 2px 2px 10px 1px rgba(175, 175, 175, 0.938);
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    margin-right: 30px;
+    color: orange;
+}
+
+.order_item_image {
+    width: 64px;
+    height: 64px;
+    box-shadow: 2px 2px 10px 1px rgba(175, 175, 175, 0.938);
+    border-radius: 15px;
+    margin-right: 30px;
+}
+
+.order_item_info_box {
+    height: 94px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    box-sizing: border-box;
+    width: 560px;
+    display: flex;
+    flex-direction: column;
+}
+
+.order_item_info_entry {
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.order_item_info_label {
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: orange;
+    font-size: 1.2rem;
+}
+
+.order_item_info_value {
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: black;
+    font-size: 1.15rem;
 }

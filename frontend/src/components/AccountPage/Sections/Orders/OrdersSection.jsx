@@ -51,7 +51,7 @@ const OrdersSection = ({setError, setSection}) => {
                     </div>
                     <div className={styles.order_info_entry}>
                         <p className={styles.order_info_label}> {"Placement date:\u00A0"}</p>
-                        <p className={styles.order_info_value}> {`${format(order.placingDate, 'dd-MM-yyyy')}`} </p>
+                        <p className={styles.order_info_value}> {`${format(Date(order.placingDate), 'dd-MM-yyyy')}`} </p>
                     </div>
                 </div>
                 <p className={styles.licences_header}> {`Ordered items:\u00A0\u00A0(${order.orderEntries.length})`} </p>
@@ -73,9 +73,29 @@ const OrdersSection = ({setError, setSection}) => {
     const displaySingleOrderItem = (orderItem, index) => {
         return (
             <div
+                className={styles.order_item}
                 key={index}
             >
-                yes
+                <p className={styles.order_item_index}> {index + 1} </p>
+                <img
+                    className={styles.order_item_image}
+                    src={orderItem.imageUrl || '/src/assets/images/placeholder_img.png'}
+
+                />
+                <div className={styles.order_item_info_box}>
+                    <div className={styles.order_item_info_entry}>
+                        <p className={styles.order_item_info_label}> {"Name:\u00A0"} </p>
+                        <p className={styles.order_item_info_value}> {orderItem.licenceName} </p>
+                    </div>
+                    <div className={styles.order_item_info_entry}>
+                        <p className={styles.order_item_info_label}> {"Price:\u00A0"} </p>
+                        <p className={styles.order_item_info_value}> {`${orderItem.price}$`} </p>
+                    </div>
+                    <div className={styles.order_item_info_entry}>
+                        <p className={styles.order_item_info_label}> {"Quantity:\u00A0"} </p>
+                        <p className={styles.order_item_info_value}> {orderItem.quantity} </p>
+                    </div>
+                </div>
             </div>
         )
     }
