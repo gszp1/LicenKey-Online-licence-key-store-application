@@ -1,4 +1,5 @@
 import styles from "@/components/AccountPage/Sections/Orders/OrdersSection.module.css"
+import axios from "axios";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 
@@ -7,9 +8,22 @@ const OrdersSection = ({setError, setSection}) => {
 
     useEffect(() => {
         const fetchOrders = async () => {
-            let url = 
+            let url = `${window._env_.BACKEND_API_URL}${'/api/orders'}`;
+            try {
+                let response = await axios.get(
+                    url,
+                    {headers: {
+                        "Authorization": `Bearer ${localStorage.getItem("AuthToken")}`
+                    }}
+                );
+                setOrders(response.data.orders);
+            } catch (error) {
+                setError(error);
+                setSection('error');
+            }
         }
-    }, []);
+        fetchOrders();
+    }, [setError, setSection]);
 
     return (
         <div className={styles.section}>
