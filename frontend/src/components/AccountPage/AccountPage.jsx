@@ -91,7 +91,10 @@ const AccountPage = () => {
                 )
             case 'orders':
                 return (
-                    <OrdersSection/>
+                    <OrdersSection
+                        setError={setExecutionError}
+                        setSection={setSection}
+                    />
                 )
             case 'keys':
                 return (
