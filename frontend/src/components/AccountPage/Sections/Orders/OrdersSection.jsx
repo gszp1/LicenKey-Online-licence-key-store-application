@@ -25,13 +25,52 @@ const OrdersSection = ({setError, setSection}) => {
         fetchOrders();
     }, [setError, setSection]);
 
+    const displayOrders = () => {
+        return (
+            <>
+                {orders.map((order, index) => {return displaySingleOrder(order, index)})}
+            </>
+        )
+    }
+
+    const displaySingleOrder = (order, index) => {
+        return (
+            <div
+                key={index}
+            >
+                <div>
+                    hello
+                    {displayOrderedItems(order)}
+                </div>
+            </div>
+        )
+    }
+
+    const displayOrderedItems = (order) => {
+        return (
+            <>
+                {order.orderEntries.map((item, index) => {return displaySingleOrderItem(item, index)})}
+            </>
+        )
+    }
+
+    const displaySingleOrderItem = (orderItem, index) => {
+        return (
+            <div
+                key={index}
+            >
+                yes
+            </div>
+        )
+    }
+
     return (
         <div className={styles.section}>
             <h1 className={styles.section_header}> Your Orders </h1>
             <div className={styles.section_content}>
                 <p className={styles.orders_header}> Orders </p>
                 <div className={styles.orders_field}>
-
+                    {displayOrders()}
                 </div>
             </div>
         </div>
