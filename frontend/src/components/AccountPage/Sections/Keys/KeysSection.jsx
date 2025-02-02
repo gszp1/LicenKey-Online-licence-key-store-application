@@ -1,9 +1,29 @@
 import styles from "@/components/AccountPage/Sections/Keys/KeysSection.module.css"
+import axios from "axios";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const KeysSection = ({setError, setSection}) => {
     const [keys, setKeys] = useState([]);
+
+    useEffect(() => {
+        const fetchKeys = async () => {
+            let url = `${window._env_.BACKEND_API_URL}${'/api/keys'}`;
+            try {
+                let response = await axios.get(
+                    url,
+                    {headers: {
+                        "Authorization": `Bearer ${localStorage.getItem("AuthToken")}`
+                    }}
+                );
+                setKeys(response.data.keys);
+            } catch (error) {
+                setError(error);
+                setSection('error');
+            }
+        }
+        fetchKeys();
+    }, [setError, setSection]);
 
     return (
         <div className={styles.section}>
@@ -11,7 +31,7 @@ const KeysSection = ({setError, setSection}) => {
             <div className={styles.section_content}>
                 <p className={styles.keys_header}> Keys </p>
                 <div className={styles.keys_field}>
-                    
+
                 </div>
             </div>
         </div>
