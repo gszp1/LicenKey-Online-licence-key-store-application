@@ -43,8 +43,7 @@ const InformationSection = ({userData}) => {
                     />
                     <DataEntry
                         header={"Join Date"}
-                        content={userData.creationDate == null ? null
-                             : format(Date(userData.creationDate), 'dd-MM-yyyy')}
+                        content={userData.creationDate ? format(new Date(userData.creationDate), 'dd-MM-yyyy') : null}
                     />
                 </div>
             </div>

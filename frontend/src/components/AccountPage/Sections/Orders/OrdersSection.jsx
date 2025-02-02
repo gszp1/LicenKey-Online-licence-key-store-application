@@ -51,7 +51,7 @@ const OrdersSection = ({setError, setSection}) => {
                     </div>
                     <div className={styles.order_info_entry}>
                         <p className={styles.order_info_label}> {"Placement date:\u00A0"}</p>
-                        <p className={styles.order_info_value}> {`${format(Date(order.placingDate), 'dd-MM-yyyy')}`} </p>
+                        <p className={styles.order_info_value}> {order.placingDate ? format(new Date(order.placingDate), 'dd-MM-yyyy') : "Unknown"} </p>
                     </div>
                 </div>
                 <p className={styles.licences_header}> {`Ordered items:\u00A0\u00A0(${order.orderEntries.length})`} </p>
