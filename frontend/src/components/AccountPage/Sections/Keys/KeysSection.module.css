@@ -50,4 +50,125 @@
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
     padding-bottom: 20px;
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+
+.key_entry {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 900px;
+    height: 174px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    background-color: rgba(228, 228, 228, 0.726);
+    box-shadow: 2px 2px 10px 1px rgba(192, 192, 192, 0.938);
+    border-radius: 15px;
+}
+
+.key_index {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    height: 100%;
+    width: 20px;
+    background-color: rgb(230, 230, 230);
+    box-shadow: 2px 2px 10px 1px rgba(192, 192, 192, 0.938);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    margin-right: 15px;
+    color: orange;
+}
+
+.key_image {
+    width: 128px;
+    height: 128px;
+    box-shadow: 2px 2px 10px 1px rgba(192, 192, 192, 0.938);
+    border-radius: 15px;
+    margin-right: 15px;
+}
+
+.key_data {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 700px;
+    height: 174px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+}
+
+.key_info_box {
+    height: 120px;
+    width: 100%;
+}
+
+.key_code {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    font-size: 1.6rem;
+    color: orange
+}
+
+.key_identifier {
+    height: 60px;
+}
+
+.name {
+    box-sizing: border-box;
+    padding-top: 5px;
+    padding-left: 10px;
+    font-size: 1.5rem;
+    height: 35px;
+}
+
+.id {
+    box-sizing: border-box;
+    padding-left: 10px;
+    font-size: 1.2rem;
+    height: 25px;
+}
+
+.key_info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    font-size: 1.1rem;
+    width: 100%;;
+}
+
+.info_text {
+    display: flex;
+    justify-content: center;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.text_header {
+    font-size: 1.15rem;
+    color: orange;
+}
+
+
+.info_field {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 30px;
+    justify-content: flex-start;
+    width: 100%;
+    padding-left: 20px;
 }
