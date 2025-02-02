@@ -95,7 +95,10 @@ const AccountPage = () => {
                 )
             case 'keys':
                 return (
-                    <KeysSection/>
+                    <KeysSection
+                        setError={setExecutionError}
+                        setSection={setSection}
+                    />
                 )
             case 'error':
                 return (

@@ -1,7 +1,8 @@
 import styles from "@/components/AccountPage/Sections/Keys/KeysSection.module.css"
+import PropTypes from "prop-types";
 import { useState } from "react";
 
-const KeysSection = () => {
+const KeysSection = ({setError, setSection}) => {
     const [keys, setKeys] = useState([]);
 
     return (
@@ -10,11 +11,16 @@ const KeysSection = () => {
             <div className={styles.section_content}>
                 <p className={styles.keys_header}> Keys </p>
                 <div className={styles.keys_field}>
-
+                    
                 </div>
             </div>
         </div>
     )
+}
+
+KeysSection.propTypes = {
+    setError: PropTypes.func.isRequired,
+    setSection: PropTypes.func.isRequired
 }
 
 export default KeysSection;
