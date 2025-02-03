@@ -1,6 +1,7 @@
 package com.gszp.keyfunction;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gszp.keyfunction.dto.KeyDto;
 import com.gszp.keyfunction.dto.KeyEventDto;
 import com.gszp.keyfunction.model.Key;
 import com.gszp.keyfunction.repository.KeyRepository;
@@ -49,11 +50,24 @@ public class KeyFunction {
                     key.getLicence().getService().getApiUrl()
             );
             RestTemplate restTemplate = new RestTemplate();
-            String response = restTemplate.getForObject(
+            KeyDto response = restTemplate.getForObject(
                     key.getLicence().getService().getApiUrl(),
+                    KeyDto.class
+            );
+            if (response == null) {
+                log.info("Failed to retrieve data from key service.");
+                return;
 
-            )
+            }
+            if (response.getKey() == null) {
+                log.info("Received response from service but key was not found.");
+                return;
+            }
 
+            log.info("Retrieved key from service.");
+            key.setKeyCode(response.getKey());
+            keyRepository.save(key);
+            log.info("Saved key code for key with id: {}", key.getKeyId());
         };
     }
 
