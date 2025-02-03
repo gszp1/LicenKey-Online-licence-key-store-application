@@ -22,6 +22,7 @@ import java.util.function.Consumer;
 public class KeyFunction {
 
     private final KeyRepository keyRepository;
+    
     private final ObjectMapper objectMapper;
 
     @Bean
