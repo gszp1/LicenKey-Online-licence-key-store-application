@@ -14,9 +14,9 @@ RETURNING publisher_id;
 
 INSERT INTO services (api_url, FK_publisher_id)
 VALUES 
-    ('http://key-gen-service-first-svc.key-gen-ns.svc.cluster.local/api/key', 1),
-    ('http://key-gen-service-second-svc.key-gen-ns.svc.cluster.local/api/key', 2),
-    ('http://key-gen-service-third-svc.key-gen-ns.svc.cluster.local/api/key', 3)
+    ('http://key-gen-service-first-svc.key-gen-ns.svc.cluster.local:9002/api/key', 1),
+    ('http://key-gen-service-second-svc.key-gen-ns.svc.cluster.local:9002/api/key', 2),
+    ('http://key-gen-service-third-svc.key-gen-ns.svc.cluster.local:9002/api/key', 3)
 RETURNING service_id;
 
 INSERT INTO licence_types ("name", duration_days)
