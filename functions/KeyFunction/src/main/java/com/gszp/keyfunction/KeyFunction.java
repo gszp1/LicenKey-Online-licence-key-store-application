@@ -22,7 +22,7 @@ import java.util.function.Consumer;
 public class KeyFunction {
 
     private final KeyRepository keyRepository;
-    
+
     private final ObjectMapper objectMapper;
 
     @Bean
@@ -51,14 +51,20 @@ public class KeyFunction {
                     key.getLicence().getService().getApiUrl()
             );
             RestTemplate restTemplate = new RestTemplate();
-            KeyDto response = restTemplate.getForObject(
-                    key.getLicence().getService().getApiUrl(),
-                    KeyDto.class
-            );
+            KeyDto response = null;
+            try {
+                response = restTemplate.getForObject(
+                        key.getLicence().getService().getApiUrl(),
+                        KeyDto.class
+                );
+            } catch (Exception e) {
+                log.info("Failed to retrieve data from key service.");
+                return;
+            }
+
             if (response == null) {
                 log.info("Failed to retrieve data from key service.");
                 return;
-
             }
             if (response.getKey() == null) {
                 log.info("Received response from service but key was not found.");

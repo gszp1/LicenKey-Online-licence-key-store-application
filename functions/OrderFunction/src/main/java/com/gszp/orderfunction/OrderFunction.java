@@ -2,6 +2,8 @@ package com.gszp.orderfunction;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gszp.orderfunction.dto.OrderEventDto;
+import com.gszp.orderfunction.kafka.KafkaMessageProducer;
+import com.gszp.orderfunction.kafka.KeyEventDto;
 import com.gszp.orderfunction.model.*;
 import com.gszp.orderfunction.repository.*;
 import jakarta.transaction.Transactional;
@@ -31,6 +33,8 @@ public class OrderFunction {
     private final UserRepository userRepository;
 
     private final KeyRepository keyRepository;
+
+    private final KafkaMessageProducer kafkaMessageProducer;
 
     @Bean
     @Transactional
@@ -100,8 +104,14 @@ public class OrderFunction {
 
             // Update User with key
             user = userRepository.save(user);
+            log.info("User record updated.");
 
-            // TODO: Send event to generate new keys
+            // Send key events
+            log.info("Sending key events.");
+            for(Key key : keys) {
+                kafkaMessageProducer.sendKeyMessage(new KeyEventDto(key.getKeyId()));
+                log.info("Sent key event with key id: {}", key.getKeyId());
+            }
         };
     }
 

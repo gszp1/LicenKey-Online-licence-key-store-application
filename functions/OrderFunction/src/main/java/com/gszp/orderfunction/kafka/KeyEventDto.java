@@ -1,4 +1,4 @@
-package com.gszp.orderfunction.dto;
+package com.gszp.orderfunction.kafka;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

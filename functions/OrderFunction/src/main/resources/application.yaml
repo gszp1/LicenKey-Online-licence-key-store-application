@@ -18,12 +18,14 @@ spring:
     database: postgresql
     open-in-view: false
     show-sql: false
-#logging:
-#  level:
-#    root: DEBUG
-#    org:
-#      springframework:
-#        cloud:
-#          function: DEBUG
+  kafka:
+    producer:
+      bootstrap-servers: "${KAFKA_BOOTSTRAP_SERVER}"
+      retries: "${RETRIES}"
+      acks: "${ACKS}"
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    topics:
+      keys-topic: "${KEYS_TOPIC}"
 server:
   port: 9001
