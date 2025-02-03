@@ -1,4 +1,4 @@
-FROM openjdk:21-latest
+FROM openjdk:21-slim
 
 ENV JAVA_TOOL_OPTIONS="-XX:+UseContainerSupport"
 
