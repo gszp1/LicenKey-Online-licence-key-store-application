@@ -4,6 +4,8 @@ spring:
 key:
   generation:
     template: "XXXX-XXXX-XXXX"
+cors:
+  allowed-origins: "*"
 server:
   port: 9002
 ---
@@ -16,5 +18,7 @@ spring:
 key:
   generation:
     template: "${KEY_CODE_TEMPLATE}" # There are no specified template requirements, the only one is that only 'X'
-server:                              # Character will be replaced with random sign
+cors:                                # Character will be replaced with random sign
+  allowed-origins: "${ALLOWED_ORIGINS}"
+server:
   port: 9002
