@@ -1,6 +1,9 @@
 spring:
   application:
     name: KeyFunction
+  cloud:
+    function:
+      definition: handleKeyEvent
   datasource:
     url: "${DATASOURCE_URL}"
     username: "${DATASOURCE_USER}"
