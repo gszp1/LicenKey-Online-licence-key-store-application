@@ -203,7 +203,7 @@ GRANT USAGE ON SCHEMA public TO licen_key_user;
 
 INSERT INTO platforms ("name", home_page)
 VALUES 
-    ('GameSphere', 'https://example.com/gamesphere'),
+    ('SoftwareSphere', 'https://example.com/gamesphere'),
     ('AppCentral', 'https://example.com/appcentral'),
     ('DigitalArcade', 'https://example.com/digitalarcade'),
     ('SoftMart', 'https://example.com/softmart'),
@@ -224,8 +224,8 @@ RETURNING publisher_id;
 INSERT INTO services (api_url, FK_publisher_id)
 VALUES 
     ('http://key-gen-service-first-svc.key-gen-ns.svc.cluster.local:9002/api/key', 1),
-    ('http://key-gen-service-second-svc.key-gen-ns.svc.cluster.local:9002/api/key', 2),
-    ('http://key-gen-service-third-svc.key-gen-ns.svc.cluster.local:9002/api/key', 3)
+    ('http://key-gen-service-second-svc.key-gen-ns.svc.cluster.local:9012/api/key', 2),
+    ('http://key-gen-service-third-svc.key-gen-ns.svc.cluster.local:9022/api/key', 3)
 RETURNING service_id;
 
 
@@ -263,7 +263,7 @@ INSERT INTO licences (
 VALUES 
     (
         'Advanced Photo Editor', 
-        'TechSoft', 
+        'PixelCraft Studios', 
         'A robust photo editing application for professionals.', 
         99.99, 
         NULL, 
@@ -276,7 +276,7 @@ VALUES
     ),
     (
         'Office Suite Pro', 
-        'Innovatech', 
+        'OfficePro Solutions', 
         'An integrated suite for office productivity and collaboration.', 
         149.99, 
         NULL, 
@@ -289,7 +289,7 @@ VALUES
     ),
     (
         'DevStudio IDE', 
-        'FutureWare', 
+        'DevWizard Labs', 
         'A comprehensive development environment for building applications.', 
         199.99, 
         NULL, 
@@ -302,7 +302,7 @@ VALUES
     ),
     (
         'Secure Antivirus', 
-        'Alpha Systems', 
+        'SecureNet Systems', 
         'Advanced antivirus solution for protecting systems and data.', 
         79.99, 
         NULL, 
@@ -315,7 +315,7 @@ VALUES
     ),
     (
         'Digital Learning Platform', 
-        'NovaCorp', 
+        'EduTech Innovations', 
         'An interactive platform designed for modern educational needs.', 
         59.99, 
         NULL, 

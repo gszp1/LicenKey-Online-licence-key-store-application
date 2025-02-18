@@ -90,14 +90,14 @@ const LicencesPage = ({searchKeyword}) => {
                 <div className={styles.licences_list_header}>
                     {`${searchKeyword ? 'Licences Matching Criterias' : 'Available Licences'}  (${licences.length})`}
                 </div>
-                {licences.map((licence) => (
-                    createLicenceCard(licence, licence['licenceId'])
+                {licences.map((licence, index) => (
+                    createLicenceCard(licence, licence['licenceId'], index)
                 ))}
             </>
         )
     }
 
-    const createLicenceCard = (licence, index) => {
+    const createLicenceCard = (licence, index, listIndex) => {
         return (
             <Link
                 to={`/licences/${licence['licenceId']}`}
@@ -105,7 +105,7 @@ const LicencesPage = ({searchKeyword}) => {
                 className={styles.licence_list_entry}
                 key={index}
             >   
-                <p className={styles.licence_list_entry_index}>{index + 1}</p>
+                <p className={styles.licence_list_entry_index}>{listIndex + 1}</p>
                 <img 
                     className={styles.image_box}
                     src={image || '/src/assets/images/placeholder_img.png'}
