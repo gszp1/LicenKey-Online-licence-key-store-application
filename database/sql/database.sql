@@ -203,17 +203,23 @@ GRANT USAGE ON SCHEMA public TO licen_key_user;
 
 INSERT INTO platforms ("name", home_page)
 VALUES 
-    ('Windows', 'https://www.microsoft.com/windows'),
-    ('macOS', 'https://www.apple.com/macos'),
-    ('Linux', 'https://www.linux.org/')
+    ('GameSphere', 'https://example.com/gamesphere'),
+    ('AppCentral', 'https://example.com/appcentral'),
+    ('DigitalArcade', 'https://example.com/digitalarcade'),
+    ('SoftMart', 'https://example.com/softmart'),
+    ('CloudStore', 'https://example.com/cloudstore')
 RETURNING platform_id;
+
 
 INSERT INTO publishers ("name", home_page)
 VALUES 
-    ('Adobe', 'https://www.adobe.com'),
-    ('Microsoft', 'https://www.microsoft.com'),
-    ('Apple', 'https://www.apple.com')
+    ('TechSoft', 'https://techsoft.example.com'),
+    ('Innovatech', 'https://innovatech.example.com'),
+    ('FutureWare', 'https://futureware.example.com'),
+    ('Alpha Systems', 'https://alphasystems.example.com'),
+    ('NovaCorp', 'https://novacorp.example.com')
 RETURNING publisher_id;
+
 
 INSERT INTO services (api_url, FK_publisher_id)
 VALUES 
@@ -222,17 +228,23 @@ VALUES
     ('http://key-gen-service-third-svc.key-gen-ns.svc.cluster.local:9002/api/key', 3)
 RETURNING service_id;
 
+
 INSERT INTO licence_types ("name", duration_days)
 VALUES 
-    ('Standard', 365),
-    ('Premium', 730)
+    ('Lifetime', 0),       
+    ('Annual', 365),
+    ('Semiannual', 182),
+    ('Quarterly', 90),
+    ('Monthly', 30)
 RETURNING type_id;
 
 INSERT INTO categories ("name")
 VALUES 
     ('Productivity'),
     ('Entertainment'),
-    ('Development')
+    ('Development'),
+    ('Security'),
+    ('Education')
 RETURNING category_id;
 
 INSERT INTO licences (
@@ -250,10 +262,10 @@ INSERT INTO licences (
 )
 VALUES 
     (
-        'Adobe Photoshop', 
-        'Adobe Inc.', 
-        'A powerful image editing software.', 
-        239.88, 
+        'Advanced Photo Editor', 
+        'TechSoft', 
+        'A robust photo editing application for professionals.', 
+        99.99, 
         NULL, 
         TRUE, 
         1,
@@ -263,16 +275,55 @@ VALUES
         1
     ),
     (
-        'Microsoft Office', 
-        'Microsoft Corporation', 
-        'A suite of productivity applications.', 
+        'Office Suite Pro', 
+        'Innovatech', 
+        'An integrated suite for office productivity and collaboration.', 
         149.99, 
         NULL, 
+        TRUE,
+        2,
+        1,
+        2,
+        2,
+        2
+    ),
+    (
+        'DevStudio IDE', 
+        'FutureWare', 
+        'A comprehensive development environment for building applications.', 
+        199.99, 
+        NULL, 
+        TRUE, 
+        3,
+        3,
+        3,
+        3,
+        3
+    ),
+    (
+        'Secure Antivirus', 
+        'Alpha Systems', 
+        'Advanced antivirus solution for protecting systems and data.', 
+        79.99, 
+        NULL, 
         FALSE,
-        2,
-        1,
-        2,
-        1,
+        4,
+        4,
+        4,
+        4,
+        1
+    ),
+    (
+        'Digital Learning Platform', 
+        'NovaCorp', 
+        'An interactive platform designed for modern educational needs.', 
+        59.99, 
+        NULL, 
+        TRUE,
+        5,
+        5,
+        5,
+        5,
         2
     )
 RETURNING licence_id;
