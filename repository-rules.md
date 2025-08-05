@@ -1,4 +1,4 @@
-# REPOSITORY STRUCTURE RULES
+# REPOSITORY ORGANISATION RULES
 
 ## 1. Branches
 - **main** - stable version, used for new releases,
