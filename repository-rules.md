@@ -10,10 +10,10 @@ pre-prod. Note that not all changes that are in develop, will end in next releas
 - **refactor branches** - code cleanups, refactors that improve code quality both in terms of code readability and performance,
 - **fix branches** - fixes for errors that were introduced during development,
 - **hotfix branches** - critical fixes for errors in production code - directly merged into main branch,
-## 2. Feature branches naming scheme
-### {version}/{project-module}/{type}/feature-name
+## 2. Branch naming scheme
+### {project-module}/{version}/{type}/feature-name
 #### where:
-- **version** - version in which developed changes are meant to be included in,
 - **project-module** - module which is affected by those changes, mostly backend or frontend as infrastructure is not included in this project,
+- **version** - version in which developed changes are meant to be included in,
 - **type** - what do these changes introduce - feature, refactor, fix
 - **feature-name** - proper name for the feature that is implemented.
